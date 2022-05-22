@@ -38,7 +38,7 @@ if exists(expected_pipe_name) then
     execute_command = execute_command.."\"<C-\\><C-N>"
 
     -- log buffer number so that we can delete it later. We don't want a ton of
-    -- running terminals in the background when we switch to a new nvim buffer.
+    -- running terminal buffers in the background when we switch to a new nvim buffer.
     execute_command = execute_command..":silent let g:unception_tmp_bufnr = bufnr() | "
 
     -- If there aren't arguments, we just want a new, empty buffer, but if
@@ -53,7 +53,7 @@ if exists(expected_pipe_name) then
     execute_command = execute_command.."silent execute 'bdelete! ' . g:unception_tmp_bufnr | "
 
     -- remove temporary variable
-    execute_command = execute_command.." silent unlet g:unception_tmp_bufnr | "
+    execute_command = execute_command.."silent unlet g:unception_tmp_bufnr | "
 
     -- remove command from history and send it
     execute_command = execute_command.."call histdel(':', -1)<CR>"
@@ -62,6 +62,8 @@ if exists(expected_pipe_name) then
     execute_command = execute_command..":echo 'Unception!' | call histdel(':', -1)<CR>\""
 
     os.execute(execute_command)
+
+    -- Our work here is done. Kill the nvim session that would have started otherwise.
     vim.cmd("quit")
 else
     vim.call("serverstart", expected_pipe_name)
