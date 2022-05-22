@@ -10,7 +10,11 @@ of Neovim. Instead, the desired files will be opened by the
 
 # Limitations
 
-I'm sure there are plenty. For one, this plugin assumes you have the ability to execute the `realpath` command in your shell and also have the ability to write to `/tmp/`. This is in an entirely experimental state currently.
+I'm sure there are plenty. For one, this plugin assumes you have the ability to execute the `realpath` command in your shell and also have the ability to write to `/tmp/`.
+
+Other Vim commands that do not involve editing files/directories may not work from within a terminal emulator (e.g. `echo "Hello world!" > nvim -`)
+
+This is in an entirely experimental state currently.
 
 # Installation
 
