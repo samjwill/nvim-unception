@@ -1,4 +1,4 @@
-function exists(filename)
+local function exists(filename)
    local ok, message, err_code = os.rename(filename, filename)
    if not ok then
       if err_code == 13 then
