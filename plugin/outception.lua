@@ -26,14 +26,35 @@ if exists(expected_pipe_name) then
         arg_str = arg_str.." "..iter
     end
 
+    local execute_command = "\\nvim --server "..expected_pipe_name.." --remote-send "
+
+    -- exit terminal-insert mode
+    execute_command = execute_command.."\"<C-\\><C-N>"
+
+    -- log buffer number so that we can delete it later. We don't want a ton of
+    -- running terminals in the background when we switch to a new nvim buffer.
+    execute_command = execute_command..":silent let g:outception_tmp_bufnr = bufnr() | "
+
+    -- If there aren't arguments, we just want a new, empty buffer, but if
+    -- there are, append them to the host Neovim session's arguments list.
     if (#args > 0) then
-        os.execute("\\nvim --server "..expected_pipe_name.." --remote-send \"<C-\\><C-N>:silent argedit "..arg_str.."<CR>\"")
-        --:let g:outception_tmp_bufname = bufnr()
-        --TODO: execute "bdelete " . g:outception_tmp_bufname
+        execute_command = execute_command.."silent argedit "..arg_str.." | "
     else
-        os.execute("\\nvim --server "..expected_pipe_name.." --remote-send \"<C-\\><C-N>:silent enew<CR>\"")
+        execute_command = execute_command.."silent enew | "
     end
+
+    -- remove the old terminal buffer
+    execute_command = execute_command.."silent execute 'bdelete! ' . g:outception_tmp_bufnr | "
+
+    -- remove temporary variable
+    execute_command = execute_command.." silent unlet g:outception_tmp_bufnr<CR>"
+
+    -- flavor text :)
+    execute_command = execute_command..":echo 'Outception!'<CR>\""
+
+    os.execute(execute_command)
     vim.cmd("quit")
 else
     vim.call("serverstart", expected_pipe_name)
 end
+
