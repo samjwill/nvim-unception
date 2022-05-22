@@ -59,6 +59,8 @@ if exists(expected_pipe_name) then
     execute_command = execute_command..":echo 'Unception!'<CR>\""
 
     os.execute(execute_command)
+    
+    -- Our work here is done. Kill the vim session that would have started otherwise.
     vim.cmd("quit")
 else
     vim.call("serverstart", expected_pipe_name)
