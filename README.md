@@ -25,8 +25,8 @@ execute the `realpath` command in your shell and also that you have the ability 
 to `/tmp/`.
 
 If trying to open a NEW Neovim instance outside of the terminal emulator when an instance using this plugin is already running, the
-commands will instead be piped to the existing Neovim server. This means you can really
-only have one Neovim instance at a time unless disabling this plugin when
+arguments will instead be piped to the existing Neovim server, and Neovim will not be launched. This means you can really
+only use one Neovim instance at a time (per user) unless disabling this plugin when
 launching the new Neovim session.
 
 Other Vim commands that do not involve editing files/directories may or may not
