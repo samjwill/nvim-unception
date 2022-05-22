@@ -18,8 +18,8 @@ instead.
 # Limitations
 
 I'm sure there are plenty. This plugin is experimental. Unception can be temporarily disabled when
-launching Vim if you run into any side-effects like so:
-`vim --cmd "let g:disable_unception=1"`
+launching Neovim if you run into any side-effects like so:
+`nvim --cmd "let g:disable_unception=1"`
 
 For one, this plugin assumes you have the ability to
 execute the `realpath` command in your shell and also that you have the ability to write
