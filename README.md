@@ -1,15 +1,14 @@
 # Purpose
 
-Leverages Neovim's clientserver feature to make opening files in Neovim from
-within Neovim's terminal emulator easier. Terminals will no longer go into a
+Leverages Neovim's `client-server` feature to make opening files from within
+Neovim's terminal emulator easier. Terminals will no longer go into a
 state of "inception" in which an instance of Neovim is open within an instance
-of Neovim. Instead, the desired files will be opened by an instance of the
-"host" Neovim session, using :argedit to update the host session's arguments.
+of Neovim. Instead, the desired files will be opened by the
+"host" Neovim session, using `:argedit` to update the host session's arguments.
 
 # Limitations
 
-I'm sure there are plenty that haven't come to mind. This is in an entirely
-experimental state currently.
+I'm sure there are plenty. This is in an entirely experimental state currently.
 
 # Installation
 
