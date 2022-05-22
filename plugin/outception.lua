@@ -19,6 +19,10 @@ if exists(expected_pipe_name) then
 
     local arg_str = ""
     for index, iter in pairs(args) do
+        local handle = io.popen("realpath "..iter)
+        iter = handle:read("*a")
+        handle:close()
+        iter = string.gsub(iter, "\n", "")
         arg_str = arg_str.." "..iter
     end
 
