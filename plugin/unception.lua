@@ -53,7 +53,7 @@ if exists(expected_pipe_name) then
     execute_command = execute_command.."silent execute 'bdelete! ' . g:unception_tmp_bufnr | "
 
     -- remove temporary variable
-    execute_command = execute_command.." silent unlet g:unception_tmp_bufnr<CR>"
+    execute_command = execute_command.."silent unlet g:unception_tmp_bufnr<CR>"
 
     -- flavor text :)
     execute_command = execute_command..":echo 'Unception!'<CR>\""
