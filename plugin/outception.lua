@@ -2,7 +2,7 @@ local function exists(filename)
    local ok, message, err_code = os.rename(filename, filename)
    if not ok then
       if err_code == 13 then
-         --file inaccessible, but was found
+         --file couldn't be renamed, but was found
          ok = true
       end
    end
