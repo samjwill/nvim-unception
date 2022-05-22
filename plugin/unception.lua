@@ -60,7 +60,7 @@ if exists(expected_pipe_name) then
 
     os.execute(execute_command)
     
-    -- Our work here is done. Kill the vim session that would have started otherwise.
+    -- Our work here is done. Kill the nvim session that would have started otherwise.
     vim.cmd("quit")
 else
     vim.call("serverstart", expected_pipe_name)
