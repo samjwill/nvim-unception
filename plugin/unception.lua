@@ -53,10 +53,13 @@ if exists(expected_pipe_name) then
     execute_command = execute_command.."silent execute 'bdelete! ' . g:unception_tmp_bufnr | "
 
     -- remove temporary variable
-    execute_command = execute_command.." silent unlet g:unception_tmp_bufnr<CR>"
+    execute_command = execute_command.." silent unlet g:unception_tmp_bufnr | "
+
+    -- remove command from history and send it
+    execute_command = execute_command.."call histdel(':', -1)<CR>"
 
     -- flavor text :)
-    execute_command = execute_command..":echo 'Unception!'<CR>\""
+    execute_command = execute_command..":echo 'Unception!' | call histdel(':', -1)<CR>\""
 
     os.execute(execute_command)
     vim.cmd("quit")
