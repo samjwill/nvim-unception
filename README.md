@@ -14,7 +14,7 @@ I'm sure there are plenty. This is in an entirely experimental state currently.
 
 #### Using [vim-plug](https://github.com/junegunn/vim-plug) (preferred):
 
-    Plug 'SamuelWilliams256/nvim-outception'
+    Plug 'samjwill/nvim-outception'
 
 #### Manual:
 
