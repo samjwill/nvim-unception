@@ -27,9 +27,9 @@ if exists(expected_pipe_name) then
     end
 
     if (#args > 0) then
-        os.execute("\\nvim --server "..expected_pipe_name.." --remote-send \"<C-\\><C-N>:argedit "..arg_str.."<CR>\"")
+        os.execute("\\nvim --server "..expected_pipe_name.." --remote-send \"<C-\\><C-N>:silent argedit "..arg_str.."<CR>\"")
     else
-        os.execute("\\nvim --server "..expected_pipe_name.." --remote-send \"<C-\\><C-N>:enew<CR>\"")
+        os.execute("\\nvim --server "..expected_pipe_name.." --remote-send \"<C-\\><C-N>:silent enew<CR>\"")
     end
     vim.cmd("quit")
 else
