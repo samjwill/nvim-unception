@@ -16,7 +16,7 @@ I'm sure there are plenty. For one, this plugin assumes you have the ability to 
 
 #### Using [vim-plug](https://github.com/junegunn/vim-plug) (preferred):
 
-    Plug 'samjwill/nvim-outception'
+    Plug 'samjwill/nvim-unception'
 
 #### Manual:
 
