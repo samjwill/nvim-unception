@@ -15,6 +15,42 @@ local function exists(filename)
    return ok
 end
 
+local function build_command(arg_str, number_of_args, server_address)
+    local execute_command = "\\nvim --server "..server_address.." --remote-send "
+
+    -- start command to be run by server
+    execute_command = execute_command.."\""
+
+    -- exit terminal-insert mode
+    execute_command = execute_command.."<C-\\><C-N>"
+
+    -- log buffer number so that we can delete it later. We don't want a ton of
+    -- running terminal buffers in the background when we switch to a new nvim buffer.
+    execute_command = execute_command..":silent let g:unception_tmp_bufnr = bufnr() | "
+
+    -- If there aren't arguments, we just want a new, empty buffer, but if
+    -- there are, append them to the host Neovim session's arguments list.
+    if (number_of_args > 0) then
+        execute_command = execute_command.."silent argedit "..arg_str.." | "
+    else
+        execute_command = execute_command.."silent enew | "
+    end
+
+    -- remove the old terminal buffer
+    execute_command = execute_command.."silent execute 'bdelete! ' . g:unception_tmp_bufnr | "
+
+    -- remove temporary variable
+    execute_command = execute_command.."silent unlet g:unception_tmp_bufnr | "
+
+    -- remove command from history and send it
+    execute_command = execute_command.."call histdel(':', -1)<CR>"
+
+    -- flavor text :)
+    execute_command = execute_command..":echo 'Unception!' | call histdel(':', -1)<CR>\""
+
+    return execute_command
+end
+
 local username = os.getenv("USER")
 local expected_pipe_name = "/tmp/nvim-"..username..".pipe"
 
@@ -32,34 +68,7 @@ if exists(expected_pipe_name) then
         arg_str = arg_str.." "..iter
     end
 
-    local execute_command = "\\nvim --server "..expected_pipe_name.." --remote-send "
-
-    -- exit terminal-insert mode
-    execute_command = execute_command.."\"<C-\\><C-N>"
-
-    -- log buffer number so that we can delete it later. We don't want a ton of
-    -- running terminal buffers in the background when we switch to a new nvim buffer.
-    execute_command = execute_command..":silent let g:unception_tmp_bufnr = bufnr() | "
-
-    -- If there aren't arguments, we just want a new, empty buffer, but if
-    -- there are, append them to the host Neovim session's arguments list.
-    if (#args > 0) then
-        execute_command = execute_command.."silent argedit "..arg_str.." | "
-    else
-        execute_command = execute_command.."silent enew | "
-    end
-
-    -- remove the old terminal buffer
-    execute_command = execute_command.."silent execute 'bdelete! ' . g:unception_tmp_bufnr | "
-
-    -- remove temporary variable
-    execute_command = execute_command.."silent unlet g:unception_tmp_bufnr | "
-
-    -- remove command from history and send it
-    execute_command = execute_command.."call histdel(':', -1)<CR>"
-
-    -- flavor text :)
-    execute_command = execute_command..":echo 'Unception!' | call histdel(':', -1)<CR>\""
+    local execute_command = build_command(arg_str, #args, expected_pipe_name)
 
     os.execute(execute_command)
 
