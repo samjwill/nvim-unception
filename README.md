@@ -1,6 +1,6 @@
 # Purpose
 
-Leverages Neovim's `client-server` feature to make opening files from within
+A plugin that leverages Neovim's `client-server` feature to make opening files from within
 Neovim's terminal emulator easier. Terminals will no longer go into a
 state of "inception" in which an instance of Neovim is open within an instance
 of Neovim. Instead, the desired files will be opened by the
@@ -8,7 +8,7 @@ of Neovim. Instead, the desired files will be opened by the
 
 # Limitations
 
-I'm sure there are plenty. For one, this plugin assumes you have the ability to execute the `realpath` command in your shell and have the ability to write to `/tmp/`. This is in an entirely experimental state currently.
+I'm sure there are plenty. For one, this plugin assumes you have the ability to execute the `realpath` command in your shell and also have the ability to write to `/tmp/`. This is in an entirely experimental state currently.
 
 # Installation
 
