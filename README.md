@@ -17,24 +17,22 @@ instead.
 
 # Limitations
 
-I'm sure there are plenty. Unception can be temporarily disabled when
+I'm sure there are plenty. This plugin is experimental. Unception can be temporarily disabled when
 launching Vim if you run into any side-effects like so:
 `vim --cmd "let g:disable_unception=1"`
 
 For one, this plugin assumes you have the ability to
-execute the `realpath` command in your shell and also have the ability to write
+execute the `realpath` command in your shell and also that you have the ability to write
 to `/tmp/`.
 
-If trying to open a new Neovim instance outside of the terminal emulator, the
-commands will instead be piped to the Neovim server. This means you can really
-only have one Neovim instance at a time unless disabling this plugin before
-launching the a new Neovim session.
+If trying to open a NEW Neovim instance outside of the terminal emulator when an instance using this plugin is already running, the
+commands will instead be piped to the existing Neovim server. This means you can really
+only have one Neovim instance at a time unless disabling this plugin when
+launching the new Neovim session.
 
 Other Vim commands that do not involve editing files/directories may or may not
-work as expected from within the terminal emulator; I haven't done a lot of
-testing in this regard (the commands should be fine from the "host" session).
-
-This is in an entirely experimental state currently.
+work as expected from within the terminal emulator; I haven't done a ton of
+testing in this regard (the commands should be fine from the "host" session though). If using Neovim as your default editor for git, for example, I would reccommend updating your .gitconfig to always pass the flag to disable unception described above.
 
 # Installation
 
