@@ -12,6 +12,8 @@ end
 local username = os.getenv("USER")
 local expected_pipe_name = "/tmp/nvim-"..username..".pipe"
 
+--TODO: Checking if the pipe exists probably isn't sufficient. Should instead
+--check if the pipe is currently attached to a Neovim session.
 if exists(expected_pipe_name) then
     args = vim.call("argv")
 
