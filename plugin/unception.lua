@@ -38,7 +38,7 @@ if exists(expected_pipe_name) then
     execute_command = execute_command.."\"<C-\\><C-N>"
 
     -- log buffer number so that we can delete it later. We don't want a ton of
-    -- running terminals in the background when we switch to a new nvim buffer.
+    -- running terminal buffersin the background when we switch to a new nvim buffer.
     execute_command = execute_command..":silent let g:unception_tmp_bufnr = bufnr() | "
 
     -- If there aren't arguments, we just want a new, empty buffer, but if
