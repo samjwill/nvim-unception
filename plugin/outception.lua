@@ -9,7 +9,8 @@ local function exists(filename)
    return ok
 end
 
-local expected_pipe_name = "/tmp/nvim.pipe"
+local username = os.getenv("USER")
+local expected_pipe_name = "/tmp/nvim-"..username..".pipe"
 
 if exists(expected_pipe_name) then
     args = vim.call("argv")
