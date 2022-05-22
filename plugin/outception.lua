@@ -28,6 +28,8 @@ if exists(expected_pipe_name) then
 
     if (#args > 0) then
         os.execute("\\nvim --server "..expected_pipe_name.." --remote-send \"<C-\\><C-N>:silent argedit "..arg_str.."<CR>\"")
+        --:let g:outception_tmp_bufname = bufnr()
+        --TODO: execute "bdelete " . g:outception_tmp_bufname
     else
         os.execute("\\nvim --server "..expected_pipe_name.." --remote-send \"<C-\\><C-N>:silent enew<CR>\"")
     end
