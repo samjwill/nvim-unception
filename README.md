@@ -8,7 +8,7 @@ of Neovim. Instead, the desired files will be opened by the
 
 # Limitations
 
-I'm sure there are plenty. This is in an entirely experimental state currently.
+I'm sure there are plenty. For one, this plugin assumes you have the ability to execute the `realpath` command in your shell and have the ability to write to `/tmp/`. This is in an entirely experimental state currently.
 
 # Installation
 
