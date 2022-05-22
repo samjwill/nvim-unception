@@ -1,3 +1,9 @@
+if not (vim.g.disable_unception == nil) then
+    if vim.g.disable_unception > 0 then
+        return
+    end
+end
+
 local function exists(filename)
    local ok, message, err_code = os.rename(filename, filename)
    if not ok then
@@ -33,7 +39,7 @@ if exists(expected_pipe_name) then
 
     -- log buffer number so that we can delete it later. We don't want a ton of
     -- running terminals in the background when we switch to a new nvim buffer.
-    execute_command = execute_command..":silent let g:outception_tmp_bufnr = bufnr() | "
+    execute_command = execute_command..":silent let g:unception_tmp_bufnr = bufnr() | "
 
     -- If there aren't arguments, we just want a new, empty buffer, but if
     -- there are, append them to the host Neovim session's arguments list.
@@ -44,13 +50,13 @@ if exists(expected_pipe_name) then
     end
 
     -- remove the old terminal buffer
-    execute_command = execute_command.."silent execute 'bdelete! ' . g:outception_tmp_bufnr | "
+    execute_command = execute_command.."silent execute 'bdelete! ' . g:unception_tmp_bufnr | "
 
     -- remove temporary variable
-    execute_command = execute_command.." silent unlet g:outception_tmp_bufnr<CR>"
+    execute_command = execute_command.." silent unlet g:unception_tmp_bufnr<CR>"
 
     -- flavor text :)
-    execute_command = execute_command..":echo 'Outception!'<CR>\""
+    execute_command = execute_command..":echo 'Unception!'<CR>\""
 
     os.execute(execute_command)
     vim.cmd("quit")
