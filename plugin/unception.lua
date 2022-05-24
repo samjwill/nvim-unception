@@ -1,3 +1,8 @@
+if 1 ~= vim.fn.has "nvim-0.7.0" then
+    vim.api.nvim_err_writeln "Unception requires Neovim 0.7 or higher."
+    return
+end
+
 if not (vim.g.disable_unception == nil) then
     if vim.g.disable_unception > 0 then
         return
