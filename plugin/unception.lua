@@ -9,15 +9,14 @@ if 1 ~= vim.fn.has "nvim-0.7.0" then
     return
 end
 
-local function exists(filename)
-   local ok, message, err_code = os.rename(filename, filename)
-   if not ok then
-      if err_code == 13 then
-         --file couldn't be renamed, but was found
-         ok = true
-      end
-   end
-   return ok
+local function nvim_already_running(filename)
+    local handle = io.popen("pidof nvim")
+    nvim_pid_str = handle:read("*a")
+    handle:close()
+
+    --If there's a space, then at least two instances are running.
+    _, num_spaces = string.gsub(nvim_pid_str, " ", " ")
+    return (num_spaces > 0)
 end
 
 local function build_command(arg_str, number_of_args, server_address)
@@ -61,7 +60,7 @@ local expected_pipe_name = "/tmp/nvim-"..username..".pipe"
 
 --TODO: Checking if the pipe exists probably isn't sufficient. Should instead
 --check if the pipe is currently attached to a Neovim session.
-if exists(expected_pipe_name) then
+if not nvim_already_running() then
     args = vim.call("argv")
 
     local arg_str = ""
