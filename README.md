@@ -34,9 +34,11 @@ disabling this plugin when launching the new Neovim session.
 Other Vim commands that do not involve editing files/directories may or may not
 work as expected from within the terminal emulator; I haven't done a ton of
 testing in this regard (the commands should be fine from the "host" session
-though). If using Neovim as your default editor for git, **for example, I would
+though). **If using Neovim as your default editor for git, for example, I would
 reccommend updating your .gitconfig to always pass the flag to disable
 unception described above.**
+
+Additionally, if any of the commands passed to the Neovim "host" session through the terminal buffer conflict with arguments provided to the host session, they probably won't work.
 
 # Installation
 
