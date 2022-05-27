@@ -45,10 +45,11 @@ local function build_command(arg_str, number_of_args, server_address)
     -- remove temporary variable
     cmd_to_execute = cmd_to_execute.."silent unlet g:unception_tmp_bufnr | "
 
-    -- This is kind of stupid, but basically I've noticed that some plugins,
-    -- like Treesitter, don't appear to properly triggering when receiving a
-    -- server command with argedit. Basically just re-edit the same file here
-    -- to get it to trigger, since doing so doesn't hurt anything.
+    -- This is kind of stupid, but basically I've noticed that some
+    -- plugins, like Treesitter, don't appear to properly trigger when
+    -- receiving a server command with argedit. Basically just re-edit the
+    -- same file here to get it to trigger, since doing so doesn't hurt
+    -- anything.
     cmd_to_execute = cmd_to_execute.."e | "
 
     -- remove command from history and send it
