@@ -69,6 +69,13 @@ if nvim_already_running() then
     args = vim.call("argv")
 
     local arg_str = ""
+
+    _, num_args = string.gsub(arg_str, "%S+", "")
+    if (num_args == 0) then
+        arg_str = "." -- TODO: instead of editing the current directory, maybe
+                      -- it should open an empty buffer in this directory
+    end
+
     for index, iter in pairs(args) do
         local handle = io.popen("realpath "..iter)
         iter = handle:read("*a")
