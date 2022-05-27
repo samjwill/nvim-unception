@@ -14,7 +14,7 @@ session's arguments.
 
 The plugin tells Neovim to automatically start a server listening to a pipe on
 launch. Upon launching a new Neovim session within a terminal emulator, the
-arguments are forwarded to the aforementioned Neovim session, and the host
+arguments are forwarded to the aforementioned Neovim server session, and the server
 session replaces the buffer under the cursor (which should be the terminal
 buffer), with the first file specified.
 
