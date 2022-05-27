@@ -4,7 +4,7 @@ A plugin that leverages Neovim's `client-server` feature to make opening files
 from within Neovim's terminal emulator even easier and completely automatic.
 
 Terminals will no longer enter a state of "inception" in which an instance of
-Neovim is open within an instance of Neovim. Instead, the desired files will be
+Neovim is open within an instance of Neovim. Instead, the desired files and directories will be
 opened by the "host" Neovim session, and which leverages `:argedit` to update its own arguments.
 
 https://user-images.githubusercontent.com/25990267/170632310-8bbee2fa-672b-4385-9dea-7ed4501a0558.mp4
