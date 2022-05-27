@@ -65,6 +65,7 @@ local username = os.getenv("USER")
 local server_pipe_path = "/tmp/nvim-"..username..".pipe"
 
 if nvim_already_running() then
+    -- We don't want to start. Send the args to the server instance instead.
     args = vim.call("argv")
 
     local arg_str = ""
