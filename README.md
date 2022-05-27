@@ -36,23 +36,23 @@ launched. This means you can really only use one Neovim instance at a time (per
 user) unless disabling this plugin when launching the new Neovim session.
 
 Other Neovim non-filepath commands that do not involve editing may or may not
-work as expected from within the terminal emulator; try it out and let me know
-:). Note that the commands should be fine when launching the "host" session
-though. ***If using Neovim as your default editor for git, for example, I would
-reccommend updating your .gitconfig to always pass the flag to disable
-unception described above.***
+work as expected from within the terminal emulator; try them out and let me
+know if there's an issue :). Note that any commands that might not work well
+within the Neovim terminal emulator should work just fine when launching the
+"host" session.
+
+***If using Neovim as your default editor for git, for example, and you would
+like to be able to use it from within the terminal emulator, I would reccommend
+updating your .gitconfig to always pass the flag to disable unception described
+above.***
 
 Additionally, if any of the commands passed to the Neovim "host" session
-through the terminal buffer conflict with arguments provided to the host
-session, they probably won't work.
+through the terminal buffer conflict with arguments provided to the initial
+host session, they probably won't work.
 
 # Installation
 
-#### Using [vim-plug](https://github.com/junegunn/vim-plug) (preferred):
+#### Using [vim-plug](https://github.com/junegunn/vim-plug):
 
     Plug 'samjwill/nvim-unception'
 
-#### Manual:
-
-* Copy the contents of the `plugin` directory to `~/.vim/plugin` and ensure
-  that they load on startup.
