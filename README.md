@@ -26,7 +26,7 @@ have the ability to write to `/tmp/`.
 
 # Limitations
 
-I'm sure there are plenty. This plugin is experimental. Unception can be
+I'm sure there are plenty. This plugin is experimental and probably has some unaccounted for edge cases. Unception can be
 temporarily disabled when launching Neovim if you run into any side-effects
 like so: `nvim --cmd "let g:disable_unception=1"`
 
