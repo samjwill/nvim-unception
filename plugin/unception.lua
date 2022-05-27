@@ -9,15 +9,13 @@ if 1 ~= vim.fn.has "nvim-0.7.0" then
     return
 end
 
-local function exists(filename)
-   local ok, message, err_code = os.rename(filename, filename)
-   if not ok then
-      if err_code == 13 then
-         --file couldn't be renamed, but was found
-         ok = true
-      end
-   end
-   return ok
+local function nvim_already_running(filename)
+    local handle = io.popen("pidof nvim")
+    nvim_pid_str = handle:read("*a")
+    handle:close()
+
+    _, num_processes = string.gsub(nvim_pid_str, "%S+", "")
+    return (num_processes > 0)
 end
 
 local function build_command(arg_str, number_of_args, server_address)
@@ -57,11 +55,9 @@ local function build_command(arg_str, number_of_args, server_address)
 end
 
 local username = os.getenv("USER")
-local expected_pipe_name = "/tmp/nvim-"..username..".pipe"
---TODO use tmpdir environment variable
---TODO: Checking if the pipe exists probably isn't sufficient. Should instead
---check if the pipe is currently attached to a Neovim session.
-if exists(expected_pipe_name) then
+local server_pipe_path = "/tmp/nvim-"..username..".pipe"
+
+if nvim_already_running() then
     args = vim.call("argv")
 
     local arg_str = ""
@@ -73,13 +69,13 @@ if exists(expected_pipe_name) then
         arg_str = arg_str.." "..iter
     end
 
-    local cmd_to_execute = build_command(arg_str, #args, expected_pipe_name)
+    local cmd_to_execute = build_command(arg_str, #args, server_pipe_path)
 
     os.execute(cmd_to_execute)
 
     -- Our work here is done. Kill the nvim session that would have started otherwise.
     vim.cmd("quit")
 else
-    vim.call("serverstart", expected_pipe_name)
+    vim.call("serverstart", server_pipe_path)
 end
 
