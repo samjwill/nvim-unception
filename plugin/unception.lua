@@ -15,7 +15,7 @@ local function nvim_already_running(filename)
     handle:close()
 
     _, num_processes = string.gsub(nvim_pid_str, "%S+", "")
-    return (num_processes >= 2)
+    return (num_processes > 1) -- Don't count yourself ;)
 end
 
 local function build_command(arg_str, number_of_args, server_address)
