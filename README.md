@@ -16,29 +16,35 @@ arguments are forwarded to the aforementioned Neovim session, and the host
 session replaces the buffer under the cursor (which should be the terminal
 buffer), with the first file specified.
 
+# Requirements
+
+It is assumed that you have the ability to run the `realpath` and `pidof`
+commands in the shell that is used to launch Neovim, as well as the shell used
+by the internal Neovim terminal emulator. The user launching Neovim must also
+have the ability to write to `/tmp/`.
+
 # Limitations
 
 I'm sure there are plenty. This plugin is experimental. Unception can be
 temporarily disabled when launching Neovim if you run into any side-effects
 like so: `nvim --cmd "let g:disable_unception=1"`
 
-For one, this plugin assumes you have the ability to execute the `realpath`
-command in your shell and also that you have the ability to write to `/tmp/`.
-
 If trying to open a NEW Neovim instance outside of the terminal emulator when
 an instance using this plugin is already running, the arguments will instead be
-piped to the existing Neovim server, and Neovim will not be launched. This
-means you can really only use one Neovim instance at a time (per user) unless
-disabling this plugin when launching the new Neovim session.
+piped to the existing Neovim server, and a new Neovim instance will not be
+launched. This means you can really only use one Neovim instance at a time (per
+user) unless disabling this plugin when launching the new Neovim session.
 
-Other Vim commands that do not involve editing files/directories may or may not
-work as expected from within the terminal emulator; I haven't done a ton of
-testing in this regard (the commands should be fine from the "host" session
-though). **If using Neovim as your default editor for git, for example, I would
+Other Neovim non-filepath commands that do not involve editing may or may not
+work as expected from within the terminal emulator; try it out and let me know
+:). Note that the commands should be fine when launching the "host" session
+though. ***If using Neovim as your default editor for git, for example, I would
 reccommend updating your .gitconfig to always pass the flag to disable
-unception described above.**
+unception described above.***
 
-Additionally, if any of the commands passed to the Neovim "host" session through the terminal buffer conflict with arguments provided to the host session, they probably won't work.
+Additionally, if any of the commands passed to the Neovim "host" session
+through the terminal buffer conflict with arguments provided to the host
+session, they probably won't work.
 
 # Installation
 
