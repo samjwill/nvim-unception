@@ -52,7 +52,7 @@ local function build_command(arg_str, number_of_args, server_address)
     -- trigger, since doing so doesn't hurt anything.
     cmd_to_execute = cmd_to_execute.."e | "
 
-    -- remove command from history and send it
+    -- remove command from history and enter it
     cmd_to_execute = cmd_to_execute.."call histdel(':', -1)<CR>"
 
     -- flavor text :)
