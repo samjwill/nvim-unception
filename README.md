@@ -1,7 +1,7 @@
 # nvim-unception
 
 A plugin that leverages Neovim's `client-server` feature to make opening files
-from within Neovim's terminal emulator easier.
+from within Neovim's terminal emulator even easier and completely automatic.
 
 https://user-images.githubusercontent.com/25990267/170632310-8bbee2fa-672b-4385-9dea-7ed4501a0558.mp4
 
