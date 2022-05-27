@@ -58,3 +58,7 @@ host session, they probably won't work.
 
     Plug 'samjwill/nvim-unception'
 
+#### Using [packer.nvim](https://github.com/wbthomason/packer.nvim):
+
+    use "samjwill/nvim-unception"
+
