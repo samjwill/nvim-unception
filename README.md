@@ -5,18 +5,17 @@ from within Neovim's terminal emulator even easier and completely automatic.
 
 Terminals will no longer enter a state of "inception" in which an instance of
 Neovim is open within an instance of Neovim. Instead, the desired files will be
-opened by the "host" Neovim session, and leverage `:argedit` to update the host
-session's arguments.
+opened by the "host" Neovim session, and which leverages `:argedit` to update its own arguments.
 
 https://user-images.githubusercontent.com/25990267/170632310-8bbee2fa-672b-4385-9dea-7ed4501a0558.mp4
 
 # How does it work?
 
-The plugin tells Neovim to automatically start a server listening to a pipe on
+The plugin tells Neovim to automatically start a local server listening to a named pipe on
 launch. Upon launching a new Neovim session within a terminal emulator, the
 arguments are forwarded to the aforementioned Neovim server session, and the server
-session replaces the buffer under the cursor (which should be the terminal
-buffer), with the first file specified.
+session replaces the buffer under the cursor, which should be the terminal
+buffer, with the first file/directory argument specified.
 
 # Requirements
 
