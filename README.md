@@ -57,6 +57,10 @@ Additionally, if any of the commands passed to the Neovim server session
 through the terminal buffer conflict with arguments provided to the initial
 host session, they probably won't work.
 
+# Troubleshooting
+
+If something goes horribly wrong, try deleting the pipe in the `/tmp/` directory. It will be named `nvim-<username>.pipe`.
+
 # Installation
 
 #### Using [vim-plug](https://github.com/junegunn/vim-plug):
