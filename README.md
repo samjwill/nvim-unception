@@ -1,7 +1,7 @@
 # nvim-unception
 
-A plugin that leverages Neovim's `client-server` feature to make opening files
-from within Neovim's terminal emulator even easier and completely automatic.
+A plugin that leverages Neovim's ***native*** `client-server` feature to make opening files
+from within Neovim's terminal emulator without experiencing weird behavior easier and completely automatic.
 
 Terminals will no longer enter a state of "inception" in which an instance of
 Neovim is open within an instance of Neovim. Instead, the desired files and
@@ -21,7 +21,7 @@ specified.
 
 # Requirements
 
-Basically a bash or bash-like shell.
+Requires Neovim 0.7 or higher and a bash or somewhat bash-like shell.
 
 It is assumed that you have the ability to run the `realpath` and `pgrep`
 commands in the shell that is used to launch Neovim, as well as the shell used
