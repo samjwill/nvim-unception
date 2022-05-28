@@ -47,13 +47,13 @@ piped to the existing Neovim server, and a new Neovim instance will not be
 launched. This means you can really only use one Neovim instance at a time (per
 user) unless disabling this plugin when launching the new Neovim session.
 
-Other Neovim non-filepath commands that do not involve editing may or may not
+Other Neovim non-filepath command-line arguments that do not involve editing a file or directory may or may not
 work as expected from within the terminal emulator; try them out and let me
 know if there's an issue :). Note that any commands that might not work well
 within the Neovim terminal emulator should work just fine when launching the
-host/server session.
+initial server session.
 
-Additionally, if any of the commands passed to the Neovim host/server session
+Additionally, if any of the commands passed to the Neovim server session
 through the terminal buffer conflict with arguments provided to the initial
 host session, they probably won't work.
 
