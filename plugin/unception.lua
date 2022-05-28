@@ -46,8 +46,8 @@ local function build_command(arg_str, number_of_args, server_address)
 
         -- This is kind of stupid, but basically, I've noticed that some
         -- plugins, like Treesitter, don't appear to properly trigger when
-        -- receiving a server command with argedit. Here I just re-edit the
-        -- same file here to get stuff like Treesitter's syntax highlighting to
+        -- receiving a server command with argedit. I just re-edit the same
+        -- file here to get stuff like Treesitter's syntax highlighting to
         -- trigger, since doing so doesn't hurt anything.
         cmd_to_execute = cmd_to_execute.."silent e | "
     else
