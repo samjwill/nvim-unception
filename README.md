@@ -56,6 +56,8 @@ Additionally, if any of the commands passed to the Neovim server session
 through the terminal buffer conflict with arguments provided to the initial
 host session, they probably won't work.
 
+When the server session receives the command, the old terminal buffer is deleted when the new file is switched to. It assumes that the terminal buffer used to send the command will be the one under the cursor at the time the server receives the command. This happens extremely quickly, so it should not be an issue unless you're the Flash, but it's worth noting.
+
 # Troubleshooting
 
 If something goes horribly wrong, try deleting the pipe in the `/tmp/` directory. It will be named `nvim-<username>.pipe`.
