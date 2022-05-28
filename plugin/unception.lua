@@ -9,7 +9,7 @@ if 1 ~= vim.fn.has "nvim-0.7.0" then
     return
 end
 
-local function nvim_already_running(filename)
+local function nvim_already_running()
     local handle = io.popen("pgrep nvim -u $USER")
     nvim_pid_str = handle:read("*a")
     handle:close()
