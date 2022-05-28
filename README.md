@@ -32,9 +32,9 @@ be set.
 # Limitations
 
 I'm sure there are plenty. This plugin is experimental and probably has some
-(several) unaccounted for edge cases. Unception can be temporarily disabled
+(several) unaccounted for edge cases. It works well enough for me but YMMV. Unception can be temporarily disabled
 when launching Neovim if you run into any side-effects like so: `nvim --cmd
-"let g:disable_unception=1"`
+"let g:disable_unception=1"`.
 
 If trying to open a NEW Neovim instance outside of the terminal emulator when
 an instance using this plugin is already running, the arguments will instead be
