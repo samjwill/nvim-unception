@@ -19,6 +19,8 @@ buffer, with the first file/directory argument specified.
 
 # Requirements
 
+Requires Neovim 0.7 or higher.
+
 It is assumed that you have the ability to run the `realpath` and `pidof`
 commands in the shell that is used to launch Neovim, as well as the shell used
 by the internal Neovim terminal emulator. The user launching Neovim must also
