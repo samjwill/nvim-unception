@@ -51,9 +51,9 @@ Other Neovim non-filepath commands that do not involve editing may or may not
 work as expected from within the terminal emulator; try them out and let me
 know if there's an issue :). Note that any commands that might not work well
 within the Neovim terminal emulator should work just fine when launching the
-"host" session.
+host/server session.
 
-Additionally, if any of the commands passed to the Neovim "host" session
+Additionally, if any of the commands passed to the Neovim host/server session
 through the terminal buffer conflict with arguments provided to the initial
 host session, they probably won't work.
 
