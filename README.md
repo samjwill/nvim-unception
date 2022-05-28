@@ -4,31 +4,37 @@ A plugin that leverages Neovim's `client-server` feature to make opening files
 from within Neovim's terminal emulator even easier and completely automatic.
 
 Terminals will no longer enter a state of "inception" in which an instance of
-Neovim is open within an instance of Neovim. Instead, the desired files and directories will be
-opened by the "host" Neovim session, and which leverages `:argedit` to update its own arguments.
+Neovim is open within an instance of Neovim. Instead, the desired files and
+directories will be opened by the "host" Neovim session, and which leverages
+`:argedit` to update its own arguments.
 
 https://user-images.githubusercontent.com/25990267/170632310-8bbee2fa-672b-4385-9dea-7ed4501a0558.mp4
 
 # How does it work?
 
-The plugin tells Neovim to automatically start a local server listening to a named pipe on
-launch. Upon launching a new Neovim session within a terminal emulator, the
-arguments are forwarded to the aforementioned Neovim server session, and the server
-session replaces the buffer under the cursor, which should be the terminal
-buffer, with the first file/directory argument specified.
+The plugin tells Neovim to automatically start a local server listening to a
+named pipe on launch. Upon launching a new Neovim session within a terminal
+emulator, the arguments are forwarded to the aforementioned Neovim server
+session, and the server session replaces the buffer under the cursor, which
+should be the terminal buffer, with the first file/directory argument
+specified.
 
 # Requirements
 
-It is assumed that you have the ability to run the `realpath` and `pidof`
+Basically a bash or bash-like shell.
+
+It is assumed that you have the ability to run the `realpath` and `pgrep`
 commands in the shell that is used to launch Neovim, as well as the shell used
 by the internal Neovim terminal emulator. The user launching Neovim must also
-have the ability to write to `/tmp/`.
+have the ability to write to `/tmp/`, and the `$USER` environment variable must
+be set.
 
 # Limitations
 
-I'm sure there are plenty. This plugin is experimental and probably has some (several) unaccounted for edge cases. Unception can be
-temporarily disabled when launching Neovim if you run into any side-effects
-like so: `nvim --cmd "let g:disable_unception=1"`
+I'm sure there are plenty. This plugin is experimental and probably has some
+(several) unaccounted for edge cases. Unception can be temporarily disabled
+when launching Neovim if you run into any side-effects like so: `nvim --cmd
+"let g:disable_unception=1"`
 
 If trying to open a NEW Neovim instance outside of the terminal emulator when
 an instance using this plugin is already running, the arguments will instead be
