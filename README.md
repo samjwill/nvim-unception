@@ -13,8 +13,8 @@ https://user-images.githubusercontent.com/25990267/170632310-8bbee2fa-672b-4385-
 # How does it work?
 
 The plugin tells Neovim to automatically start a local server listening to a
-named pipe on launch. Upon launching a new Neovim session within a terminal
-emulator, the arguments are forwarded to the aforementioned Neovim server
+named pipe at launch. Upon launching a new Neovim session within a terminal
+emulator buffer, the arguments are forwarded to the aforementioned Neovim server
 session via the pipe, and the server session replaces the buffer under the cursor, which
 should be the terminal buffer, with the first file/directory argument
 specified.
