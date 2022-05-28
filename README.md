@@ -26,8 +26,7 @@ Requires Neovim 0.7 or higher and a bash or somewhat bash-like shell.
 It is assumed that you have the ability to run the `realpath` and `pgrep`
 commands in the shell that is used to launch Neovim, as well as the shell used
 by the internal Neovim terminal emulator. The user launching Neovim must also
-have the ability to write to `/tmp/`, and the `$USER` environment variable must
-be set.
+have the ability to write to `/tmp/`, and the `$USER` environment variable is assumed to be set.
 
 # Limitations
 
