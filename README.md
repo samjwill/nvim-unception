@@ -36,6 +36,11 @@ I'm sure there are plenty. This plugin is experimental and probably has some
 when launching Neovim if you run into any side-effects like so: `nvim --cmd
 "let g:disable_unception=1"`.
 
+***If using Neovim as your default editor for git, for example, and you would
+like to be able to use it from within the terminal emulator, I would reccommend
+updating your .gitconfig to always pass the flag to disable unception described
+above.***
+
 If trying to open a NEW Neovim instance outside of the terminal emulator when
 an instance using this plugin is already running, the arguments will instead be
 piped to the existing Neovim server, and a new Neovim instance will not be
@@ -47,11 +52,6 @@ work as expected from within the terminal emulator; try them out and let me
 know if there's an issue :). Note that any commands that might not work well
 within the Neovim terminal emulator should work just fine when launching the
 "host" session.
-
-***If using Neovim as your default editor for git, for example, and you would
-like to be able to use it from within the terminal emulator, I would reccommend
-updating your .gitconfig to always pass the flag to disable unception described
-above.***
 
 Additionally, if any of the commands passed to the Neovim "host" session
 through the terminal buffer conflict with arguments provided to the initial
