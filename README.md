@@ -6,7 +6,7 @@ from within Neovim's terminal emulator without experiencing weird behavior easie
 Terminal buffers will no longer enter a state of "inception" in which an instance of
 Neovim is open within an instance of Neovim. Instead, the desired files and
 directories will be opened by the "host" Neovim session, which leverages
-`:argedit` to update its own arguments.
+`:argadd` to update its own arguments.
 
 https://user-images.githubusercontent.com/25990267/170632310-8bbee2fa-672b-4385-9dea-7ed4501a0558.mp4
 
