@@ -42,7 +42,10 @@ local function build_command(arg_str, number_of_args, server_address)
     -- If there aren't arguments, we just want a new, empty buffer, but if
     -- there are, append them to the host Neovim session's arguments list.
     if (number_of_args > 0) then
-        cmd_to_execute = cmd_to_execute.."silent argedit "..arg_str.." | "
+        -- Had some issues when using argedit. Explicitly calling these
+        -- separately appears to work though.
+        cmd_to_execute = cmd_to_execute.."silent 0argadd "..arg_str.." | "
+        cmd_to_execute = cmd_to_execute.."silent argument 1 | "
 
         -- This is kind of stupid, but basically, I've noticed that some
         -- plugins, like Treesitter, don't appear to properly trigger when
