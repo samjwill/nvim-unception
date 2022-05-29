@@ -60,7 +60,7 @@ When the server session receives the command, the old terminal buffer is deleted
 
 # Troubleshooting
 
-If something goes horribly wrong, try deleting the pipe in the `/tmp/` directory. It will be named `nvim-<username>.pipe`.
+If something goes horribly wrong, try deleting the pipe in the `/tmp/` directory. It will be named `nvim-unception-<username>.pipe`.
 
 # Installation
 

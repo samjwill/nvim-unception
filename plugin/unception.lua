@@ -74,9 +74,13 @@ local function build_command(arg_str, number_of_args, server_address)
 end
 
 local username = os.getenv("USER")
-local server_pipe_path = "/tmp/nvim-"..username..".pipe"
+local server_pipe_path = "/tmp/nvim-unception-"..username..".pipe"
 
-if nvim_already_running() then
+if not nvim_already_running() then
+    -- Clean up if the pipe still exists for whatever reason.
+    os.execute("rm -f "..server_pipe_path)
+    vim.call("serverstart", server_pipe_path)
+else
     -- We don't want to start. Send the args to the server instance instead.
     args = vim.call("argv")
 
@@ -92,7 +96,5 @@ if nvim_already_running() then
 
     -- Our work here is done. Kill the nvim session that would have started otherwise.
     vim.cmd("quit")
-else
-    vim.call("serverstart", server_pipe_path)
 end
 
