@@ -43,7 +43,7 @@ above.***
 If trying to open a NEW Neovim instance outside of the terminal emulator when
 an instance using this plugin is already running, the arguments will instead be
 piped to the existing Neovim server, and a new Neovim instance will not be
-launched. This means you can really only use one Neovim instance at a time (per
+launched. ***This means you can really only use one Neovim instance at a time*** (per
 user) unless disabling this plugin when launching the new Neovim session.
 
 Other Neovim non-filepath command-line arguments that do not involve editing a file or directory may or may not
