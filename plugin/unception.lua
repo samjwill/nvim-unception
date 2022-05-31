@@ -17,6 +17,15 @@ local function get_absolute_filepath(relative_path)
     return absolute_path
 end
 
+local function generate_server_pipe_name()
+    local handle = io.popen("mktemp -d")
+    server_pipe_path = handle:read("*a")
+    handle:close()
+    server_pipe_path = string.gsub(server_pipe_path, "\n", "")
+    server_pipe_path = server_pipe_path.."/nvim-unception.pipe"
+    return server_pipe_path
+end
+
 local function build_command(arg_str, number_of_args, server_address)
     local cmd_to_execute = "\\nvim --server "..server_address.." --remote-send "
 
@@ -64,15 +73,11 @@ local function build_command(arg_str, number_of_args, server_address)
     return cmd_to_execute
 end
 
-local username = os.getenv("USER")
 local existing_server_pipe_path = os.getenv("NVIM_UNCEPTION_PIPE_PATH")
 local in_terminal_buffer = (existing_server_pipe_path ~= nil)
 
 if not in_terminal_buffer then
-    -- TODO: Ensure file doesn't exist first, and make unique. If doing so, do not need rm -f below or the username.
-    local new_server_pipe_path = "/tmp/nvim-unception-"..username..".pipe"
-    -- Clean up if the pipe still exists for whatever reason.
-    os.execute("rm -f "..new_server_pipe_path)
+    local new_server_pipe_path = generate_server_pipe_name()
     vim.call("serverstart", new_server_pipe_path)
     vim.call("setenv", "NVIM_UNCEPTION_PIPE_PATH", new_server_pipe_path)
 else
