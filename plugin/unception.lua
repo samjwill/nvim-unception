@@ -69,9 +69,8 @@ local server_pipe_path = os.getenv("NVIM_UNCEPTION_PIPE_PATH")
 
 local in_terminal_buffer = (server_pipe_path ~= nil)
 if not in_terminal_buffer then
-    -- TODO: Ensure file doesn't exist first, and make unique.
+    -- TODO: Ensure file doesn't exist first, and make unique. If doing so, do not need rm -f below either most likely.
     server_pipe_path = "/tmp/nvim-unception-"..username..".pipe"
-
     -- Clean up if the pipe still exists for whatever reason.
     os.execute("rm -f "..server_pipe_path)
     vim.call("serverstart", server_pipe_path)
