@@ -36,14 +36,11 @@ updating your .gitconfig to always pass the flag to disable unception described
 above.***
 
 Other Neovim non-filepath command-line arguments that do not involve editing a
-file or directory may or may not work as expected from within the terminal
-emulator; try them out and let me know if there's an issue :). Note that any
-commands that might not work well within the Neovim terminal emulator should
-work just fine when launching the initial server session.
-
-Additionally, if any of the commands passed to the Neovim server session
-through the terminal buffer conflict with arguments provided to the initial
-host session, they probably won't work.
+file or directory may not work as expected from within the terminal emulator,
+(e.g. passing `-b` to edit in binary mode or opening a file as read-only when
+the server session is not set to read-only mode). Note that any commands that
+might not work well within the Neovim terminal emulator should work just fine
+when launching the initial server session.
 
 When the server session receives the command, the old terminal buffer is
 deleted when the new file is switched to. This plugin assumes that the terminal
