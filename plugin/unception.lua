@@ -65,10 +65,9 @@ local function build_command(arg_str, number_of_args, server_address)
 end
 
 local username = os.getenv("USER")
-local server_pipe_path = os.getenv("UNCEPTION_PIPE_PATH")
-_, num_words = string.gsub(server_pipe_path, "%S+", "")
+local server_pipe_path = os.getenv("NVIM_UNCEPTION_PIPE_PATH")
 
-local in_terminal_buffer = (num_words > 0)
+local in_terminal_buffer = (server_pipe_path ~= nil)
 if not in_terminal_buffer then
     -- TODO: Ensure file doesn't exist first, and make unique.
     server_pipe_path = "/tmp/nvim-unception-"..username..".pipe"
@@ -76,6 +75,7 @@ if not in_terminal_buffer then
     -- Clean up if the pipe still exists for whatever reason.
     os.execute("rm -f "..server_pipe_path)
     vim.call("serverstart", server_pipe_path)
+    vim.call("setenv", 'NVIM_UNCEPTION_PIPE_PATH', server_pipe_path)
 else
     -- We don't want to start. Send the args to the server instance instead.
     args = vim.call("argv")
