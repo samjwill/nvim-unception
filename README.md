@@ -23,11 +23,6 @@ specified.
 
 Requires Neovim 0.7 or higher and a bash or somewhat bash-like shell.
 
-It is assumed that you have the ability to run the `realpath` and `pgrep`
-commands in the shell that is used to launch Neovim, as well as the shell used
-by the internal Neovim terminal emulator. The user launching Neovim must also
-have the ability to write to `/tmp/`, and the `$USER` environment variable is assumed to be set.
-
 # Limitations
 
 I'm sure there are plenty. This plugin is experimental and probably has some
@@ -40,23 +35,21 @@ like to be able to use it from within the terminal emulator, I would recommend
 updating your .gitconfig to always pass the flag to disable unception described
 above.***
 
-If trying to open a NEW Neovim instance outside of the terminal emulator when
-an instance using this plugin is already running, the arguments will instead be
-piped to the existing Neovim server, and a new Neovim instance will not be
-launched. ***This means you can really only use one Neovim instance at a time*** (per
-user) unless disabling this plugin when launching the new Neovim session.
-
-Other Neovim non-filepath command-line arguments that do not involve editing a file or directory may or may not
-work as expected from within the terminal emulator; try them out and let me
-know if there's an issue :). Note that any commands that might not work well
-within the Neovim terminal emulator should work just fine when launching the
-initial server session.
+Other Neovim non-filepath command-line arguments that do not involve editing a
+file or directory may or may not work as expected from within the terminal
+emulator; try them out and let me know if there's an issue :). Note that any
+commands that might not work well within the Neovim terminal emulator should
+work just fine when launching the initial server session.
 
 Additionally, if any of the commands passed to the Neovim server session
 through the terminal buffer conflict with arguments provided to the initial
 host session, they probably won't work.
 
-When the server session receives the command, the old terminal buffer is deleted when the new file is switched to. This plugin assumes that the terminal buffer used to send the command will be the one under the cursor at the time the server receives the command. This happens extremely quickly, so it should not be an issue unless you're the Flash, but it's worth noting.
+When the server session receives the command, the old terminal buffer is
+deleted when the new file is switched to. This plugin assumes that the terminal
+buffer used to send the command will be the one under the cursor at the time
+the server receives the command. This happens extremely quickly, so it should
+not be an issue unless you're the Flash, but it's worth noting.
 
 # Installation
 
