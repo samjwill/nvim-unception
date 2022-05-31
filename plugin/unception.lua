@@ -9,21 +9,21 @@ if 1 ~= vim.fn.has "nvim-0.7.0" then
     return
 end
 
-local function nvim_already_running()
-    local handle = io.popen("pgrep nvim -u $USER")
-    nvim_pid_str = handle:read("*a")
-    handle:close()
-
-    _, num_processes = string.gsub(nvim_pid_str, "%S+", "")
-    return (num_processes > 1) -- Don't count yourself ;)
-end
-
 local function get_absolute_filepath(relative_path)
     local handle = io.popen("realpath "..relative_path)
     absolute_path = handle:read("*a")
     handle:close()
     absolute_path = string.gsub(absolute_path, "\n", "")
     return absolute_path
+end
+
+local function generate_server_pipe_name()
+    local handle = io.popen("mktemp -d")
+    server_pipe_path = handle:read("*a")
+    handle:close()
+    server_pipe_path = string.gsub(server_pipe_path, "\n", "")
+    server_pipe_path = server_pipe_path.."/nvim-unception.pipe"
+    return server_pipe_path
 end
 
 local function build_command(arg_str, number_of_args, server_address)
@@ -73,13 +73,13 @@ local function build_command(arg_str, number_of_args, server_address)
     return cmd_to_execute
 end
 
-local username = os.getenv("USER")
-local server_pipe_path = "/tmp/nvim-unception-"..username..".pipe"
+local existing_server_pipe_path = os.getenv("NVIM_UNCEPTION_PIPE_PATH")
+local in_terminal_buffer = (existing_server_pipe_path ~= nil)
 
-if not nvim_already_running() then
-    -- Clean up if the pipe still exists for whatever reason.
-    os.execute("rm -f "..server_pipe_path)
-    vim.call("serverstart", server_pipe_path)
+if not in_terminal_buffer then
+    local new_server_pipe_path = generate_server_pipe_name()
+    vim.call("serverstart", new_server_pipe_path)
+    vim.call("setenv", "NVIM_UNCEPTION_PIPE_PATH", new_server_pipe_path)
 else
     -- We don't want to start. Send the args to the server instance instead.
     args = vim.call("argv")
@@ -90,7 +90,7 @@ else
         arg_str = arg_str.." "..iter
     end
 
-    local cmd_to_execute = build_command(arg_str, #args, server_pipe_path)
+    local cmd_to_execute = build_command(arg_str, #args, existing_server_pipe_path)
 
     os.execute(cmd_to_execute)
 
