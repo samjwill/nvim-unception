@@ -9,15 +9,6 @@ if 1 ~= vim.fn.has "nvim-0.7.0" then
     return
 end
 
-local function nvim_already_running()
-    local handle = io.popen("pgrep nvim -u $USER")
-    nvim_pid_str = handle:read("*a")
-    handle:close()
-
-    _, num_processes = string.gsub(nvim_pid_str, "%S+", "")
-    return (num_processes > 1) -- Don't count yourself ;)
-end
-
 local function get_absolute_filepath(relative_path)
     local handle = io.popen("realpath "..relative_path)
     absolute_path = handle:read("*a")
@@ -74,9 +65,14 @@ local function build_command(arg_str, number_of_args, server_address)
 end
 
 local username = os.getenv("USER")
-local server_pipe_path = "/tmp/nvim-unception-"..username..".pipe"
+local server_pipe_path = os.getenv("UNCEPTION_PIPE_PATH")
+_, num_words = string.gsub(server_pipe_path, "%S+", "")
 
-if not nvim_already_running() then
+local in_terminal_buffer = (num_words > 0)
+if not in_terminal_buffer then
+    -- TODO: Ensure file doesn't exist first, and make unique.
+    server_pipe_path = "/tmp/nvim-unception-"..username..".pipe"
+
     -- Clean up if the pipe still exists for whatever reason.
     os.execute("rm -f "..server_pipe_path)
     vim.call("serverstart", server_pipe_path)
