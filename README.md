@@ -31,7 +31,7 @@ when launching Neovim if you run into any side-effects like so: `nvim --cmd
 "let g:disable_unception=1"`.
 
 ***If using Neovim as your default editor for git, for example, and you would
-like to be able to use it from within the terminal emulator, I would recommend
+like to be able to use it from WITHIN the terminal emulator, I would recommend
 updating your .gitconfig to always pass the flag to disable unception described
 above.***
 
