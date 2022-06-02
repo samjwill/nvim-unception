@@ -1,7 +1,7 @@
-if not (vim.g.disable_unception == nil) then
-    if vim.g.disable_unception > 0 then
-        return
-    end
+require("init_config_defaults")
+
+if (vim.g.unception_disable) then
+    return
 end
 
 if 1 ~= vim.fn.has "nvim-0.7.0" then
@@ -39,6 +39,10 @@ local function build_command(arg_str, number_of_args, server_address)
     -- running terminal buffers in the background when we switch to a new nvim buffer.
     cmd_to_execute = cmd_to_execute..":silent let g:unception_tmp_bufnr = bufnr() | "
 
+    if vim.g.unception_open_buffer_in_new_tab then
+        cmd_to_execute = cmd_to_execute.."silent tabnew | "
+    end
+
     -- If there aren't arguments, we just want a new, empty buffer, but if
     -- there are, append them to the host Neovim session's arguments list.
     if (number_of_args > 0) then
@@ -58,8 +62,11 @@ local function build_command(arg_str, number_of_args, server_address)
         cmd_to_execute = cmd_to_execute.."silent enew | "
     end
 
-    -- remove the old terminal buffer
-    cmd_to_execute = cmd_to_execute.."silent execute 'bdelete! ' . g:unception_tmp_bufnr | "
+    -- We don't want to delete the replaced buffer if there wasn't a replaced buffer vvv
+    if (vim.g.unception_delete_replaced_buffer and not vim.g.unception_open_buffer_in_new_tab) then
+        -- remove the old terminal buffer
+        cmd_to_execute = cmd_to_execute.."silent execute 'bdelete! ' . g:unception_tmp_bufnr | "
+    end
 
     -- remove temporary variable
     cmd_to_execute = cmd_to_execute.."silent unlet g:unception_tmp_bufnr | "

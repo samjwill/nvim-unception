@@ -28,7 +28,7 @@ Requires Neovim 0.7 or higher and a bash or somewhat bash-like shell.
 I'm sure there are plenty. This plugin is experimental and probably has some
 (several) unaccounted for edge cases. It works well enough for me but YMMV. Unception can be temporarily disabled
 when launching Neovim if you run into any side-effects like so: `nvim --cmd
-"let g:disable_unception=1"`.
+"let g:unception_disable=1"`.
 
 ***If using Neovim as your default editor for git, for example, and you would
 like to be able to use it from WITHIN the terminal emulator, I would recommend
