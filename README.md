@@ -43,13 +43,6 @@ server session is not set to read-only mode). Note that any commands that
 might not work well within the Neovim terminal emulator should work just
 fine when launching the initial server session.
 
-When the server session receives the command, the old terminal buffer is
-deleted when the new file is switched to. This plugin assumes that the
-terminal buffer used to send the command will be the one under the cursor
-at the time the server receives the command. This happens extremely
-quickly, so it should not be an issue unless you're the Flash, but it's
-worth noting.
-
 # Settings
 
 See `doc/nvim-unception.txt` for usage details, or after installation, run
