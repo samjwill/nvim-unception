@@ -1,4 +1,4 @@
-require("init_config_defaults")
+require("init_default_settings_vars")
 
 if (vim.g.unception_disable) then
     return
