@@ -6,6 +6,8 @@ TODO: Intro
 
 SETTINGS                                   *nvim-unception-settings*
 
+TODO: Mention that these cannot be set by the server session alone.
+
 bool                                       *g:unception_delete_replaced_buffer*
 
     When true, causes nvim-unception to delete the buffer under the cursor
@@ -19,7 +21,12 @@ mandate that this will be the case.
 
 bool                                       *g:unception_open_buffer_in_new_tab*
 
-    When true, causes the server Neovim session to open file/directory in a
-new tab rather than placing it in the current buffer.
+    When true, causes the server Neovim session to open files/directories in a
+new tab rather than placing them in the current buffer.
+
+
+bool                                       *g:unception_disable*
+
+    TODO: Document
 
 vim:ft=help:norl:
