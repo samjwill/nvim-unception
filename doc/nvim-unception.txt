@@ -13,11 +13,11 @@ leverages |:argadd| to update its own arguments.
 
 SETTINGS                                   *nvim-unception-settings*
 
-    These settings must be accessible to the Neovim instance that is launched
-within a terminal buffer. What this means is that you cannot set them in the
-Neovim server session alone after it is already running. They must be set
-sometime during initialization before the client loads the plugin (e.g. they
-can be placed in your init.vim file).
+    IMPORTANT: These settings must be accessible to the Neovim instance that
+is launched within a terminal buffer. What this means is that you cannot set
+them in the Neovim server session alone after it is already running. They must
+be set sometime during initialization before the client loads the plugin (e.g.
+they can be placed in your init.vim file).
 
 
 bool (default=false)                       *g:unception_delete_replaced_buffer*
