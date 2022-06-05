@@ -1,0 +1,52 @@
+nvim-unception.txt
+
+INTRODUCTION                                           *nvim-unception*
+
+        A plugin that leverages Neovim's native |clientserver| feature to make
+    opening files from within Neovim's terminal emulator without experiencing
+    weird behavior easier and completely automatic.
+
+        Terminal buffers will no longer enter a state of "inception" in which
+    an instance of Neovim is open within an instance of Neovim. Instead, the
+    desired files and directories will be opened by the "host" Neovim session,
+    which leverages |:argadd| to update its own arguments.
+
+SETTINGS                                               *nvim-unception-settings*
+
+        IMPORTANT: These settings must be accessible to the Neovim instance
+    that is launched within a terminal buffer. What this means is that you
+    cannot set them in the Neovim server session alone after it is already
+    running. They must be set sometime during initialization, before the
+    client loads the plugin (e.g. they can be placed in your init.vim file).
+
+
+*g:unception_delete_replaced_buffer*                     bool (default=false)
+
+        When true, causes the Neovim session running the local server to
+    delete the buffer under the cursor when a command is received from a
+    Neovim client session (i.e. a session launched from within a terminal
+    buffer).
+
+        Has no effect when |g:unception_open_buffer_in_new_tab| is true.
+
+        Note: The deleted buffer should always be the terminal buffer that was
+    used to launch the new Neovim session, but there are no checks in place
+    that mandate that this will always be the case. If the cursor was somehow
+    moved quickly enough to another buffer between the time the client sends
+    the command and the server receives it, this could technically cause
+    deletion of the wrong buffer.
+
+
+*g:unception_open_buffer_in_new_tab*                     bool (default=false)
+
+        When true, causes the server Neovim session to open files/directories
+    in a new tab rather than placing them in the window that has focus.
+
+
+*g:unception_disable*                                    bool (default=false)
+
+        When true, disables nvim-unception.
+
+
+vim:ft=help:norl:
+
