@@ -2,22 +2,22 @@ nvim-unception.txt
 
 INTRODUCTION                                           *nvim-unception*
 
-    A plugin that leverages Neovim's native |clientserver| feature to
-make opening files from within Neovim's terminal emulator without experiencing
-weird behavior easier and completely automatic.
+        A plugin that leverages Neovim's native |clientserver| feature to make
+    opening files from within Neovim's terminal emulator without experiencing
+    weird behavior easier and completely automatic.
 
-    Terminal buffers will no longer enter a state of "inception" in which an
-instance of Neovim is open within an instance of Neovim. Instead, the desired
-files and directories will be opened by the "host" Neovim session, which
-leverages |:argadd| to update its own arguments.
+        Terminal buffers will no longer enter a state of "inception" in which
+    an instance of Neovim is open within an instance of Neovim. Instead, the
+    desired files and directories will be opened by the "host" Neovim session,
+    which leverages |:argadd| to update its own arguments.
 
 SETTINGS                                               *nvim-unception-settings*
 
-    IMPORTANT: These settings must be accessible to the Neovim instance that
-is launched within a terminal buffer. What this means is that you cannot set
-them in the Neovim server session alone after it is already running. They must
-be set sometime during initialization before the client loads the plugin (e.g.
-they can be placed in your init.vim file).
+        IMPORTANT: These settings must be accessible to the Neovim instance
+    that is launched within a terminal buffer. What this means is that you
+    cannot set them in the Neovim server session alone after it is already
+    running. They must be set sometime during initialization before the client
+    loads the plugin (e.g. they can be placed in your init.vim file).
 
 *g:unception_delete_replaced_buffer*                     bool (default=false)
 
