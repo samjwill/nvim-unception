@@ -6,27 +6,32 @@ TODO: Intro
 
 SETTINGS                                   *nvim-unception-settings*
 
-TODO: Mention that these cannot be set by the server session alone.
-
-bool                                       *g:unception_delete_replaced_buffer*
-
-    When true, causes nvim-unception to delete the buffer under the cursor
-when the command from the Neovim session that was launched within the terminal
-buffer is received.
-
-    Note: This should virtually always be the terminal buffer that was used to
-launch the new Neovim session, but there are no guarantees in place that
-mandate that this will be the case.
+    These settings must be accessible to the Neovim instance that is launched
+within a terminal buffer. What this means is that you cannot set them in the
+Neovim server session alone after it is already running. They must be set
+sometime during initialization before the client loads the plugin (e.g. they
+can be placed in your init.vim file).
 
 
-bool                                       *g:unception_open_buffer_in_new_tab*
+bool (default=false)                       *g:unception_delete_replaced_buffer*
 
-    When true, causes the server Neovim session to open files/directories in a
-new tab rather than placing them in the current buffer.
+        When true, causes nvim-unception to delete the buffer under the cursor
+    when the command from the Neovim session that was launched within the
+    terminal buffer is received.
+
+        Note: This should virtually always be the terminal buffer that was
+    used to launch the new Neovim session, but there are no guarantees in
+    place that mandate that this will be the case.
 
 
-bool                                       *g:unception_disable*
+bool (default=false)                       *g:unception_open_buffer_in_new_tab*
 
-    TODO: Document
+        When true, causes the server Neovim session to open files/directories
+    in a new tab rather than placing them in the current buffer.
+
+
+bool (default=false)                       *g:unception_disable*
+
+        When true, prevents nvim-unception from changing any default behavior.
 
 vim:ft=help:norl:
