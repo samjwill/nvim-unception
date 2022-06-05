@@ -1,6 +1,6 @@
 nvim-unception.txt
 
-INTRODUCTION                               *nvim-unception*
+INTRODUCTION                                           *nvim-unception*
 
     A plugin that leverages Neovim's native |clientserver| feature to
 make opening files from within Neovim's terminal emulator without experiencing
@@ -11,7 +11,7 @@ instance of Neovim is open within an instance of Neovim. Instead, the desired
 files and directories will be opened by the "host" Neovim session, which
 leverages |:argadd| to update its own arguments.
 
-SETTINGS                                   *nvim-unception-settings*
+SETTINGS                                               *nvim-unception-settings*
 
     IMPORTANT: These settings must be accessible to the Neovim instance that
 is launched within a terminal buffer. What this means is that you cannot set
@@ -19,8 +19,7 @@ them in the Neovim server session alone after it is already running. They must
 be set sometime during initialization before the client loads the plugin (e.g.
 they can be placed in your init.vim file).
 
-
-bool (default=false)                       *g:unception_delete_replaced_buffer*
+*g:unception_delete_replaced_buffer*                     bool (default=false)
 
         When true, causes nvim-unception to delete the buffer under the cursor
     when the command from the Neovim session that was launched within the
@@ -31,14 +30,15 @@ bool (default=false)                       *g:unception_delete_replaced_buffer*
     place that mandate that this will be the case.
 
 
-bool (default=false)                       *g:unception_open_buffer_in_new_tab*
+*g:unception_open_buffer_in_new_tab*                     bool (default=false)
 
         When true, causes the server Neovim session to open files/directories
     in a new tab rather than placing them in the current buffer.
 
 
-bool (default=false)                       *g:unception_disable*
+*g:unception_disable*                                    bool (default=false)
 
         When true, prevents nvim-unception from changing any default behavior.
 
 vim:ft=help:norl:
+
