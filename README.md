@@ -21,7 +21,7 @@ specified.
 
 # Requirements
 
-Requires Neovim 0.7 or higher and a bash or somewhat bash-like shell.
+Requires Neovim 0.7 or later and a bash or somewhat bash-like shell.
 
 # Limitations
 
