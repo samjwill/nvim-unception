@@ -1,0 +1,25 @@
+nvim-unception.txt
+
+INTRODUCTION                               *nvim-unception*
+
+TODO: Intro
+
+SETTINGS                                   *nvim-unception-settings*
+
+bool                                       *g:unception_delete_replaced_buffer*
+
+    When true, causes nvim-unception to delete the buffer under the cursor
+when the command from the Neovim session that was launched within the terminal
+buffer is received.
+
+    Note: This should virtually always be the terminal buffer that was used to
+launch the new Neovim session, but there are no guarantees in place that
+mandate that this will be the case.
+
+
+bool                                       *g:unception_open_buffer_in_new_tab*
+
+    When true, causes the server Neovim session to open file/directory in a
+new tab rather than placing it in the current buffer.
+
+vim:ft=help:norl:
