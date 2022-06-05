@@ -50,6 +50,11 @@ at the time the server receives the command. This happens extremely
 quickly, so it should not be an issue unless you're the Flash, but it's
 worth noting.
 
+# Settings
+
+See `doc/nvim-unception.txt` for usage details, or after installation, run
+`:help nvim-unception`.
+
 # Installation
 
 #### Using [vim-plug](https://github.com/junegunn/vim-plug):

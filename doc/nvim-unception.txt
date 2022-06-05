@@ -16,8 +16,8 @@ SETTINGS                                               *nvim-unception-settings*
         IMPORTANT: These settings must be accessible to the Neovim instance
     that is launched within a terminal buffer. What this means is that you
     cannot set them in the Neovim server session alone after it is already
-    running. They must be set sometime during initialization before the client
-    loads the plugin (e.g. they can be placed in your init.vim file).
+    running. They must be set sometime during initialization, before the
+    client loads the plugin (e.g. they can be placed in your init.vim file).
 
 
 *g:unception_delete_replaced_buffer*                     bool (default=false)
@@ -27,7 +27,9 @@ SETTINGS                                               *nvim-unception-settings*
     Neovim client session (i.e. a session launched from within a terminal
     buffer).
 
-        Note: This should virtually always be the terminal buffer that was
+        Has no effect when |g:unception_open_buffer_in_new_tab| is true.
+
+        Note: The deleted buffer should always be the terminal buffer that was
     used to launch the new Neovim session, but there are no checks in place
     that mandate that this will always be the case. If the cursor was somehow
     moved quickly enough to another buffer between the time the client sends
