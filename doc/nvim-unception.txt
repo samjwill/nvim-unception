@@ -43,7 +43,7 @@ SETTINGS                                               *nvim-unception-settings*
 
 *g:unception_disable*                                    bool (default=false)
 
-        When true, prevents nvim-unception from doing anything.
+        When true, disables nvim-unception.
 
 
 vim:ft=help:norl:
