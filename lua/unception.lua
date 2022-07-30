@@ -1,8 +1,15 @@
 local function get_absolute_filepath(relative_path)
+    -- In case relative path has a space in it, surround with quotes.
+    relative_path = '"'..relative_path..'"'
+
     local handle = io.popen("realpath "..relative_path)
     absolute_path = handle:read("*a")
     handle:close()
     absolute_path = string.gsub(absolute_path, "\n", "")
+
+    -- Absolute path that's returned needs escaped spaces.
+    absolute_path = string.gsub(absolute_path, " ", "\\ ")
+
     return absolute_path
 end
 
@@ -64,7 +71,10 @@ local function build_command(arg_str, number_of_args, server_address)
     cmd_to_execute = cmd_to_execute.."call histdel(':', -1)<CR>"
 
     -- flavor text :)
-    cmd_to_execute = cmd_to_execute..":echo 'Unception prevented inception!' | call histdel(':', -1)<CR>\""
+    cmd_to_execute = cmd_to_execute..":echo 'Unception prevented inception!' | call histdel(':', -1)<CR>"
+
+    -- end command to be run by server
+    cmd_to_execute = cmd_to_execute.."\""
 
     return cmd_to_execute
 end
