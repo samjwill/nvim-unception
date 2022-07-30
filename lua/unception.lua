@@ -64,7 +64,10 @@ local function build_command(arg_str, number_of_args, server_address)
     cmd_to_execute = cmd_to_execute.."call histdel(':', -1)<CR>"
 
     -- flavor text :)
-    cmd_to_execute = cmd_to_execute..":echo 'Unception prevented inception!' | call histdel(':', -1)<CR>\""
+    cmd_to_execute = cmd_to_execute..":echo 'Unception prevented inception!' | call histdel(':', -1)<CR>"
+
+    -- end command to be run by server
+    cmd_to_execute = cmd_to_execute.."\""
 
     return cmd_to_execute
 end
