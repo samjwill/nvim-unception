@@ -1,4 +1,7 @@
 local function get_absolute_filepath(relative_path)
+    -- If relative path has a space in it, it must be surrounded by quotes.
+    relative_path = '"'..relative_path..'"'
+
     local handle = io.popen("realpath "..relative_path)
     absolute_path = handle:read("*a")
     handle:close()
