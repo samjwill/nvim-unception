@@ -1,14 +1,18 @@
 local function get_absolute_filepath(relative_path)
-    -- In case relative path has a space in it, surround with quotes.
-    relative_path = '"'..relative_path..'"'
+    -- Escape any special characters
+    relative_path = string.gsub(relative_path, " ", "\\ ")
+    relative_path = string.gsub(relative_path, "\'", "\\\'")
+    relative_path = string.gsub(relative_path, "\"", "\\\"")
 
     local handle = io.popen("realpath "..relative_path)
     absolute_path = handle:read("*a")
     handle:close()
     absolute_path = string.gsub(absolute_path, "\n", "")
 
-    -- Absolute path that's returned needs escaped spaces.
+    -- Absolute path that's returned needs escaped special chars.
     absolute_path = string.gsub(absolute_path, " ", "\\ ")
+    absolute_path = string.gsub(absolute_path, "\'", "\\\\\\\'")
+    absolute_path = string.gsub(absolute_path, "\"", "\\\\\\\"")
 
     return absolute_path
 end
