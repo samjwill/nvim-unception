@@ -1,21 +1,19 @@
 local function get_absolute_filepath(relative_path)
-    -- Escape any special characters before passing to realpath cmd.
-    relative_path = string.gsub(relative_path, " ", "\\ ")
-    relative_path = string.gsub(relative_path, "\'", "\\\'")
+    -- Surround with quotes in case of special chars before passing to
+    -- realpath cmd. Also need to escape any existing double quotes.
     relative_path = string.gsub(relative_path, "\"", "\\\"")
+    relative_path = "\""..relative_path.."\""
 
     local handle = io.popen("realpath "..relative_path)
     absolute_path = handle:read("*a")
     handle:close()
     absolute_path = string.gsub(absolute_path, "\n", "")
 
-    -- Absolute path that's returned needs escaped special chars.
-    absolute_path = string.gsub(absolute_path, " ", "\\ ")
-    absolute_path = string.gsub(absolute_path, "\'", "\\\'")
-    -- Double quotes need escaped by the Neovim server session
-    -- executing the command as well as the shell, so twice as many
-    -- backslashes here...
-    absolute_path = string.gsub(absolute_path, "\"", "\\\\\\\"")
+    -- The absolute path that's returned needs escaped special chars.
+    -- Just escaping everything once is acceptable, so go ahead and
+    -- interpolate backslashes so we don't have to maintain a special
+    -- character list or rely on another external tool.
+    absolute_path = string.gsub(absolute_path, ".", "\\%1")
 
     return absolute_path
 end
@@ -103,8 +101,11 @@ else
     for index, iter in pairs(args) do
         iter = get_absolute_filepath(iter)
 
-        -- Double quotes need escaped in the Neovim server session as well
-        -- as the shell, so twice as many backslashes here...
+        -- Double quotes need to be escaped by the Neovim server
+        -- session executing the command as well as the shell, so even
+        -- more backslashes here...
+        iter = string.gsub(iter, "\"", "\\\\\"")
+
         arg_str = arg_str.." "..iter
     end
 
