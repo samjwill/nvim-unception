@@ -11,8 +11,9 @@ local function get_absolute_filepath(relative_path)
 
     -- Absolute path that's returned needs escaped special chars.
     absolute_path = string.gsub(absolute_path, " ", "\\ ")
-    absolute_path = string.gsub(absolute_path, "\'", "\\\\\\\'")
-    absolute_path = string.gsub(absolute_path, "\"", "\\\\\\\"")
+    absolute_path = string.gsub(absolute_path, "\'", "\\\'")
+    -- TODO: This doesn't work?
+    absolute_path = string.gsub(absolute_path, "\"", "\\\"")
 
     return absolute_path
 end
