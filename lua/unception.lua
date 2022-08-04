@@ -1,5 +1,5 @@
 local function get_absolute_filepath(relative_path)
-    -- Escape any special characters
+    -- Escape any special characters before passing to realpath cmd.
     relative_path = string.gsub(relative_path, " ", "\\ ")
     relative_path = string.gsub(relative_path, "\'", "\\\'")
     relative_path = string.gsub(relative_path, "\"", "\\\"")
