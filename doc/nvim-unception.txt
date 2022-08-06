@@ -18,6 +18,7 @@ SETTINGS                                               *nvim-unception-settings*
     cannot set them in the Neovim server session alone after it is already
     running. They must be set sometime during initialization, before the
     nested session loads the plugin.
+
         To put it simply, these settings can be placed in your initialization
     files (e.g. init.vim), but will not work if directly calling |:let| in the
     server session after the server is already running.
