@@ -46,6 +46,12 @@ SETTINGS                                               *nvim-unception-settings*
     in a new tab rather than placing them in the window that has focus.
 
 
+*g:unception_enable_flavor_text*                         bool (default=true)
+
+        When true, causes unception to echo a message whenever it is
+    triggered.
+
+
 *g:unception_disable*                                    bool (default=false)
 
         When true, disables nvim-unception.

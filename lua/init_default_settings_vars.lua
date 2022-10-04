@@ -10,3 +10,7 @@ if (vim.g.unception_disable == nil) then
     vim.g.unception_disable = false
 end
 
+if (vim.g.unception_enable_flavor_text == nil) then
+    vim.g.unception_enable_flavor_text = true
+end
+
