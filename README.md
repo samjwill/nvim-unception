@@ -26,10 +26,12 @@ Requires Neovim 0.7 or later and a bash or somewhat bash-like shell.
 
 # Limitations
 
-I'm sure there are plenty. This plugin is experimental and probably has
-some unaccounted for edge cases. It works well enough for me but YMMV.
-Unception can be temporarily disabled when launching Neovim if you run into
-any side-effects like so: `nvim --cmd "let g:unception_disable=1"`
+This plugin is experimental and probably has some unaccounted for
+limitations/edge cases. It works well enough for me but YMMV. If you find an
+issue, feel free to create one detailing the problem on the GitHub repo, and
+I'll try to fix it if I'm able. Unception can be temporarily disabled when
+launching Neovim if you run into any side-effects like so: `nvim --cmd "let
+g:unception_disable=1"`
 
 ***If using Neovim as your default editor for git, for example, and you
 would like to be able to use it from WITHIN the terminal emulator, I would
@@ -37,16 +39,19 @@ recommend updating your .gitconfig to always pass the flag to disable
 unception described above.***
 
 Other Neovim command-line arguments that do not involve editing a file or
-directory may not work as expected from within the terminal emulator, (e.g.
-passing `-b` to edit in binary mode or opening a file as read-only when the
-server session is not set to read-only mode). Note that any commands that
-might not work well within the Neovim terminal emulator should work just
-fine when launching the initial server session.
+directory may not work as expected from *within* the terminal emulator, (e.g.
+passing `-b` to edit in binary mode when inside of a terminal buffer or opening
+a file as read-only when the server session is not set to read-only mode). Note
+that any commands that might not work well within Neovim terminal buffers
+should work just fine outside of terminal buffers. They should also behave as
+as they do by default if you pass the disable flag detailed above, even within
+the terminal emulator.
 
 # Settings
 
-See `doc/nvim-unception.txt` for usage details, or after installation, run
-`:help nvim-unception`.
+For usage details and options (such as setting the new buffers to be opened in
+new tabs instead of the current window), see `doc/nvim-unception.txt`, or after
+installation, run `:help nvim-unception`.
 
 # Installation
 
