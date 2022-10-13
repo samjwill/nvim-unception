@@ -50,8 +50,8 @@ the terminal emulator.
 # Settings
 
 For usage details and options (such as setting the new buffers to be opened in
-new tabs instead of the current window), see `doc/nvim-unception.txt`, or after
-installation, run `:help nvim-unception`.
+new tabs instead of the current window), see `doc/nvim-unception.txt`, or,
+after installation, run `:help nvim-unception`.
 
 # Installation
 
