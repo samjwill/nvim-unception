@@ -40,7 +40,7 @@ recommend updating your .gitconfig to always pass the flag to disable
 unception described above.***
 
 Other Neovim command-line arguments that do not involve editing a file or
-directory may not work as expected from *within* the terminal emulator, (e.g.
+directory may not work as expected from *within* the terminal emulator (e.g.
 passing `-b` to edit in binary mode when inside of a terminal buffer or opening
 a file as read-only when the server session is not set to read-only mode). Note
 that any commands that might not work well within Neovim terminal buffers
