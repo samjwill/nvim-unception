@@ -1,8 +1,8 @@
 # nvim-unception
 
 A plugin that leverages Neovim's ***native*** `client-server` feature to
-make opening files from within Neovim's terminal emulator without
-experiencing weird behavior easier and completely automatic.
+simplify opening files from within Neovim's terminal emulator without
+experiencing unintentionally nested sessions.
 
 Terminal buffers will no longer enter a state of "inception" in which an
 instance of Neovim is open within an instance of Neovim. Instead, the
