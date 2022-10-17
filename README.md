@@ -20,12 +20,6 @@ Neovim server session via the pipe, and the server session replaces the
 buffer under the cursor (the terminal buffer) with the first file/directory
 argument specified.
 
-# Requirements
-
-Requires Neovim 0.7 or later and a bash or somewhat bash-like shell. Basically,
-the shell must be capable of running the `realpath` and `mktemp` commands, and
-treat `/` as the file separator.
-
 # Limitations
 
 This plugin is experimental and probably has some unaccounted for
@@ -53,6 +47,12 @@ the terminal emulator.
 For usage details and options (such as setting the new buffers to be opened in
 new tabs instead of the current window), see `doc/nvim-unception.txt`, or,
 after installation, run `:help nvim-unception`.
+
+# Requirements
+
+Requires Neovim 0.7 or later and a bash or somewhat bash-like shell. Basically,
+the shell must be capable of running the `realpath` and `mktemp` commands, and
+treat `/` as the file separator.
 
 # Installation
 
