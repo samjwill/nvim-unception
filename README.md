@@ -51,12 +51,13 @@ unception described above (like [this](https://github.com/samjwill/dotfiles/blob
 
 Other Neovim command-line arguments that do not involve editing a file or
 directory may not work as expected from *within* the terminal emulator (e.g.
-passing `-b` to edit in binary mode when inside of a terminal buffer or opening
-a file as read-only when the server session is not set to read-only mode). Note
-that any commands that might not work well within Neovim terminal buffers
-should work just fine outside of terminal buffers. They should also behave as
-as they do by default if you pass the disable flag detailed above, even within
-the terminal emulator.
+passing `-b` to edit in binary mode when inside of a terminal buffer will not
+propagate binary mode to the file when it's unnested, and opening a file as
+read-only when the server session is not set to read-only mode will not result
+in a read-only buffer). Note that any commands that might not work well within
+Neovim terminal buffers should work just fine outside of terminal buffers. They
+should also behave as as they do by default if you pass the disable flag
+detailed above, even within the terminal emulator.
 
 # Settings
 
