@@ -11,6 +11,22 @@ which leverages `:argadd` to update its own arguments.
 
 https://user-images.githubusercontent.com/25990267/170632310-8bbee2fa-672b-4385-9dea-7ed4501a0558.mp4
 
+# Requirements
+
+Requires Neovim 0.7 or later and a bash or somewhat bash-like shell. Basically,
+the shell must be capable of running the `realpath` and `mktemp` commands, and
+treat `/` as the file separator.
+
+# Installation
+
+#### Using [vim-plug](https://github.com/junegunn/vim-plug):
+
+    Plug 'samjwill/nvim-unception'
+
+#### Using [packer.nvim](https://github.com/wbthomason/packer.nvim):
+
+    use "samjwill/nvim-unception"
+
 # How does it work?
 
 The plugin tells Neovim to automatically start a local server listening to
@@ -47,20 +63,3 @@ the terminal emulator.
 For usage details and options (such as setting the new buffers to be opened in
 new tabs instead of the current window), see `doc/nvim-unception.txt`, or,
 after installation, run `:help nvim-unception`.
-
-# Requirements
-
-Requires Neovim 0.7 or later and a bash or somewhat bash-like shell. Basically,
-the shell must be capable of running the `realpath` and `mktemp` commands, and
-treat `/` as the file separator.
-
-# Installation
-
-#### Using [vim-plug](https://github.com/junegunn/vim-plug):
-
-    Plug 'samjwill/nvim-unception'
-
-#### Using [packer.nvim](https://github.com/wbthomason/packer.nvim):
-
-    use "samjwill/nvim-unception"
-
