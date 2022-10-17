@@ -28,7 +28,7 @@ SETTINGS                                               *nvim-unception-settings*
         When true, causes the Neovim session running the local server to
     delete the buffer under the cursor when a command is received from a
     Neovim client session (i.e. a session launched from within a terminal
-    buffer).
+    buffer) if that buffer is not visible in any other windows.
 
         Has no effect when |g:unception_open_buffer_in_new_tab| is true.
 
