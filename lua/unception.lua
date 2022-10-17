@@ -65,16 +65,10 @@ local function build_command(arg_str, number_of_args, server_address)
 
     -- We don't want to delete the replaced buffer if there wasn't a replaced buffer vvv
     if (vim.g.unception_delete_replaced_buffer and not vim.g.unception_open_buffer_in_new_tab) then
-        -- First record if the terminal buffer is still visible in some other window to a variable.
-        cmd_to_execute = cmd_to_execute.."let g:unception_tmp_is_visible = (len(win_findbuf(g:unception_tmp_bufnr)) > 0) | "
-
-        -- Only delete the terminal buffer if it's not visible elsewhere.
-        cmd_to_execute = cmd_to_execute.."if (g:unception_tmp_is_visible == v:false) | "
+        -- Only delete the terminal buffer if it's not visible in some other window.
+        cmd_to_execute = cmd_to_execute.."if (len(win_findbuf(g:unception_tmp_bufnr)) == 0) | "
         cmd_to_execute = cmd_to_execute.."silent execute 'bdelete! ' . g:unception_tmp_bufnr | "
         cmd_to_execute = cmd_to_execute.."endif | "
-
-        -- remove temporary variable
-        cmd_to_execute = cmd_to_execute.."silent unlet g:unception_tmp_is_visible | " 
     end
 
     -- remove temporary variable
