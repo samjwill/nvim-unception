@@ -5,7 +5,7 @@ local function get_absolute_filepath(relative_path)
     relative_path = "\""..relative_path.."\""
 
     local handle = io.popen("realpath "..relative_path)
-    absolute_path = handle:read("*a")
+    local absolute_path = handle:read("*a")
     handle:close()
     absolute_path = string.gsub(absolute_path, "\n", "")
 
@@ -20,7 +20,7 @@ end
 
 local function generate_server_pipe_name()
     local handle = io.popen("mktemp -d")
-    server_pipe_path = handle:read("*a")
+    local server_pipe_path = handle:read("*a")
     handle:close()
     server_pipe_path = string.gsub(server_pipe_path, "\n", "")
     server_pipe_path = server_pipe_path.."/nvim-unception.pipe"
