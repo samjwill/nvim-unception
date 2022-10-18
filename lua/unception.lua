@@ -99,7 +99,7 @@ if not in_terminal_buffer then
     vim.call("setenv", "NVIM_UNCEPTION_PIPE_PATH", new_server_pipe_path)
 else
     -- We don't want to start. Send the args to the server instance instead.
-    args = vim.call("argv")
+    local args = vim.call("argv")
 
     local arg_str = ""
     for index, iter in pairs(args) do
