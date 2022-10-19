@@ -20,8 +20,8 @@ SETTINGS                                               *nvim-unception-settings*
     nested session loads the plugin.
 
         To put it simply, these settings can be placed in your initialization
-    files (e.g. |init.vim|), but will not work if directly calling |:let| in the
-    server session after the server is already running.
+    files (e.g. |init.vim|), but will not work if directly calling |:let| in
+    the server session after the server is already running.
 
 *g:unception_delete_replaced_buffer*                     bool (default=false)
 
