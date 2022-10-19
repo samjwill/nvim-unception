@@ -38,11 +38,11 @@ argument specified.
 
 # Limitations
 
-This plugin is experimental and probably has some unaccounted for
-limitations/edge cases. It works well enough for me but YMMV. If you find an
-issue, feel free to create one detailing the problem on the GitHub repo, and
-I'll try to fix it if I'm able. Unception can be temporarily disabled when
-launching Neovim like so: `nvim --cmd "let g:unception_disable=1"`
+This plugin probably has some unaccounted for limitations/edge cases. It works
+well enough for me but YMMV. If you find an issue, feel free to create one
+detailing the problem on the GitHub repo, and I'll try to fix it if I'm able.
+Unception can be temporarily disabled when launching Neovim like so: 
+`nvim --cmd "let g:unception_disable=1"`
 
 ***If using Neovim as your default editor for git, for example, and you
 would like to be able to use it from WITHIN the terminal emulator, I would
