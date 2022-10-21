@@ -17,6 +17,10 @@ Requires Neovim 0.7 or later and a bash or somewhat bash-like shell. Basically,
 the shell must be capable of running the `realpath` and `mktemp` commands, and
 treat `/` as the file separator.
 
+Note that while the `realpath` command ships with most Linux distributions, on
+MacOS, it is not provided by default. It can be installed with Homebrew by
+running `brew install coreutils`.
+
 # Installation
 
 #### Using [vim-plug](https://github.com/junegunn/vim-plug):
