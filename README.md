@@ -65,6 +65,6 @@ detailed above, even within the terminal emulator.
 
 # Settings
 
-For usage details and options (such as setting the new buffers to be opened in
-new tabs instead of the current window), see `doc/nvim-unception.txt`, or,
-after installation, run `:help nvim-unception`.
+For usage details and options (such as setting the buffers for the file arguments
+to be opened in new tabs instead of the current window), see `doc/nvim-unception.txt`,
+or, after installation, run `:help nvim-unception`.
