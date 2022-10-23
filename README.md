@@ -59,8 +59,8 @@ passing `-b` to edit in binary mode when inside of a terminal buffer will not
 propagate binary mode to the file when it's unnested, and opening a file as
 read-only when the server session is not set to read-only mode will not result
 in a read-only buffer). Note that any commands that might not work well within
-Neovim terminal buffers should work just fine outside of terminal buffers. They
-should also behave as as they do by default if you pass the disable flag
+Neovim terminal buffers should work just fine when launching Neovim normally.
+They should also behave as as they do by default if you pass the disable flag
 detailed above, even within the terminal emulator.
 
 # Settings
