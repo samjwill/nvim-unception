@@ -18,15 +18,6 @@ local function get_absolute_filepath(relative_path)
     return absolute_path
 end
 
-local function generate_server_pipe_name()
-    local handle = io.popen("mktemp -d")
-    local server_pipe_path = handle:read("*a")
-    handle:close()
-    server_pipe_path = string.gsub(server_pipe_path, "\n", "")
-    server_pipe_path = server_pipe_path.."/nvim-unception.pipe"
-    return server_pipe_path
-end
-
 local function build_command(arg_str, number_of_args, server_address)
     local cmd_to_execute = "\\nvim --server "..server_address.." --remote-send "
 
@@ -94,8 +85,7 @@ local existing_server_pipe_path = os.getenv("NVIM_UNCEPTION_PIPE_PATH")
 local in_terminal_buffer = (existing_server_pipe_path ~= nil)
 
 if not in_terminal_buffer then
-    local new_server_pipe_path = generate_server_pipe_name()
-    vim.call("serverstart", new_server_pipe_path)
+    local new_server_pipe_path = vim.call("serverstart")
     vim.call("setenv", "NVIM_UNCEPTION_PIPE_PATH", new_server_pipe_path)
 else
     -- We don't want to start. Send the args to the server instance instead.
