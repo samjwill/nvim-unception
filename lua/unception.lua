@@ -95,9 +95,9 @@ else
     for index, iter in pairs(args) do
         iter = get_absolute_filepath(iter)
 
-        -- Double quotes need to be escaped by the Neovim server
-        -- session executing the command as well as the shell, so even
-        -- more backslashes here...
+        -- Double quotes need to be escaped by the Neovim server session
+        -- executing the command as well as the shell. Lua itself needs escaped
+        -- backslashes too, so even more backslashes here...
         iter = string.gsub(iter, "\"", "\\\\\"")
 
         arg_str = arg_str.." "..iter
