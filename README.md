@@ -70,3 +70,7 @@ described above, even if launched from within a terminal buffer.
 For usage details and options (such as opening the file buffers in new tabs
 rather than the current window), see `doc/nvim-unception.txt`, or, after
 installation, run `:help nvim-unception`.
+
+# Can this work with toggleterm.nvim or other plugins?
+
+Yep! See the [wiki](https://github.com/samjwill/nvim-unception/wiki) for more info.
