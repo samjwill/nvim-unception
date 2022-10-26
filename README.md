@@ -71,6 +71,6 @@ For usage details and options (such as opening the file buffers in new tabs
 rather than the current window), see `doc/nvim-unception.txt`, or, after
 installation, run `:help nvim-unception`.
 
-# Can this work with other terminal-toggling plugins?
+# Can this work with terminal-toggling plugins?
 
 Yep! See the [wiki](https://github.com/samjwill/nvim-unception/wiki) for more info.
