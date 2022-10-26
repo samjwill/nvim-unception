@@ -63,7 +63,7 @@ in a read-only buffer). See `:help vim-arguments` for how these are typically
 used. Note that any arguments that might not work when launched from within a
 Neovim terminal buffer should work just fine when launching Neovim normally.
 They should also behave as as they do by default if you pass the disable flag
-detailed above, even if launched from within a terminal buffer.
+described above, even if launched from within a terminal buffer.
 
 # Settings
 
