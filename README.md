@@ -73,4 +73,4 @@ installation, run `:help nvim-unception`.
 
 # Can this work with terminal-toggling plugins?
 
-Yep! See the [wiki](https://github.com/samjwill/nvim-unception/wiki) for more setup info.
+Yep! See the [wiki](https://github.com/samjwill/nvim-unception/wiki) for setup info.
