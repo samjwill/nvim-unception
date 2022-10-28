@@ -113,8 +113,8 @@ else
     os.execute(cmd_to_execute)
 
     if (vim.g.unception_block_while_editing) then
-        local socket = vim.fn.sockconnect("pipe", existing_server_pipe_path, {'rpc':1})
-        vim.fn.rpcrequest(socket, "nvim_eval", "getpid()")
+        local sock = vim.fn.sockconnect("pipe", existing_server_pipe_path, {rpc = true})
+        print(vim.fn.rpcrequest(sock, "nvim_eval", "getpid()"))
     end
 
     -- Our work here is done. Kill the nvim session that would have started otherwise.
