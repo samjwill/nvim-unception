@@ -63,10 +63,14 @@ in a read-only buffer). See `:help vim-arguments` for how these are typically
 used. Note that any arguments that might not work when launched from within a
 Neovim terminal buffer should work just fine when launching Neovim normally.
 They should also behave as as they do by default if you pass the disable flag
-detailed above, even if launched from within a terminal buffer.
+described above, even if launched from within a terminal buffer.
 
 # Settings
 
-For usage details and options (such as setting the buffers for the file arguments
-to be opened in new tabs instead of the current window), see `doc/nvim-unception.txt`,
-or, after installation, run `:help nvim-unception`.
+For usage details and options (such as opening the file buffers in new tabs
+rather than the current window), see `doc/nvim-unception.txt`, or, after
+installation, run `:help nvim-unception`.
+
+# Can this work with terminal-toggling plugins?
+
+Yep! See the [wiki](https://github.com/samjwill/nvim-unception/wiki) for setup info.
