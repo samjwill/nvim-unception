@@ -12,3 +12,7 @@ echo rpcrequest(my_socket, "nvim_eval", "getpid()")
 -- predefined function `block_while_editing(filepath)`, and an autocmd will be
 -- set up such that it will stay blocked until the git commit buffer is
 -- unloaded, in which case the function will return.
+--
+-- ISSUE: We only want to block on the side of the client making the request.
+-- We do not want to block serverside. Ergo, this needs thought out some more,
+-- as the RPC functions are executed synchronously instead of asynchronously.
