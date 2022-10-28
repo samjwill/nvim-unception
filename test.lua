@@ -24,3 +24,7 @@ echo rpcrequest(my_socket, "nvim_eval", "getpid()")
 -- to open the git commit file.
 --
 -- https://github.com/neovim/neovim/blob/0c537240df9ceaa9f9019d24d6d4dddea7744387/runtime/lua/vim/_editor.lua#L699-L706
+--
+-- Client rpc notifies server of realpath then spins. Server receives request
+-- and sets autocmd for bufunload of file to to notify client that it's
+-- finished. Client receives result and stops spinning.
