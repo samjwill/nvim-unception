@@ -31,12 +31,6 @@ local function build_command(arg_str, number_of_args, server_address)
     -- running terminal buffers in the background when we switch to a new nvim buffer.
     cmd_to_execute = cmd_to_execute..":silent let g:unception_tmp_bufnr = bufnr() | "
 
-    -- Can't allow buffer holding terminal to be deleted. Easiest to just force
-    -- a new tab to be used.
-    if vim.g.unception_block_while_editing then
-        vim.g.unception_open_buffer_in_new_tab = true
-    end
-
     if vim.g.unception_open_buffer_in_new_tab then
         cmd_to_execute = cmd_to_execute.."silent tabnew | "
     end
