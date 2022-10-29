@@ -119,6 +119,8 @@ else
     if (vim.g.unception_block_while_editing) then
         local sock = vim.fn.sockconnect("pipe", existing_server_pipe_path, {rpc = true})
         print(vim.fn.rpcrequest(sock, "nvim_exec_lua", "return tmp_unception_still_being_edited("..vim.inspect(arg_str)..")", {}))
+
+        --TODO: Sleep until a notification is received from the server indicating that the file has been unloaded.
     end
 
     -- Our work here is done. Kill the nvim session that would have started otherwise.
@@ -135,6 +137,8 @@ function _G.handle_unloaded_buffer(unloaded_buffer_filepath)
 
     if (unloaded_buffer_filepath == filepath_to_check) then
         print("ITS A MATCH!")
+        --TODO: send notify out to client that its buffer was unloaded and that it can stop blocking
+        --TODO: delete the autocmd
     end
 
     print(unloaded_buffer_filepath)
