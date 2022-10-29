@@ -1,6 +1,27 @@
 let my_socket = sockconnect("pipe", "/tmp/nvim.user/OjfIs/nvim.3552.1", {'rpc':1})
 echo rpcrequest(my_socket, "nvim_eval", "getpid()")
 
+-- Current Idea: Have client start server of its own when it is
+-- initialized. Communication via RPC becomes bidirectional. Replace
+-- --remote command with RPC calls directly. Client starts blocking call on
+-- file, but sleeps for eternity before actually opening the file to avoid
+-- swap conflicts. Server receives RPC command to edit file. When it's done
+-- editing, server sends vim.fn.rpcrequest to client telling it to die.
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+-- OUTDATED: vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+--
+--
 -- Idea: if g:nvim_unception_block_while_editing is set to true, will build the
 -- usual --remote command (with the exception that it will force the buffer to
 -- be opened in a new tab), but before exiting, send an rpcrequest() to the
