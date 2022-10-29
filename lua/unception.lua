@@ -78,7 +78,8 @@ local function build_command(arg_str, number_of_args, server_address)
     return cmd_to_execute
 end
 
-
+-- TODO: Move somewhere more logical
+local sock
 
 local existing_server_pipe_path = os.getenv("NVIM_UNCEPTION_PIPE_PATH")
 local in_terminal_buffer = (existing_server_pipe_path ~= nil)
@@ -112,10 +113,13 @@ else
     --os.execute(cmd_to_execute)
 
     if (vim.g.unception_block_while_editing) then
-        local sock = vim.fn.sockconnect("pipe", existing_server_pipe_path, {rpc = true})
+        sock = vim.fn.sockconnect("pipe", existing_server_pipe_path, {rpc = true})
         print(vim.fn.rpcrequest(sock, "nvim_exec_lua", "return tmp_unception_still_being_edited("..vim.inspect(arg_str)..")", {}))
 
-        --TODO: Sleep until a notification is received from the server indicating that the file has been unloaded.
+        while (true)
+        do
+            vim.cmd("sleep 100m")
+        end
     end
 
     -- Our work here is done. Kill the nvim session that would have started otherwise.
@@ -124,6 +128,7 @@ else
 end
 
 
+-- TODO: Move someplace more logical.
 -- TODO: Unsure how robust this is.
 local filepath_to_check = ""
 
@@ -133,6 +138,8 @@ function _G.handle_unloaded_buffer(unloaded_buffer_filepath)
 
     if (unloaded_buffer_filepath == filepath_to_check) then
         print("ITS A MATCH!")
+        -- TODO: Use rpcnotify instead?
+        print(vim.fn.rpcrequest(sock, "nvim_exec_lua", "vim.cmd(q!)", {}))
         --TODO: send notify out to client that its buffer was unloaded and that it can stop blocking
         --TODO: delete the autocmd
     end
