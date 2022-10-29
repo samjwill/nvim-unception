@@ -108,6 +108,7 @@ else
 
     local cmd_to_execute = build_command(arg_str, #args, existing_server_pipe_path)
 
+    --TODO: Uncomment!
     --os.execute(cmd_to_execute)
 
     if (vim.g.unception_block_while_editing) then
@@ -118,6 +119,7 @@ else
     end
 
     -- Our work here is done. Kill the nvim session that would have started otherwise.
+    --TODO: Uncomment!
     --vim.cmd("quit")
 end
 
