@@ -114,15 +114,15 @@ else
 
     if (vim.g.unception_block_while_editing) then
         local sock = vim.fn.sockconnect("pipe", existing_server_pipe_path, {rpc = true})
-        print(vim.fn.rpcrequest(sock, "nvim_eval", "Unception_still_being_edited()"))
+        print(vim.fn.rpcrequest(sock, "nvim_exec_lua", "return tmp_unception_still_being_edited()", {}))
     end
 
     -- Our work here is done. Kill the nvim session that would have started otherwise.
     --vim.cmd("quit")
 end
 
-vim.cmd([[
-function! Unception_still_being_edited()
-    return v:false
-endfunction
-]])
+
+function _G.tmp_unception_still_being_edited()
+    return true
+end
+
