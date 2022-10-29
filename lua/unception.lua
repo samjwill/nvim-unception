@@ -105,7 +105,11 @@ else
         -- backslashes too, so even more backslashes here...
         iter = string.gsub(iter, "\"", "\\\\\"")
 
-        arg_str = arg_str.." "..iter
+        if (string.len(arg_str) == 0) then
+            arg_str = iter
+        else
+            arg_str = arg_str.." "..iter
+        end
     end
 
     local cmd_to_execute = build_command(arg_str, #args, existing_server_pipe_path)
