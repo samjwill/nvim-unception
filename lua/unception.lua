@@ -114,7 +114,7 @@ else
 
     if (vim.g.unception_block_while_editing) then
         local sock = vim.fn.sockconnect("pipe", existing_server_pipe_path, {rpc = true})
-        print(vim.fn.rpcrequest(sock, "nvim_exec_lua", "return tmp_unception_still_being_edited("..arg_str..")", {}))
+        print(vim.fn.rpcrequest(sock, "nvim_exec_lua", "return tmp_unception_still_being_edited("..vim.inspect(arg_str)..")", {}))
     end
 
     -- Our work here is done. Kill the nvim session that would have started otherwise.
@@ -122,7 +122,24 @@ else
 end
 
 
+local filepath_to_check = ""
+
+-- TODO: Global necessary?
+function _G.handle_unloaded_buffer(unloaded_buffer_filepath, filepath_to_check)
+    print(unloaded_buffer_filepath)
+    print(filepath_to_check)
+    print(filepath_to_check)
+    print(filepath_to_check)
+    print(filepath_to_check)
+    print(unloaded_buffer_filepath)
+    print(unloaded_buffer_filepath)
+    print(unloaded_buffer_filepath)
+    print(unloaded_buffer_filepath)
+    print(unloaded_buffer_filepath)
+end
+
 function _G.tmp_unception_still_being_edited(filepath)
+    vim.api.nvim_create_autocmd("BufUnload",{ command = "lua handle_unloaded_buffer(vim.fn.expand('<afile>:p'), "..filepath_to_check..")"})
     return filepath
 end
 
