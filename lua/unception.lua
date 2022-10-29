@@ -1,5 +1,5 @@
 local function get_absolute_filepath(relative_path)
-    -- Also need to escape any existing double quotes.
+    -- Need to escape any existing double quotes.
     relative_path = string.gsub(relative_path, "\"", "\\\"")
 
     print(relative_path)
