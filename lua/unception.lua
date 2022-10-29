@@ -118,7 +118,7 @@ else
 
         while (true)
         do
-            vim.cmd("sleep 100m")
+            vim.cmd("sleep 10")
         end
     end
 
@@ -138,8 +138,7 @@ function _G.handle_unloaded_buffer(unloaded_buffer_filepath)
 
     if (unloaded_buffer_filepath == filepath_to_check) then
         print("ITS A MATCH!")
-        -- TODO: Use rpcnotify instead?
-        print(vim.fn.rpcrequest(sock, "nvim_exec_lua", "vim.cmd(q!)", {}))
+        --TODO: Use rpcnotify instead?
         --TODO: send notify out to client that its buffer was unloaded and that it can stop blocking
         --TODO: delete the autocmd
     end
