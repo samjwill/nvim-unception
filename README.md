@@ -13,8 +13,7 @@ https://user-images.githubusercontent.com/25990267/170632310-8bbee2fa-672b-4385-
 
 # Requirements
 
-Requires Neovim 0.7 or later and a filesystem that treats `/` as the file
-separator.
+Neovim 0.7 or later.
 
 # Installation
 
