@@ -13,13 +13,7 @@ https://user-images.githubusercontent.com/25990267/170632310-8bbee2fa-672b-4385-
 
 # Requirements
 
-Requires Neovim 0.7 or later and a bash or somewhat bash-like shell. Basically,
-the shell must be capable of running the `realpath` command, and treat `/` as
-the file separator.
-
-Note that while the `realpath` command ships with most Linux distributions, on
-MacOS, it is not provided by default. It can be installed with Homebrew by
-running `brew install coreutils`.
+Neovim 0.7 or later.
 
 # Installation
 
