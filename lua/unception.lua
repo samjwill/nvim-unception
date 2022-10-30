@@ -1,8 +1,13 @@
 local function get_absolute_filepath(relative_path)
-    -- Need to escape any existing double quotes.
+    -- Surround with quotes in case of special chars before passing to
+    -- realpath cmd. Also need to escape any existing double quotes.
     relative_path = string.gsub(relative_path, "\"", "\\\"")
+    relative_path = "\""..relative_path.."\""
 
-    local absolute_path = vim.loop.fs_realpath(relative_path)
+    local handle = io.popen("realpath "..relative_path)
+    local absolute_path = handle:read("*a")
+    handle:close()
+    absolute_path = string.gsub(absolute_path, "\n", "")
 
     -- The absolute path that's returned needs escaped special chars.
     -- Just escaping everything once is acceptable, so go ahead and
