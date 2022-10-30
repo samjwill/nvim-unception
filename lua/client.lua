@@ -24,14 +24,15 @@ local cmd_to_execute = build_command(arg_str, #args, existing_server_pipe_path)
 
 os.execute(cmd_to_execute)
 
-if (vim.g.unception_block_while_editing) then
+if (vim.g.unception_block_while_host_edits) then
     local sock = vim.fn.sockconnect("pipe", existing_server_pipe_path, {rpc = true})
 
     -- Start up a pipe so that it can listen for a response from the host session.
     local nested_pipe_path = vim.call("serverstart")
 
-    -- Send the pipe path and edited filepath to the server so that it knows what to look for and who to respond to.
+    -- Send the pipe path and edited filepath to the host so that it knows what file to look for and who to respond to.
     vim.fn.rpcnotify(sock, "nvim_exec_lua", "tmp_unception_still_being_edited("..vim.inspect(nested_pipe_path)..","..vim.inspect(arg_str)..")", {})
+    vim.fn.chanclose(sock)
 
     -- Sleep forever. The host session will kill this when it's done editing.
     while (true)

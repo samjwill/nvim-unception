@@ -15,6 +15,7 @@ function _G.handle_unloaded_buffer(unloaded_buffer_filepath)
     if (unloaded_buffer_filepath == filepath_to_check) then
         vim.api.nvim_del_autocmd(unception_bufunload_autocmd_id)
         vim.fn.rpcnotify(response_sock, "nvim_exec_lua", "vim.cmd('quit')", {})
+        vim.fn.chanclose(response_sock)
     end
 end
 
