@@ -18,9 +18,9 @@ if(vim.g.unception_block_while_editing == nil) then
     vim.g.unception_block_while_editing = false
 end
 
--- Can't allow buffer holding terminal to be deleted. Easiest to just force
--- a new tab to be used.
+-- Can't allow buffer holding terminal to be deleted.
 if vim.g.unception_block_while_editing then
-    vim.g.unception_open_buffer_in_new_tab = true
+    vim.g.unception_open_buffer_in_new_tab = false
+    vim.g.unception_delete_replaced_buffer = false
 end
 
