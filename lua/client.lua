@@ -22,8 +22,7 @@ end
 
 local cmd_to_execute = build_command(arg_str, #args, existing_server_pipe_path)
 
---TODO: Uncomment!
---os.execute(cmd_to_execute)
+os.execute(cmd_to_execute)
 
 if (vim.g.unception_block_while_editing) then
     local sock = vim.fn.sockconnect("pipe", existing_server_pipe_path, {rpc = true})
@@ -32,8 +31,9 @@ if (vim.g.unception_block_while_editing) then
     local nested_pipe_path = vim.call("serverstart")
 
     -- Send the pipe path and edited filepath to the server so that it knows what to look for and who to respond to.
-    print(vim.fn.rpcrequest(sock, "nvim_exec_lua", "return tmp_unception_still_being_edited("..vim.inspect(nested_pipe_path)..","..vim.inspect(arg_str)..")", {}))
+    vim.fn.rpcnotify(sock, "nvim_exec_lua", "tmp_unception_still_being_edited("..vim.inspect(nested_pipe_path)..","..vim.inspect(arg_str)..")", {})
 
+    -- Sleep forever. The host session will kill this when it's done editing.
     while (true)
     do
         vim.cmd("sleep 10")
@@ -41,5 +41,4 @@ if (vim.g.unception_block_while_editing) then
 end
 
 -- Our work here is done. Kill the nvim session that would have started otherwise.
---TODO: Uncomment!
---vim.cmd("quit")
+vim.cmd("quit")

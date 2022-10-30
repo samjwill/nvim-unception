@@ -13,17 +13,8 @@ function _G.handle_unloaded_buffer(unloaded_buffer_filepath)
     unloaded_buffer_filepath = get_absolute_filepath(unloaded_buffer_filepath)
 
     if (unloaded_buffer_filepath == filepath_to_check) then
-        print("ITS A MATCH!")
-        print("Going to respond on: "..response_sock)
         vim.api.nvim_del_autocmd(unception_bufunload_autocmd_id)
         vim.fn.rpcnotify(response_sock, "nvim_exec_lua", "vim.cmd('quit')", {})
-
-        --TODO: Use rpcnotify instead?
-        --TODO: send notify out to client that its buffer was unloaded and that it can stop blocking
-        --TODO: delete the autocmd
     end
-
-    print(unloaded_buffer_filepath)
-    print(filepath_to_check)
 end
 
