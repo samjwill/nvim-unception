@@ -1,7 +1,4 @@
 local function get_absolute_filepath(relative_path)
-    -- Need to escape any existing double quotes.
-    relative_path = string.gsub(relative_path, "\"", "\\\"")
-
     local absolute_path = vim.loop.fs_realpath(relative_path)
 
     -- The absolute path that's returned needs escaped special chars.
