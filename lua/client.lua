@@ -32,7 +32,9 @@ if (vim.g.unception_block_while_host_edits) then
 
     -- Send the pipe path and edited filepath to the host so that it knows what file to look for and who to respond to.
     vim.fn.rpcnotify(sock, "nvim_exec_lua", "tmp_unception_still_being_edited("..vim.inspect(nested_pipe_path)..","..vim.inspect(arg_str)..")", {})
-    vim.fn.chanclose(sock)
+
+    -- TODO: Find out if this is necessary.
+    -- vim.fn.chanclose(sock)
 
     -- Sleep forever. The host session will kill this when it's done editing.
     while (true)
