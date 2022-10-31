@@ -31,7 +31,7 @@ if (vim.g.unception_block_while_host_edits) then
     local nested_pipe_path = vim.call("serverstart")
 
     -- Send the pipe path and edited filepath to the host so that it knows what file to look for and who to respond to.
-    vim.fn.rpcnotify(sock, "nvim_exec_lua", "tmp_unception_still_being_edited("..vim.inspect(nested_pipe_path)..","..vim.inspect(arg_str)..")", {})
+    vim.fn.rpcnotify(sock, "nvim_exec_lua", "unception_notify_when_done_editing("..vim.inspect(nested_pipe_path)..","..vim.inspect(arg_str)..")", {})
 
     -- TODO: Find out if this is necessary.
     -- vim.fn.chanclose(sock)
