@@ -1,6 +1,7 @@
 local response_sock -- TODO: Unsure if I actually have to declare it here.
 local unception_bufunload_autocmd_id
 
+-- TODO: Global necessary?
 function _G.tmp_unception_still_being_edited(pipe_to_respond_on, filepath)
     filepath_to_check = filepath
     response_sock = vim.fn.sockconnect("pipe", pipe_to_respond_on, {rpc = true})
@@ -8,7 +9,6 @@ function _G.tmp_unception_still_being_edited(pipe_to_respond_on, filepath)
     return filepath_to_check
 end
 
--- TODO: Global necessary?
 function _G.handle_unloaded_buffer(unloaded_buffer_filepath)
     unloaded_buffer_filepath = get_absolute_filepath(unloaded_buffer_filepath)
 
