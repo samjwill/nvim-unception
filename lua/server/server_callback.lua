@@ -1,4 +1,4 @@
-require("common_functions")
+require("common.common_functions")
 
 local response_sock
 local unception_bufunload_autocmd_id

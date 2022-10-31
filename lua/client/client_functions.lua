@@ -58,4 +58,3 @@ function build_command(arg_str, number_of_args, server_address)
     return cmd_to_execute
 end
 
-
