@@ -2,6 +2,7 @@ require("common_functions")
 
 local response_sock
 local unception_bufunload_autocmd_id
+local filepath_to_check
 
 function unception_handle_unloaded_buffer(unloaded_buffer_filepath)
     unloaded_buffer_filepath = get_absolute_filepath(unloaded_buffer_filepath)
@@ -18,6 +19,5 @@ function _G.unception_notify_when_done_editing(pipe_to_respond_on, filepath)
     filepath_to_check = filepath
     response_sock = vim.fn.sockconnect("pipe", pipe_to_respond_on, {rpc = true})
     unception_bufunload_autocmd_id = vim.api.nvim_create_autocmd("BufUnload",{ command = "lua unception_handle_unloaded_buffer(vim.fn.expand('<afile>:p'))"})
-    return filepath_to_check
 end
 
