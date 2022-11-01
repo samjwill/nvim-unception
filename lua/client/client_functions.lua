@@ -1,15 +1,7 @@
 function build_command(arg_str, number_of_args, server_address)
-    local cmd_to_execute = "\\nvim --server "..server_address.." --remote-send "
-
-    -- start command to be run by server
-    cmd_to_execute = cmd_to_execute.."\""
-
-    -- exit terminal-insert mode
-    cmd_to_execute = cmd_to_execute.."<C-\\><C-N>"
-
     -- log buffer number so that we can delete it later. We don't want a ton of
     -- running terminal buffers in the background when we switch to a new nvim buffer.
-    cmd_to_execute = cmd_to_execute..":silent let g:unception_tmp_bufnr = bufnr() | "
+    cmd_to_execute = "silent let g:unception_tmp_bufnr = bufnr() | "
 
     if vim.g.unception_open_buffer_in_new_tab then
         cmd_to_execute = cmd_to_execute.."silent tabnew | "
@@ -46,14 +38,11 @@ function build_command(arg_str, number_of_args, server_address)
     cmd_to_execute = cmd_to_execute.."silent unlet g:unception_tmp_bufnr | "
 
     -- remove command from history and enter it
-    cmd_to_execute = cmd_to_execute.."call histdel(':', -1)<CR>"
+    cmd_to_execute = cmd_to_execute.."call histdel(':', -1)"
 
     if (vim.g.unception_enable_flavor_text) then
-        cmd_to_execute = cmd_to_execute..":echo 'Unception prevented inception!' | call histdel(':', -1)<CR>"
+        cmd_to_execute = cmd_to_execute.." | echo 'Unception prevented inception!' | call histdel(':', -1)"
     end
-
-    -- end command to be run by server
-    cmd_to_execute = cmd_to_execute.."\""
 
     return cmd_to_execute
 end
