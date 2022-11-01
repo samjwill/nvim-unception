@@ -36,6 +36,13 @@ end
 -- Start up a pipe so that it can listen for a response from the host session.
 local nested_pipe_path = vim.call("serverstart")
 
+if (#args ~= 1) then
+    local err_cmd = "vim.api.nvim_err_writeln('Only 1 argument is supported when g:unception_block_while_host_edits is true. Received '..#args..'.')"
+    vim.fn.rpcnotify(sock, "nvim_exec_lua", err_cmd, {})
+    vim.fn.chanclose(sock)
+    vim.cmd("quit")
+end
+
 -- Send the pipe path and edited filepath to the host so that it knows what file to look for and who to respond to.
 vim.fn.rpcnotify(sock, "nvim_exec_lua", "unception_notify_when_done_editing("..vim.inspect(nested_pipe_path)..","..vim.inspect(arg_str)..")", {})
 
