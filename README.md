@@ -71,9 +71,9 @@ buffer being edited. This can be done by setting your .git core.editor to pass
 the `g:unception_block_while_host_edits=1` argument (like
 [this](https://github.com/samjwill/dotfiles/blob/ba56af2ff49cd23ac19fcffe7840a78c58a89c9b/.gitconfig#L5)).
 
-Alternatively, if you would like to be able to edit using Neovim in a nested session, you can
-disable unception altogether by setting your .git core.editor to pass the
-`g:unception_disable=1` argument (like
+Alternatively, if you would like to be able to edit using Neovim directly
+inside of a nested session, you can disable unception altogether by setting
+your .git core.editor to pass the `g:unception_disable=1` argument (like
 [this](https://github.com/samjwill/dotfiles/blob/c59477c47867fb8f5560ba01d17722443428bc7e/.gitconfig#L5)).
 
 # Can this work with terminal-toggling plugins?
