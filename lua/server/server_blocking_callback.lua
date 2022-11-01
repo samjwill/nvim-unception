@@ -20,3 +20,82 @@ function _G.unception_notify_when_done_editing(pipe_to_respond_on, filepath)
     unception_bufunload_autocmd_id = vim.api.nvim_create_autocmd("BufUnload",{ command = "lua unception_handle_unloaded_buffer(vim.fn.expand('<afile>:p'))"})
 end
 
+function _G.unception_edit_files(file_args, num_files_in_list)
+    local tmp_buf_number = vim.fn.bufnr()
+    if vim.g.unception_open_buffer_in_new_tab then
+        vim.cmd("tabnew")
+    end
+
+    if (num_files_in_list > 0) then
+        vim.cmd("0argadd "..file_args)
+        vim.cmd("argument 1")
+
+        vim.cmd("edit")
+    else
+        vim.cmd("enew")
+    end
+
+    if (vim.g.unception_delete_replaced_buffer and not vim.g.unception_open_buffer_in_new_tab) then
+        if (vim.fn.len(vim.fn.win_findbuf(tmp_buf_number)) == 0) then
+            pcall(vim.cmd, "bdelete! "..tmp_buf_number) -- Don't complain if it fails to delete the buffer.
+        end
+    end
+
+    if (vim.g.unception_enable_flavor_text) then
+        print("Unception prevented inception!")
+    end
+
+    -- TODO: Do we have to call histdel?
+end
+
+--function build_command(arg_str, number_of_args, server_address)
+--    -- log buffer number so that we can delete it later. We don't want a ton of
+--    -- running terminal buffers in the background when we switch to a new nvim buffer.
+--    cmd_to_execute = "silent let g:unception_tmp_bufnr = bufnr() | "
+--
+--    if vim.g.unception_open_buffer_in_new_tab then
+--        cmd_to_execute = cmd_to_execute.."silent tabnew | "
+--    end
+--
+--    -- If there aren't arguments, we just want a new, empty buffer, but if
+--    -- there are, append them to the host Neovim session's arguments list.
+--    if (number_of_args > 0) then
+--        -- Apparently need to escape backslashes again.
+--        local escaped_arg_list = string.gsub(arg_str, "\\", "\\\\")
+--
+--        -- Had some issues when using argedit. Explicitly calling these
+--        -- separately appears to work though.
+--        cmd_to_execute = cmd_to_execute.."silent 0argadd "..escaped_arg_list.." | "
+--        cmd_to_execute = cmd_to_execute.."silent argument 1 | "
+--
+--        -- This is kind of stupid, but basically, I've noticed that some
+--        -- plugins, like Treesitter, don't appear to properly trigger when
+--        -- receiving a server command with argedit. I just re-edit the
+--        -- same file here to give stuff like Treesitter's syntax
+--        -- highlighting another chance to trigger, since doing so doesn't
+--        -- hurt anything. Sometimes it works.
+--        cmd_to_execute = cmd_to_execute.."silent e | "
+--    else
+--        cmd_to_execute = cmd_to_execute.."silent enew | "
+--    end
+--
+--    -- We don't want to delete the replaced buffer if there wasn't a replaced buffer vvv
+--    if (vim.g.unception_delete_replaced_buffer and not vim.g.unception_open_buffer_in_new_tab) then
+--        -- Only delete the terminal buffer if it's not visible in some other window.
+--        cmd_to_execute = cmd_to_execute.."if (len(win_findbuf(g:unception_tmp_bufnr)) == 0) | "
+--        cmd_to_execute = cmd_to_execute.."silent execute 'bdelete! ' . g:unception_tmp_bufnr | "
+--        cmd_to_execute = cmd_to_execute.."endif | "
+--    end
+--
+--    -- remove temporary variable
+--    cmd_to_execute = cmd_to_execute.."silent unlet g:unception_tmp_bufnr | "
+--
+--    -- remove command from history and enter it
+--    cmd_to_execute = cmd_to_execute.."call histdel(':', -1)"
+--
+--    if (vim.g.unception_enable_flavor_text) then
+--        cmd_to_execute = cmd_to_execute.." | echo 'Unception prevented inception!' | call histdel(':', -1)"
+--    end
+--
+--    return cmd_to_execute
+--end

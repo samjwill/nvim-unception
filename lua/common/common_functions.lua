@@ -5,7 +5,7 @@ function get_absolute_filepath(relative_path)
     -- Just escaping everything once is acceptable, so go ahead and
     -- interpolate backslashes so we don't have to maintain a special
     -- character list or rely on another external tool.
-    absolute_path = string.gsub(absolute_path, ".", "\\%1")
+    --absolute_path = string.gsub(absolute_path, ".", "\\\\%1")
 
     return absolute_path
 end

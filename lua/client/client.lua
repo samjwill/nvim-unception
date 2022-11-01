@@ -1,4 +1,3 @@
-require("client.client_functions")
 require("common.common_functions")
 
 -- We don't want to start. Send the args to the server instance instead.
@@ -11,7 +10,7 @@ for index, iter in pairs(args) do
     -- Double quotes need to be escaped by the Neovim server session
     -- executing the command as well as the shell. Lua itself needs escaped
     -- backslashes too, so even more backslashes here...
-    iter = string.gsub(iter, "\"", "\\\\\"")
+    --iter = string.gsub(iter, "\"", "\\\\\"")
 
     if (string.len(arg_str) == 0) then
         arg_str = iter
@@ -23,9 +22,8 @@ end
 -- Listen to host on existing pipe.
 local sock = vim.fn.sockconnect("pipe", existing_server_pipe_path, {rpc = true})
 
-local cmd_to_execute = build_command(arg_str, #args, existing_server_pipe_path)
-
-vim.fn.rpcnotify(sock, "nvim_exec_lua", "vim.cmd(\""..cmd_to_execute.."\")", {})
+-- TODO: Should this be an rpcnotify instead?
+vim.fn.rpcrequest(sock, "nvim_exec_lua", "unception_edit_files(\""..arg_str.."\", "..#args..")", {})
 
 if (not vim.g.unception_block_while_host_edits) then
     -- Our work here is done. Kill the nvim session that would have started otherwise.
