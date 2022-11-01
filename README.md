@@ -43,11 +43,6 @@ problem, Unception can be temporarily disabled when launching Neovim
 like so:
 `nvim --cmd "let g:unception_disable=1"`
 
-***If using Neovim as your default editor for git, for example, and you
-would like to be able to use it from WITHIN the terminal emulator, I would
-recommend updating your .gitconfig to always pass the flag to disable
-unception described above (like [this](https://github.com/samjwill/dotfiles/blob/c59477c47867fb8f5560ba01d17722443428bc7e/.gitconfig#L5)).***
-
 Other Neovim command-line arguments that do not involve editing a file or
 directory may not work as expected from *within* the terminal emulator (e.g.
 passing `-b` to edit in binary mode when inside of a terminal buffer will not
@@ -64,6 +59,22 @@ described above, even if launched from within a terminal buffer.
 For usage details and options (such as opening the file buffers in new tabs
 rather than the current window), see `doc/nvim-unception.txt`, or, after
 installation, run `:help nvim-unception`.
+
+# Working with Git
+
+There are a few options for using Neovim as your editor for git from within
+Neovim itself.
+
+The first option is to make git defer editing (e.g. the commit message when
+running `git commit`) to the host session, and block until the host unloads the
+buffer being edited. This can be done by setting your .git core.editor to pass
+the `g:unception_block_while_host_edits=1` argument (like
+[this](https://github.com/samjwill/dotfiles/blob/ba56af2ff49cd23ac19fcffe7840a78c58a89c9b/.gitconfig#L5)).
+
+Alternatively, if you would like to be able to edit using Neovim in a nested session, you can
+disable unception altogether by setting your .git core.editor to pass the
+`g:unception_disable=1` argument (like
+[this](https://github.com/samjwill/dotfiles/blob/c59477c47867fb8f5560ba01d17722443428bc7e/.gitconfig#L5)).
 
 # Can this work with terminal-toggling plugins?
 
