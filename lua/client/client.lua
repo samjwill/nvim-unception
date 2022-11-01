@@ -33,7 +33,7 @@ if (not vim.g.unception_block_while_host_edits) then
     vim.cmd("quit")
 end
 
--- Start up a pipe so that it can listen for a response from the host session.
+-- Start up a pipe so that client can listen for a response from the host session.
 local nested_pipe_path = vim.call("serverstart")
 
 -- TODO: Can't get this working...
