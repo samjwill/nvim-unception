@@ -20,17 +20,17 @@ for index, iter in pairs(args) do
     end
 end
 
--- Listen to host on existing pipe.
-local sock = vim.fn.sockconnect("pipe", existing_server_pipe_path, {rpc = true})
-
 local cmd_to_execute = build_command(arg_str, #args, existing_server_pipe_path)
 
-vim.fn.rpcnotify(sock, "nvim_exec_lua", "vim.cmd(\""..cmd_to_execute.."\")", {})
+os.execute(cmd_to_execute)
 
 if (not vim.g.unception_block_while_host_edits) then
     -- Our work here is done. Kill the nvim session that would have started otherwise.
     vim.cmd("quit")
 end
+
+-- Listen to host on existing pipe.
+local sock = vim.fn.sockconnect("pipe", existing_server_pipe_path, {rpc = true})
 
 -- Start up a pipe so that it can listen for a response from the host session.
 local nested_pipe_path = vim.call("serverstart")
