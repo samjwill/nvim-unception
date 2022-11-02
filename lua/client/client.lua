@@ -7,33 +7,10 @@ local arg_str = ""
 for index, iter in pairs(args) do
     local absolute_filepath = get_absolute_filepath(iter)
 
-    -- File doesn't exist (yet)
-    if(absolute_filepath == nil) then
-
-        -- User did specify a filepath
-        if (string.len(iter) > 0) then
-            local pos_of_last_file_separator = 0
-            for i = 1, string.len(iter) do
-                 local char = string.sub(iter, i, i)
-                 if (char == "/") then
-                     pos_of_last_file_separator = i
-                 end
-            end
-
-            local dir_path = string.sub(iter, 0, pos_of_last_file_separator)
-            if (dir_path == nil) then
-                dir_path = "./"
-            end
-            local filename = string.sub(iter, pos_of_last_file_separator + 1, string.len(iter))
-
-            absolute_filepath = get_absolute_filepath(dir_path).."/"..filename
-        end
-    end
-
     if (string.len(arg_str) == 0) then
-        arg_str = iter
+        arg_str = absolute_filepath
     else
-        arg_str = arg_str.." "..iter
+        arg_str = arg_str.." "..absolute_filepath
     end
 end
 
