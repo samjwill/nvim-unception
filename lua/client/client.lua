@@ -22,8 +22,16 @@ end
 -- Listen to host on existing pipe.
 local sock = vim.fn.sockconnect("pipe", existing_server_pipe_path, {rpc = true})
 
+
+-- Need to escape backslashes and quotes in case they are part of the
+-- filepaths. Lua needs \\ to define a \, so to escape special chars,
+-- there are twice as many backslashes as you would think that there
+-- should be.
+arg_str = string.gsub(arg_str, "\\", "\\\\\\\\")
+arg_str = string.gsub(arg_str, "\"", "\\\\\\\"")
+
 -- TODO: Should this be an rpcnotify instead?
-vim.fn.rpcrequest(sock, "nvim_exec_lua", "unception_edit_files(\""..arg_str.."\", "..#args..")", {})
+vim.fn.rpcnotify(sock, "nvim_exec_lua", "unception_edit_files(\""..arg_str.."\", "..#args..")", {})
 
 if (not vim.g.unception_block_while_host_edits) then
     -- Our work here is done. Kill the nvim session that would have started otherwise.

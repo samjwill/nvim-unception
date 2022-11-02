@@ -6,6 +6,7 @@ function get_absolute_filepath(relative_path)
     -- interpolate backslashes so we don't have to maintain a special
     -- character list or rely on another external tool.
     --absolute_path = string.gsub(absolute_path, ".", "\\\\%1")
+    -- TODO: Uncomment? ^^^
 
     return absolute_path
 end
