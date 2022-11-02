@@ -14,9 +14,6 @@ for index, iter in pairs(args) do
     end
 end
 
--- Send messages to host on existing pipe.
-local sock = vim.fn.sockconnect("pipe", existing_server_pipe_path, {rpc = true})
-
 -- Need to escape backslashes and quotes in case they are part of the
 -- filepaths. Lua needs \\ to define a \, so to escape special chars,
 -- there are twice as many backslashes as you would think that there
@@ -28,6 +25,8 @@ else
     arg_str = ""
 end
 
+-- Send messages to host on existing pipe.
+local sock = vim.fn.sockconnect("pipe", existing_server_pipe_path, {rpc = true})
 vim.fn.rpcnotify(sock, "nvim_exec_lua", "unception_edit_files("
                                         .."\""..arg_str.."\""
                                         ..", "
