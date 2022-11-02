@@ -18,9 +18,11 @@ function get_absolute_filepath(relative_path)
             if (string.len(dir_path) == 0) then
                 dir_path = "."
             end
+            dir_path = vim.loop.fs_realpath(dir_path)
+
             local filename = string.sub(relative_path, pos_of_last_file_separator + 1, string.len(relative_path))
 
-            absolute_path = vim.loop.fs_realpath(dir_path).."/"..filename
+            absolute_path = dir_path.."/"..filename
         end
     end
 
