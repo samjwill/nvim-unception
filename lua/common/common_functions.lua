@@ -29,3 +29,17 @@ function get_absolute_filepath(relative_path)
     return absolute_path
 end
 
+function escape_special_chars(str)
+    if (str ~= nil) then
+        -- Need to escape backslashes and quotes in case they are part of the
+        -- filepaths. Lua needs \\ to define a \, so to escape special chars,
+        -- there are twice as many backslashes as you would think that there
+        -- should be.
+        str = string.gsub(str, "\\", "\\\\\\\\")
+        str = string.gsub(str, "\"", "\\\\\\\"")
+        str = string.gsub(str, " ", "\\\\ ")
+        return str
+    else
+        return ""
+    end
+end
