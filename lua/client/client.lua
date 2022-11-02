@@ -48,7 +48,18 @@ local nested_pipe_path = vim.call("serverstart")
 --end
 
 -- Send the pipe path and edited filepath to the host so that it knows what file to look for and who to respond to.
-vim.fn.rpcnotify(sock, "nvim_exec_lua", "unception_notify_when_done_editing("..vim.inspect(nested_pipe_path)..","..vim.inspect(arg_str)..","..vim.inspect(vim.g.unception_open_buffer_in_new_tab)..","..vim.inspect(vim.g.unception_delete_replaced_buffer)..","..vim.inspect(vim.g.unception_enable_flavor_text)..")", {})
+vim.fn.rpcnotify(sock, "nvim_exec_lua", "unception_notify_when_done_editing("
+										..vim.inspect(nested_pipe_path)
+										..","
+										..vim.inspect(arg_str)
+										..","
+										..vim.inspect(vim.g.unception_open_buffer_in_new_tab)
+										..","
+										..vim.inspect(vim.g.unception_delete_replaced_buffer)
+										..","
+										..vim.inspect(vim.g.unception_enable_flavor_text)
+										..")"
+										,{})
 
 -- Sleep forever. The host session will kill this when it's done editing.
 while (true)
