@@ -28,7 +28,18 @@ else
     arg_str = ""
 end
 
-vim.fn.rpcnotify(sock, "nvim_exec_lua", "unception_edit_files(\""..arg_str.."\", "..#args..")", {})
+vim.fn.rpcnotify(sock, "nvim_exec_lua", "unception_edit_files("
+                                        .."\""..arg_str.."\""
+                                        ..", "
+                                        ..#args
+                                        ..", "
+                                        ..vim.inspect(vim.g.unception_open_buffer_in_new_tab)
+                                        ..", "
+                                        ..vim.inspect(vim.g.unception_delete_replaced_buffer)
+                                        ..", "
+                                        ..vim.inspect(vim.g.unception_enable_flavor_text)
+                                        ..")"
+                                        ,{})
 
 if (not vim.g.unception_block_while_host_edits) then
     -- Our work here is done. Kill the nvim session that would have started otherwise.
@@ -53,12 +64,6 @@ vim.fn.rpcnotify(sock, "nvim_exec_lua", "unception_notify_when_done_editing("
                                         ..vim.inspect(nested_pipe_path)
                                         ..","
                                         ..vim.inspect(arg_str)
-                                        ..","
-                                        ..vim.inspect(vim.g.unception_open_buffer_in_new_tab)
-                                        ..","
-                                        ..vim.inspect(vim.g.unception_delete_replaced_buffer)
-                                        ..","
-                                        ..vim.inspect(vim.g.unception_enable_flavor_text)
                                         ..")"
                                         ,{})
 
