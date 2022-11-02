@@ -14,7 +14,7 @@ for index, iter in pairs(args) do
     end
 end
 
--- Listen to host on existing pipe.
+-- Send messages to host on existing pipe.
 local sock = vim.fn.sockconnect("pipe", existing_server_pipe_path, {rpc = true})
 
 -- Need to escape backslashes and quotes in case they are part of the
