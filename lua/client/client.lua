@@ -21,6 +21,7 @@ end
 if (arg_str ~= nil) then
     arg_str = string.gsub(arg_str, "\\", "\\\\\\\\")
     arg_str = string.gsub(arg_str, "\"", "\\\\\\\"")
+    arg_str = string.gsub(arg_str, " ", "\\\\ ")
 else
     arg_str = ""
 end
