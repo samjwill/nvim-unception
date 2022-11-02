@@ -20,11 +20,16 @@ function _G.unception_notify_when_done_editing(pipe_to_respond_on, filepath)
     unception_bufunload_autocmd_id = vim.api.nvim_create_autocmd("BufUnload",{ command = "lua unception_handle_unloaded_buffer(vim.fn.expand('<afile>:p'))"})
 end
 
-function _G.unception_edit_files(file_args, num_files_in_list)
+function _G.unception_edit_files(file_args, num_files_in_list, open_in_new_tab, delete_replaced_buffer, enable_flavor_text)
+	-- Need to do this because false values can come in as "nil"
+	open_in_new_tab = vim.inspect(open_in_new_tab)
+	delete_replaced_buffer = vim.inspect(delete_replaced_buffer)
+	enable_flavor_text = vim.inspect(enable_flavor_text)
+
     -- log buffer number so that we can delete it later. We don't want a ton of
     -- running terminal buffers in the background when we switch to a new nvim buffer.
     local tmp_buf_number = vim.fn.bufnr()
-    if vim.g.unception_open_buffer_in_new_tab then
+    if (open_in_new_tab) then
         vim.cmd("tabnew")
     end
 
@@ -48,16 +53,14 @@ function _G.unception_edit_files(file_args, num_files_in_list)
     end
 
     -- We don't want to delete the replaced buffer if there wasn't a replaced buffer vvv
-    if (vim.g.unception_delete_replaced_buffer and not vim.g.unception_open_buffer_in_new_tab) then
+    if (delete_replaced_buffer and not open_in_new_tab) then
         if (vim.fn.len(vim.fn.win_findbuf(tmp_buf_number)) == 0) then
             pcall(vim.cmd, "bdelete! "..tmp_buf_number) -- Don't complain if it fails to delete the buffer.
         end
     end
 
-    if (vim.g.unception_enable_flavor_text) then
+    if (enable_flavor_text) then
         print("Unception prevented inception!")
     end
-
-    -- TODO: Do we have to call histdel?
 end
 
