@@ -2,7 +2,7 @@ function get_absolute_filepath(relative_path)
     local absolute_path = vim.loop.fs_realpath(relative_path)
 
     -- File doesn't exist (yet)
-    if(absolute_filepath == nil) then
+    if(absolute_path == nil) then
 
         -- User did specify a filepath
         if (string.len(relative_path) > 0) then
@@ -20,7 +20,7 @@ function get_absolute_filepath(relative_path)
             end
             local filename = string.sub(relative_path, pos_of_last_file_separator + 1, string.len(relative_path))
 
-            absolute_filepath = vim.loop.fs_realpath(dir_path).."/"..filename
+            absolute_path = vim.loop.fs_realpath(dir_path).."/"..filename
         end
     end
 
