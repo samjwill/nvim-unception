@@ -22,8 +22,12 @@ local sock = vim.fn.sockconnect("pipe", existing_server_pipe_path, {rpc = true})
 -- filepaths. Lua needs \\ to define a \, so to escape special chars,
 -- there are twice as many backslashes as you would think that there
 -- should be.
-arg_str = string.gsub(arg_str, "\\", "\\\\\\\\")
-arg_str = string.gsub(arg_str, "\"", "\\\\\\\"")
+if (arg_str ~= nil) then
+	arg_str = string.gsub(arg_str, "\\", "\\\\\\\\")
+	arg_str = string.gsub(arg_str, "\"", "\\\\\\\"")
+else
+	arg_str = ""
+end
 
 -- TODO: Should this be an rpcnotify instead?
 vim.fn.rpcnotify(sock, "nvim_exec_lua", "unception_edit_files(\""..arg_str.."\", "..#args..")", {})

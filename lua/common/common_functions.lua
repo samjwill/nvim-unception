@@ -5,22 +5,22 @@ function get_absolute_filepath(relative_path)
     if(absolute_filepath == nil) then
 
         -- User did specify a filepath
-        if (string.len(iter) > 0) then
+        if (string.len(relative_path) > 0) then
             local pos_of_last_file_separator = 0
-            for i = 1, string.len(iter) do
-                 local char = string.sub(iter, i, i)
+            for i = 1, string.len(relative_path) do
+                 local char = string.sub(relative_path, i, i)
                  if (char == "/") then
                      pos_of_last_file_separator = i
                  end
             end
 
-            local dir_path = string.sub(iter, 0, pos_of_last_file_separator)
-            if (dir_path == nil) then
-                dir_path = "./"
+            local dir_path = string.sub(relative_path, 0, pos_of_last_file_separator)
+            if (string.len(dir_path) == 0) then
+                dir_path = "."
             end
-            local filename = string.sub(iter, pos_of_last_file_separator + 1, string.len(iter))
+            local filename = string.sub(relative_path, pos_of_last_file_separator + 1, string.len(relative_path))
 
-            absolute_filepath = get_absolute_filepath(dir_path).."/"..filename
+            absolute_filepath = vim.loop.fs_realpath(dir_path).."/"..filename
         end
     end
 
