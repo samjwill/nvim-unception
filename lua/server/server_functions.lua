@@ -52,7 +52,7 @@ function _G.unception_edit_files(file_args, num_files_in_list, open_in_new_tab, 
         vim.cmd("enew")
     end
 
-    -- We don't want to delete the replaced buffer if there wasn't a replaced buffer vvv
+    -- We don't want to delete the replaced buffer if there wasn't a replaced buffer
     if (delete_replaced_buffer and not open_in_new_tab) then
         if (vim.fn.len(vim.fn.win_findbuf(tmp_buf_number)) == 0) then
             pcall(vim.cmd, "bdelete! "..tmp_buf_number) -- Don't complain if it fails to delete the buffer.
