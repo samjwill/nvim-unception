@@ -6,6 +6,7 @@ local filepath_to_check
 
 function unception_handle_unloaded_buffer(unloaded_buffer_filepath)
     unloaded_buffer_filepath = get_absolute_filepath(unloaded_buffer_filepath)
+    unloaded_buffer_filepath = escape_special_chars(unloaded_buffer_filepath)
 
     if (unloaded_buffer_filepath == filepath_to_check) then
         vim.api.nvim_del_autocmd(unception_bufunload_autocmd_id)
