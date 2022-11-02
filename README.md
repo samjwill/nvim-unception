@@ -11,11 +11,33 @@ leverages `:argadd` to update its own arguments.
 
 https://user-images.githubusercontent.com/25990267/170632310-8bbee2fa-672b-4385-9dea-7ed4501a0558.mp4
 
-# Requirements
+## Working with Git
+
+There are a few options for using Neovim as your editor for git from within
+Neovim itself.
+
+The first option is to make git defer editing (e.g. the commit message when
+running `git commit`) to the host session, and block until the host unloads the
+buffer being edited. This can be done by setting your .git core.editor to pass
+the `g:unception_block_while_host_edits=1` argument (like
+[this](https://github.com/samjwill/dotfiles/blob/ba56af2ff49cd23ac19fcffe7840a78c58a89c9b/.gitconfig#L5)).
+
+https://user-images.githubusercontent.com/25990267/199399213-a0b72114-99b4-4b4b-9a14-8d7a7fc0bb3e.mp4
+
+Alternatively, if you would like to be able to edit using Neovim directly
+inside of a nested session, you can disable unception altogether by setting
+your .git core.editor to pass the `g:unception_disable=1` argument (like
+[this](https://github.com/samjwill/dotfiles/blob/c59477c47867fb8f5560ba01d17722443428bc7e/.gitconfig#L5)).
+
+## Can this work with terminal-toggling plugins?
+
+Yep! See the [wiki](https://github.com/samjwill/nvim-unception/wiki) for setup info.
+
+## Requirements
 
 Neovim 0.7 or later.
 
-# Installation
+## Installation
 
 #### Using [vim-plug](https://github.com/junegunn/vim-plug):
 
@@ -25,7 +47,7 @@ Neovim 0.7 or later.
 
     use "samjwill/nvim-unception"
 
-# How does it work?
+## How does it work?
 
 The plugin tells Neovim to automatically start a local server listening to a
 named pipe at launch. Upon launching a new Neovim session within a terminal
@@ -34,7 +56,7 @@ server session via the pipe, and the server session replaces the buffer under
 the cursor (the terminal buffer) with the first file/directory argument
 specified.
 
-# Limitations
+## Limitations
 
 This plugin works well enough for me but your mileage may vary. If you
 find an issue, feel free to create one detailing the problem on the
@@ -54,28 +76,8 @@ Neovim terminal buffer should work just fine when launching Neovim normally.
 They should also behave as as they do by default if you pass the disable flag
 described above, even if launched from within a terminal buffer.
 
-# Settings
+## Settings
 
 For usage details and options (such as opening the file buffers in new tabs
 rather than the current window), see `doc/nvim-unception.txt`, or, after
 installation, run `:help nvim-unception`.
-
-# Working with Git
-
-There are a few options for using Neovim as your editor for git from within
-Neovim itself.
-
-The first option is to make git defer editing (e.g. the commit message when
-running `git commit`) to the host session, and block until the host unloads the
-buffer being edited. This can be done by setting your .git core.editor to pass
-the `g:unception_block_while_host_edits=1` argument (like
-[this](https://github.com/samjwill/dotfiles/blob/ba56af2ff49cd23ac19fcffe7840a78c58a89c9b/.gitconfig#L5)).
-
-Alternatively, if you would like to be able to edit using Neovim directly
-inside of a nested session, you can disable unception altogether by setting
-your .git core.editor to pass the `g:unception_disable=1` argument (like
-[this](https://github.com/samjwill/dotfiles/blob/c59477c47867fb8f5560ba01d17722443428bc7e/.gitconfig#L5)).
-
-# Can this work with terminal-toggling plugins?
-
-Yep! See the [wiki](https://github.com/samjwill/nvim-unception/wiki) for setup info.
