@@ -51,7 +51,6 @@ end
 local nested_pipe_path = vim.call("serverstart")
 
 if (#args ~= 1) then
-    local err = "Must have exactly 1 argument when g:unception_block_while_host_edits is enabled!"
     vim.fn.rpcrequest(sock, "nvim_exec_lua", "vim.api.nvim_err_writeln('Must have exactly 1 argument when g:unception_block_while_host_edits is enabled!')", {})
     vim.fn.chanclose(sock)
     vim.cmd("quit!")
