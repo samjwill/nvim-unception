@@ -14,17 +14,7 @@ for index, iter in pairs(args) do
     end
 end
 
--- Need to escape backslashes and quotes in case they are part of the
--- filepaths. Lua needs \\ to define a \, so to escape special chars,
--- there are twice as many backslashes as you would think that there
--- should be.
-if (arg_str ~= nil) then
-    arg_str = string.gsub(arg_str, "\\", "\\\\\\\\")
-    arg_str = string.gsub(arg_str, "\"", "\\\\\\\"")
-    arg_str = string.gsub(arg_str, " ", "\\\\ ")
-else
-    arg_str = ""
-end
+arg_str = escape_special_chars(arg_str)
 
 -- Send messages to host on existing pipe.
 local sock = vim.fn.sockconnect("pipe", existing_server_pipe_path, {rpc = true})
