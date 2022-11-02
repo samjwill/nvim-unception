@@ -55,9 +55,10 @@ SETTINGS                                               *nvim-unception-settings*
 *g:unception_block_while_host_edits*                     bool (default=false)
 
         When true, if unception detects that Neovim has been launched in a
-    nested terminal session, the files passed as arguments will be opened in
-    the host session, and the terminal will be blocked until the files have
-    been unloaded.
+    nested terminal session, the file passed as an argument will be opened in
+    the host session, and the terminal will be blocked until the file has been
+    unloaded. Note that only a single file argument may be passed when this is
+    enabled.
 
         This can be useful for command-line tools that are expected to launch
     an editor, such as git. By setting the core editor to:
