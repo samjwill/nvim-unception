@@ -21,10 +21,10 @@ function _G.unception_notify_when_done_editing(pipe_to_respond_on, filepath)
 end
 
 function _G.unception_edit_files(file_args, num_files_in_list, open_in_new_tab, delete_replaced_buffer, enable_flavor_text)
-	-- Might need to do this because false values can come in as "nil"
-	open_in_new_tab = vim.inspect(open_in_new_tab)
-	delete_replaced_buffer = vim.inspect(delete_replaced_buffer)
-	enable_flavor_text = vim.inspect(enable_flavor_text)
+    -- Might need to do this because false values can come in as "nil"
+    open_in_new_tab = vim.inspect(open_in_new_tab)
+    delete_replaced_buffer = vim.inspect(delete_replaced_buffer)
+    enable_flavor_text = vim.inspect(enable_flavor_text)
 
     -- log buffer number so that we can delete it later. We don't want a ton of
     -- running terminal buffers in the background when we switch to a new nvim buffer.
