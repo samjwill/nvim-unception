@@ -26,7 +26,7 @@ Here's an example workflow with this flag set:
 
 https://user-images.githubusercontent.com/25990267/199399213-a0b72114-99b4-4b4b-9a14-8d7a7fc0bb3e.mp4
 
-Note that without Neovim's `'nohidden'` option set, the buffer will not
+Note that if Neovim's `'hidden'` option is set, the buffer will not
 be unloaded upon running `:wq`. Instead `:bdelete` will need to be
 called on the git commit message buffer to trigger the `BufUnload` event
 and unblock the shell.
