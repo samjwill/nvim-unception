@@ -20,9 +20,13 @@ function get_absolute_filepath(relative_path)
             end
             dir_path = vim.loop.fs_realpath(dir_path)
 
-            local filename = string.sub(relative_path, pos_of_last_file_separator + 1, string.len(relative_path))
-
-            absolute_path = dir_path.."/"..filename
+            if (dir_path == nil) then
+                -- Don't try to resolve it. Just leave it be. It could be a path like "term://".
+                absolute_path = relative_path
+            else
+                local filename = string.sub(relative_path, pos_of_last_file_separator + 1, string.len(relative_path))
+                absolute_path = dir_path.."/"..filename
+            end
         end
     end
 
