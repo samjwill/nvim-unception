@@ -26,6 +26,11 @@ Here's an example workflow with this flag set:
 
 https://user-images.githubusercontent.com/25990267/199399213-a0b72114-99b4-4b4b-9a14-8d7a7fc0bb3e.mp4
 
+Note that without Neovim's `'nohidden'` option set, the buffer will not
+be unloaded upon running `:wq`. Instead `:bdelete` will need to be
+called on the git commit message buffer to trigger the `BufUnload` event
+and unblock the shell.
+
 Alternatively, if you would like to be able to edit using Neovim directly
 inside of a nested session, you can disable unception altogether by setting
 your git `core.editor` to pass the `g:unception_disable=1` argument (like
