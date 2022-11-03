@@ -83,5 +83,5 @@ described above, even if launched from within a terminal buffer.
 ## Settings
 
 For usage details and options (such as opening the file buffers in new tabs
-rather than the current window), see `doc/nvim-unception.txt`, or, after
+rather than the current window), see [doc/nvim-unception.txt](https://github.com/samjwill/nvim-unception/blob/main/doc/nvim-unception.txt), or, after
 installation, run `:help nvim-unception`.
