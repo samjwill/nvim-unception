@@ -2,7 +2,7 @@ nvim-unception.txt
                                                             *nvim-unception*
 INTRODUCTION                                                *unception*
 
-        A plugin that leverages Neovim's native |clientserver| feature to
+        A plugin that leverages Neovim's built-in |RPC| functionality to
     simplify opening files from within Neovim's |terminal| emulator without
     unintentionally nesting sessions.
 
