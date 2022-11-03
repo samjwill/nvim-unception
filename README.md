@@ -1,8 +1,8 @@
 # nvim-unception
 
-A plugin that leverages Neovim's ***native*** `client-server` feature to
-simplify opening files from within Neovim's terminal emulator without
-unintentionally nesting sessions.
+A plugin that leverages Neovim's built-in `RPC` functionality to simplify
+opening files from within Neovim's terminal emulator without unintentionally
+nesting sessions.
 
 Terminal buffers will no longer enter a state of "inception" in which an
 instance of Neovim is open within an instance of Neovim. Instead, the desired
