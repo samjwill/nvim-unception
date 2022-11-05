@@ -78,14 +78,12 @@ SETTINGS                                               *nvim-unception-settings*
     file is received from the nested Neovim session that was launched in a
     terminal buffer.
 
-        For example, to print "Hello world!" every time a request is received,
-    one could set the following in their init.vim: >
+        For example, to print "hello world!" every time a request is received,
+    one could set the following in their |init.lua| file: >
 
-    lua << EOF
     vim.g.unception_request_received_callback = function()
         print("hello world!")
     end
-    EOF
 <
 
 
