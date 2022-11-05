@@ -72,4 +72,21 @@ SETTINGS                                               *nvim-unception-settings*
         When true, disables nvim-unception.
 
 
+*g:unception_request_received_callback*          Lua callback (default=no-op)
+
+        A Lua callback that is executed directly after a request to edit a
+    file is received from the nested Neovim session that was launched in a
+    terminal buffer.
+
+        For example, to print "Hello world!" every time a request is received,
+    one could set the following in their init.vim: >
+
+    lua << EOF
+    vim.g.unception_request_received_callback = function()
+        print("hello world!")
+    end
+    EOF
+<
+
+
 vim:ft=help:norl:
