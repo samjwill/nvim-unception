@@ -72,4 +72,26 @@ SETTINGS                                               *nvim-unception-settings*
         When true, disables nvim-unception.
 
 
+EVENTS                                                 *nvim-unception-events*
+
+*UnceptionEditRequestReceived*
+
+        A |User| event that is triggered when a request to edit a
+    file/directory is received from the nested Neovim session that was
+    launched in a terminal buffer.
+
+        Below is an example of Lua code that creates an |autocmd| that would
+    print "Hello world!" whenever this event is triggered:
+>
+    vim.api.nvim_create_autocmd(
+        "User",
+        {
+            pattern = "UnceptionEditRequestReceived",
+            callback = function()
+                print("Hello world!")
+            end
+        }
+    )
+<
+
 vim:ft=help:norl:
