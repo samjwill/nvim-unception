@@ -18,10 +18,6 @@ if (vim.g.unception_block_while_host_edits == nil) then
     vim.g.unception_block_while_host_edits = false
 end
 
-if (vim.g.unception_request_received_callback == nil) then
-    vim.g.unception_request_received_callback = function() end
-end
-
 -- Can't allow buffer holding terminal to be deleted. Also don't want the
 -- terminal buffer to get hidden, so open the buffer being edited in a new tab.
 if (vim.g.unception_block_while_host_edits) then
