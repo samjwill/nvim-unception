@@ -82,7 +82,7 @@ EVENTS                                                 *nvim-unception-events*
 
         Below is an example of Lua code that creates an |autocmd| that would
     echo "Hello world!" whenever this event is triggered:
-    >
+>
     vim.api.nvim_create_autocmd(
         "User",
         {
