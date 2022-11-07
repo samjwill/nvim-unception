@@ -25,6 +25,9 @@ SETTINGS                                               *nvim-unception-settings*
 
 *g:unception_delete_replaced_buffer*                     bool (default=false)
 
+        Must be set during initialization. Cannot be set after Neovim is
+    already running.
+
         When true, causes the Neovim session running the local server to
     delete the buffer under the cursor when a command is received from a
     Neovim client session (i.e. a session launched from within a terminal
@@ -42,11 +45,17 @@ SETTINGS                                               *nvim-unception-settings*
 
 *g:unception_open_buffer_in_new_tab*                     bool (default=false)
 
+        Must be set during initialization. Cannot be set after Neovim is
+    already running.
+
         When true, causes the server Neovim session to open files/directories
     in a new tab rather than placing them in the window that has focus.
 
 
 *g:unception_enable_flavor_text*                         bool (default=true)
+
+        Must be set during initialization. Cannot be set after Neovim is
+    already running.
 
         When true, causes unception to echo a message whenever it is
     triggered.
@@ -54,10 +63,13 @@ SETTINGS                                               *nvim-unception-settings*
 
 *g:unception_block_while_host_edits*                     bool (default=false)
 
+        Must be set during initialization. Cannot be set after Neovim is
+    already running.
+
         When true, if unception detects that Neovim has been launched in a
     nested terminal session, the file passed as an argument will be opened in
     the host session, and the terminal will be blocked until the file has been
-    |BufUnload|ed. Note that only a single file argument may be passed when
+    |BufUnload|ed. Note that only a single, filepath argument may be passed when
     this is enabled.
 
         This can be useful for command-line tools that are expected to launch
@@ -68,6 +80,9 @@ SETTINGS                                               *nvim-unception-settings*
 
 
 *g:unception_disable*                                    bool (default=false)
+
+        Must be set during initialization. Cannot be set after Neovim is
+    already running.
 
         When true, disables nvim-unception.
 
