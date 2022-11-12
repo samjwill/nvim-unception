@@ -27,9 +27,6 @@ function _G.unception_edit_files(file_args, num_files_in_list, open_in_new_tab, 
     -- log buffer number so that we can delete it later. We don't want a ton of
     -- running terminal buffers in the background when we switch to a new nvim buffer.
     local tmp_buf_number = vim.fn.bufnr()
-    if (open_in_new_tab) then
-        vim.cmd("tabnew")
-    end
 
     -- If there aren't arguments, we just want a new, empty buffer, but if
     -- there are, append them to the host Neovim session's arguments list.
@@ -37,7 +34,12 @@ function _G.unception_edit_files(file_args, num_files_in_list, open_in_new_tab, 
         -- Had some issues when using argedit. Explicitly calling these
         -- separately appears to work though.
         vim.cmd("0argadd "..file_args)
-        vim.cmd("argument 1")
+
+        if (open_in_new_tab) then
+            vim.cmd("tab argument 1")
+        else
+            vim.cmd("argument 1")
+        end
 
         -- This is kind of stupid, but basically, I've noticed that some
         -- plugins, like Treesitter, don't appear to properly trigger when
@@ -47,7 +49,11 @@ function _G.unception_edit_files(file_args, num_files_in_list, open_in_new_tab, 
         -- Sometimes it works.
         vim.cmd("edit")
     else
-        vim.cmd("enew")
+        if (open_in_new_tab) then
+            vim.cmd("tabnew")
+        else
+            vim.cmd("enew")
+        end
     end
 
     -- We don't want to delete the replaced buffer if there wasn't a replaced buffer
