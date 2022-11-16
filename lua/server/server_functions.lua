@@ -43,7 +43,7 @@ function _G.unception_edit_files(file_args, num_files_in_list, open_in_new_tab, 
 
         -- This is kind of stupid, but basically, I've noticed that some
         -- plugins, like Treesitter, don't appear to properly trigger when
-        -- receiving a server command with argedit. I just re-edit the same
+        -- receiving a command that executes argedit. I just re-edit the same
         -- file here to give stuff like Treesitter's syntax highlighting
         -- another chance to trigger, since doing so doesn't hurt anything.
         -- Sometimes it works.
