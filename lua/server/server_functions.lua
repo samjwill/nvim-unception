@@ -3,12 +3,17 @@ require("common.common_functions")
 local response_sock
 local unception_bufunload_autocmd_id
 local filepath_to_check
+local id_of_replaced_buffer = nil
 
 function unception_handle_unloaded_buffer(unloaded_buffer_filepath)
     unloaded_buffer_filepath = get_absolute_filepath(unloaded_buffer_filepath)
     unloaded_buffer_filepath = escape_special_chars(unloaded_buffer_filepath)
 
     if (unloaded_buffer_filepath == filepath_to_check) then
+        local win_id = vim.fn.win_getid()
+        vim.cmd("split")
+        vim.cmd(win_id .. "-" .. win_id .. "windo buffer " id_of_replaced_buffer)
+
         vim.api.nvim_del_autocmd(unception_bufunload_autocmd_id)
         vim.fn.rpcnotify(response_sock, "nvim_exec_lua", "vim.cmd('quit')", {})
         vim.fn.chanclose(response_sock)
@@ -38,6 +43,7 @@ function _G.unception_edit_files(file_args, num_files_in_list, open_in_new_tab, 
         if (open_in_new_tab) then
             vim.cmd("tab argument 1")
         else
+            id_of_replaced_buffer = vim.fn.bufnr()
             vim.cmd("argument 1")
         end
 
@@ -52,6 +58,7 @@ function _G.unception_edit_files(file_args, num_files_in_list, open_in_new_tab, 
         if (open_in_new_tab) then
             vim.cmd("tabnew")
         else
+            id_of_replaced_buffer = vim.fn.bufnr()
             vim.cmd("enew")
         end
     end
