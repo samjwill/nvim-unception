@@ -12,7 +12,7 @@ function unception_handle_unloaded_buffer(unloaded_buffer_filepath)
     if (unloaded_buffer_filepath == filepath_to_check) then
         local win_id = vim.fn.win_getid()
         vim.cmd("split")
-        vim.cmd(win_id .. "-" .. win_id .. "windo buffer " id_of_replaced_buffer)
+        vim.cmd(win_id .. "-" .. win_id .. "windo buffer " .. id_of_replaced_buffer)
 
         vim.api.nvim_del_autocmd(unception_bufunload_autocmd_id)
         vim.fn.rpcnotify(response_sock, "nvim_exec_lua", "vim.cmd('quit')", {})
@@ -23,7 +23,7 @@ end
 function _G.unception_notify_when_done_editing(pipe_to_respond_on, filepath)
     filepath_to_check = filepath
     response_sock = vim.fn.sockconnect("pipe", pipe_to_respond_on, {rpc = true})
-    unception_bufunload_autocmd_id = vim.api.nvim_create_autocmd("BufUnload",{ command = "lua unception_handle_unloaded_buffer(vim.fn.expand('<afile>:p'))"})
+    unception_bufunload_autocmd_id = vim.api.nvim_create_autocmd("QuitPre",{ command = "lua unception_handle_unloaded_buffer(vim.fn.expand('<afile>:p'))"})
 end
 
 function _G.unception_edit_files(file_args, num_files_in_list, open_in_new_tab, delete_replaced_buffer, enable_flavor_text)
