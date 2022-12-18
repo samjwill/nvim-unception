@@ -16,20 +16,16 @@ https://user-images.githubusercontent.com/25990267/170632310-8bbee2fa-672b-4385-
 There are a few options for using Neovim as your editor for git from within
 Neovim itself.
 
-The first option is to make git defer editing to the host session, and block until the host unloads the
-buffer being edited. This can be done by setting your git `core.editor` to pass
-the `g:unception_block_while_host_edits=1` argument (like
+The first option is to make git defer editing to the host session, and block
+until the host quits the buffer being edited. This can be done by setting your
+git `core.editor` to pass the `g:unception_block_while_host_edits=1` argument
+(like
 [this](https://github.com/samjwill/dotfiles/blob/ba56af2ff49cd23ac19fcffe7840a78c58a89c9b/.gitconfig#L5)).
 Note that the terminal will be blocked until the commit buffer is unloaded.
 
 Here's an example workflow with this flag set:
 
 https://user-images.githubusercontent.com/25990267/199399213-a0b72114-99b4-4b4b-9a14-8d7a7fc0bb3e.mp4
-
-Note that if Neovim's `'hidden'` option is set, the buffer will not
-be unloaded upon running `:wq`. Instead `:bdelete` will need to be
-called on the git commit message buffer to trigger the `BufUnload` event
-and unblock the shell.
 
 Alternatively, if you would like to be able to edit using Neovim directly
 inside of a nested session, you can disable unception altogether by setting
