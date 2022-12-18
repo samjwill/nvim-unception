@@ -25,7 +25,7 @@ Note that the terminal will be blocked until the commit buffer is unloaded.
 
 Here's an example workflow with this flag set:
 
-https://user-images.githubusercontent.com/25990267/199399213-a0b72114-99b4-4b4b-9a14-8d7a7fc0bb3e.mp4
+https://user-images.githubusercontent.com/25990267/208282262-594b5693-8166-414b-9695-63fc02d3c25f.mp4
 
 Alternatively, if you would like to be able to edit using Neovim directly
 inside of a nested session, you can disable unception altogether by setting
