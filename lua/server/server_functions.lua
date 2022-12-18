@@ -15,7 +15,7 @@ function unception_handle_unloaded_buffer(unloaded_buffer_filepath)
             local winnr = vim.fn.winnr()
             vim.cmd("split") -- Open a new window and switch focus to it
             vim.cmd("buffer " .. id_of_replaced_buffer) -- Set the buffer for that window to the buffer that was replaced.
-            vim.cmd("wincmd x") -- Navigate to previous (initial) window.
+            vim.cmd("wincmd x") -- Navigate to previous (initial) window, and proceed with quitting.
             id_of_replaced_buffer = nil
         end
 
