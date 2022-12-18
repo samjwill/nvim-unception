@@ -21,7 +21,7 @@ until the host quits the buffer being edited. This can be done by setting your
 git `core.editor` to pass the `g:unception_block_while_host_edits=1` argument
 (like
 [this](https://github.com/samjwill/dotfiles/blob/ba56af2ff49cd23ac19fcffe7840a78c58a89c9b/.gitconfig#L5)).
-Note that the terminal will be blocked until the built-in `QuitPre` event is triggered for the commit buffer.
+Note that the terminal will be blocked and its buffer will be hidden until Neovim's `QuitPre` event is triggered for the commit buffer, after which, the terminal buffer will be restored to its original location.
 
 Here's an example workflow with this flag set:
 
