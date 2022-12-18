@@ -10,10 +10,14 @@ function unception_handle_unloaded_buffer(unloaded_buffer_filepath)
     unloaded_buffer_filepath = escape_special_chars(unloaded_buffer_filepath)
 
     if (unloaded_buffer_filepath == filepath_to_check) then
-        local winnr = vim.fn.winnr()
-        vim.cmd("split")
-        vim.cmd("buffer " .. id_of_replaced_buffer)
-        vim.cmd("wincmd x") -- Navigate to previous window.
+        -- If there was a replaced buffer, we should restore it to the same window.
+        if (id_of_replaced_buffer ~= nil) then
+            local winnr = vim.fn.winnr()
+            vim.cmd("split") -- Open a new window and switch focus to it
+            vim.cmd("buffer " .. id_of_replaced_buffer) -- Set the buffer for that window to the buffer that was replaced.
+            vim.cmd("wincmd x") -- Navigate to previous (initial) window.
+            id_of_replaced_buffer = nil
+        end
 
         vim.api.nvim_del_autocmd(unception_bufunload_autocmd_id)
         vim.fn.rpcnotify(response_sock, "nvim_exec_lua", "vim.cmd('quit')", {})
