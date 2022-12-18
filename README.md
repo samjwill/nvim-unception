@@ -21,7 +21,7 @@ until the host quits the buffer being edited. This can be done by setting your
 git `core.editor` to pass the `g:unception_block_while_host_edits=1` argument
 (like
 [this](https://github.com/samjwill/dotfiles/blob/ba56af2ff49cd23ac19fcffe7840a78c58a89c9b/.gitconfig#L5)).
-Note that the terminal will be blocked until the commit buffer is unloaded.
+Note that the terminal will be blocked until the built-in `QuitPre` event is triggered for the commit buffer.
 
 Here's an example workflow with this flag set:
 
