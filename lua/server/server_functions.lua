@@ -39,7 +39,7 @@ function unception_handle_quitpre(quitpre_buffer_filepath)
     quitpre_buffer_filepath = escape_special_chars(quitpre_buffer_filepath)
 
     if (quitpre_buffer_filepath == filepath_to_check) then
-        -- If there was a replaced buffer, we should restore it to the same window.
+        -- If this buffer replaced the blocked terminal buffer, we should restore it to the same window.
         if (blocked_terminal_buffer_id ~= nil) then
             vim.cmd("split") -- Open a new window and switch focus to it.
             vim.cmd("buffer " .. blocked_terminal_buffer_id) -- Set the buffer for that window to the buffer that was replaced.
