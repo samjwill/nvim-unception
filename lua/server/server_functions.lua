@@ -11,7 +11,7 @@ function unblock_client_and_reset_state()
     vim.api.nvim_del_autocmd(unception_quitpre_autocmd_id)
     vim.api.nvim_del_autocmd(unception_bufunload_autocmd_id)
 
-    -- Unblock client by killing editor session.
+    -- Unblock client by killing its editor session.
     vim.fn.rpcnotify(response_sock, "nvim_exec_lua", "vim.cmd('quit')", {})
     vim.fn.chanclose(response_sock)
 
