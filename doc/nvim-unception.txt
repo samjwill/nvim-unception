@@ -68,9 +68,15 @@ SETTINGS                                               *nvim-unception-settings*
 
         When true, if unception detects that Neovim has been launched in a
     nested terminal session, the file passed as an argument will be opened in
-    the host session, and the terminal will be blocked until the file has been
-    |BufUnload|ed. Note that only a single, filepath argument may be passed when
-    this is enabled.
+    the host session, and the terminal will be blocked until |QuitPre| is
+    triggered on the buffer. Note that only a single, filepath argument may be
+    passed when this is enabled.
+
+        If |g:unception_open_buffer_in_new_tab| is true, the new buffer will
+    be opened in a new tab rather than in the current window. If false, the
+    new buffer will be opened in the current window, making the buffer under
+    the cursor hidden, and restoring its visibility to the current window when
+    |QuitPre| is triggered.
 
         This can be useful for command-line tools that are expected to launch
     an editor, such as git. By setting the core editor to:
