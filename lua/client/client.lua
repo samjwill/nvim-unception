@@ -5,7 +5,7 @@ local args = vim.call("argv")
 
 local arg_str = ""
 for index, iter in pairs(args) do
-    local absolute_filepath = get_absolute_filepath(iter)
+    local absolute_filepath = unception_get_absolute_filepath(iter)
 
     if (string.len(arg_str) == 0) then
         arg_str = absolute_filepath
@@ -14,7 +14,7 @@ for index, iter in pairs(args) do
     end
 end
 
-arg_str = escape_special_chars(arg_str)
+arg_str = unception_escape_special_chars(arg_str)
 
 -- Send messages to host on existing pipe.
 local sock = vim.fn.sockconnect("pipe", existing_server_pipe_path, {rpc = true})
