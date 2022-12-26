@@ -1,4 +1,4 @@
-function get_absolute_filepath(relative_path)
+function _G.unception_get_absolute_filepath(relative_path)
     local absolute_path = vim.loop.fs_realpath(relative_path)
 
     -- File doesn't exist (yet)
@@ -33,7 +33,7 @@ function get_absolute_filepath(relative_path)
     return absolute_path
 end
 
-function escape_special_chars(str)
+function _G.unception_escape_special_chars(str)
     if (str ~= nil) then
         -- Need to escape backslashes and quotes in case they are part of the
         -- filepaths. Lua needs \\ to define a \, so to escape special chars,

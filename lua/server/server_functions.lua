@@ -7,7 +7,7 @@ local filepath_to_check = nil
 local blocked_terminal_buffer_id = nil
 local last_replaced_buffer_id = nil
 
-function unblock_client_and_reset_state()
+local function unblock_client_and_reset_state()
     -- Remove the autocmds we made.
     vim.api.nvim_del_autocmd(unception_quitpre_autocmd_id)
     vim.api.nvim_del_autocmd(unception_bufunload_autocmd_id)
@@ -25,18 +25,18 @@ function unblock_client_and_reset_state()
     last_replaced_buffer_id = nil
 end
 
-function unception_handle_bufunload(unloaded_buffer_filepath)
-    unloaded_buffer_filepath = get_absolute_filepath(unloaded_buffer_filepath)
-    unloaded_buffer_filepath = escape_special_chars(unloaded_buffer_filepath)
+function _G.unception_handle_bufunload(unloaded_buffer_filepath)
+    unloaded_buffer_filepath = unception_get_absolute_filepath(unloaded_buffer_filepath)
+    unloaded_buffer_filepath = unception_escape_special_chars(unloaded_buffer_filepath)
 
     if (unloaded_buffer_filepath == filepath_to_check) then
         unblock_client_and_reset_state()
     end
 end
 
-function unception_handle_quitpre(quitpre_buffer_filepath)
-    quitpre_buffer_filepath = get_absolute_filepath(quitpre_buffer_filepath)
-    quitpre_buffer_filepath = escape_special_chars(quitpre_buffer_filepath)
+function _G.unception_handle_quitpre(quitpre_buffer_filepath)
+    quitpre_buffer_filepath = unception_get_absolute_filepath(quitpre_buffer_filepath)
+    quitpre_buffer_filepath = unception_escape_special_chars(quitpre_buffer_filepath)
 
     if (quitpre_buffer_filepath == filepath_to_check) then
         -- If this buffer replaced the blocked terminal buffer, we should restore it to the same window.
