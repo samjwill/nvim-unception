@@ -13,15 +13,15 @@ INTRODUCTION                                                *unception*
 
 SETTINGS                                               *nvim-unception-settings*
 
-        IMPORTANT: These settings must be accessible to the Neovim instance
-    that is launched within a terminal buffer. What this means is that you
-    cannot set them in the Neovim server session alone after it is already
-    running. They must be set sometime during initialization, before the
-    nested session loads the plugin.
+        IMPORTANT: These settings must be read into the Neovim instance that
+    is launched within a terminal buffer. What this means is that you cannot
+    set them in the Neovim server (host) session alone after it is already
+    running. These values must be set sometime during initialization, before the
+    nested session loads the plugin, and likely cannot be lazy loaded.
 
         To put it simply, these settings can be placed in your initialization
     files (e.g. |init.vim|), but will not work if directly calling |:let| in
-    the server session after the server is already running.
+    the server session after you've already launched Neovim.
 
 *g:unception_delete_replaced_buffer*                     bool (default=false)
 
