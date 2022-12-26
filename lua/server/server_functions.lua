@@ -7,7 +7,7 @@ local filepath_to_check = nil
 local blocked_terminal_buffer_id = nil
 local last_replaced_buffer_id = nil
 
-function unblock_client_and_reset_state()
+local function unblock_client_and_reset_state()
     -- Remove the autocmds we made.
     vim.api.nvim_del_autocmd(unception_quitpre_autocmd_id)
     vim.api.nvim_del_autocmd(unception_bufunload_autocmd_id)
