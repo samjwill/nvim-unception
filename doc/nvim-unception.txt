@@ -13,11 +13,13 @@ INTRODUCTION                                                *unception*
 
 SETTINGS                                               *nvim-unception-settings*
 
-        IMPORTANT: These settings must be read into the Neovim instance that
-    is launched within a terminal buffer. What this means is that you cannot
-    set them in the Neovim server (host) session alone after it is already
-    running. These values must be set sometime during initialization, before the
-    nested session loads the plugin, and likely cannot be lazy loaded.
+        IMPORTANT: The nested Neovim session (i.e. the Neovim session that is
+    launched from within a terminal buffer) is the session that dictates this
+    plugin's behavior. These settings must be read into the nested session.
+    What this means is that you cannot set these options in the Neovim
+    server/host session alone after Neovim is already running. These values
+    must be set sometime during initialization, before the nested session
+    loads the plugin, and likely cannot be lazy loaded.
 
         To put it simply, these settings can be placed in your initialization
     files (e.g. |init.vim|), but will not work if directly calling |:let| in
@@ -26,7 +28,7 @@ SETTINGS                                               *nvim-unception-settings*
 *g:unception_delete_replaced_buffer*                     bool (default=false)
 
         Must be set during initialization. Cannot be set after Neovim is
-    already running.
+    already running. See |nvim-unception-settings| for more info.
 
         When true, causes the Neovim session running the local server to
     delete the buffer under the cursor when a command is received from a
@@ -46,7 +48,7 @@ SETTINGS                                               *nvim-unception-settings*
 *g:unception_open_buffer_in_new_tab*                     bool (default=false)
 
         Must be set during initialization. Cannot be set after Neovim is
-    already running.
+    already running. See |nvim-unception-settings| for more info.
 
         When true, causes the server Neovim session to open files/directories
     in a new tab rather than placing them in the window that has focus.
@@ -55,7 +57,7 @@ SETTINGS                                               *nvim-unception-settings*
 *g:unception_enable_flavor_text*                         bool (default=true)
 
         Must be set during initialization. Cannot be set after Neovim is
-    already running.
+    already running. See |nvim-unception-settings| for more info.
 
         When true, causes unception to echo a message whenever it is
     triggered.
@@ -64,13 +66,13 @@ SETTINGS                                               *nvim-unception-settings*
 *g:unception_block_while_host_edits*                     bool (default=false)
 
         Must be set during initialization. Cannot be set after Neovim is
-    already running.
+    already running. See |nvim-unception-settings| for more info.
 
-        When true, if unception detects that Neovim has been launched in a
-    nested terminal session, the file passed as an argument will be opened in
-    the host session, and the terminal will be blocked until |QuitPre| is
-    triggered on the buffer. Note that only a single, filepath argument may be
-    passed when this is enabled.
+        When true, if unception detects that the session of Neovim has been
+    launched from within a terminal buffer, the file passed as an argument
+    will be opened in the host session, and the terminal will be blocked until
+    |QuitPre| is triggered on the buffer. Note that only a single, filepath
+    argument may be passed when this is enabled.
 
         If |g:unception_open_buffer_in_new_tab| is true, the new buffer will
     be opened in a new tab rather than in the current window. If false, the
@@ -87,9 +89,6 @@ SETTINGS                                               *nvim-unception-settings*
 
 *g:unception_disable*                                    bool (default=false)
 
-        Must be set during initialization. Cannot be set after Neovim is
-    already running.
-
         When true, disables nvim-unception.
 
 
@@ -98,8 +97,8 @@ EVENTS                                                 *nvim-unception-events*
 *UnceptionEditRequestReceived*
 
         A |User| event that is triggered when a request to edit a
-    file/directory is received from the nested Neovim session that was
-    launched in a terminal buffer.
+    file/directory is received from a nested Neovim session, launched from a
+    terminal buffer.
 
         Below is an example of Lua code that creates an |autocmd| that would
     print "Hello world!" whenever this event is triggered:
