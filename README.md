@@ -33,23 +33,42 @@ your git `core.editor` to pass the `g:unception_disable=1` argument (like
 
 Lastly, setting your `core.editor` to another file editor, such as GNU nano would also work.
 
-## Can this work with terminal-toggling plugins?
-
-Yep! See the [wiki](https://github.com/samjwill/nvim-unception/wiki) for setup info.
-
 ## Requirements
 
 Neovim 0.7 or later.
 
 ## Installation
 
+#### Using [lazy.nvim](https://github.com/folke/lazy.nvim) (as a submodule):
+    return {
+        "samjwill/nvim-unception",
+        init = function()
+            -- Optional settings go here!
+        end
+    }
+#### Using [packer.nvim](https://github.com/wbthomason/packer.nvim):
+
+    use {
+        "samjwill/nvim-unception",
+        setup = function()
+            -- Optional settings go here!
+        end
+    }
+
 #### Using [vim-plug](https://github.com/junegunn/vim-plug):
 
     Plug 'samjwill/nvim-unception'
 
-#### Using [packer.nvim](https://github.com/wbthomason/packer.nvim):
+## Settings
 
-    use "samjwill/nvim-unception"
+For usage details and additional options (such as opening the file buffers in
+new tabs rather than the current window), see
+[doc/nvim-unception.txt](https://github.com/samjwill/nvim-unception/blob/main/doc/nvim-unception.txt),
+or, after installation, run `:help nvim-unception`.
+
+## Can this work with terminal-toggling plugins?
+
+Yep! See the [wiki](https://github.com/samjwill/nvim-unception/wiki) for setup info.
 
 ## How does it work?
 
@@ -79,9 +98,3 @@ used. Note that any arguments that might not work when launched from within a
 Neovim terminal buffer should work just fine when launching Neovim normally.
 They should also behave as as they do by default if you pass the disable flag
 described above, even if launched from within a terminal buffer.
-
-## Settings
-
-For usage details and options (such as opening the file buffers in new tabs
-rather than the current window), see [doc/nvim-unception.txt](https://github.com/samjwill/nvim-unception/blob/main/doc/nvim-unception.txt), or, after
-installation, run `:help nvim-unception`.
