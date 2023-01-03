@@ -81,6 +81,14 @@ function _G.unception_edit_files(file_args, num_files_in_list, open_in_new_tab, 
             last_replaced_buffer_id = vim.fn.bufnr()
             vim.cmd("argument 1")
         end
+
+        -- This is kind of stupid, but basically, it appears that Neovim may
+        -- not always properly handle opening buffers using the method
+        -- above(?), notably if it's opening directly to a directory using
+        -- netrw. Calling "edit" here appears to give it another chance to
+        -- properly handle opening the buffer; otherwise it can occasionally
+        -- segfault.
+        vim.cmd("edit")
     else
         if (open_in_new_tab) then
             last_replaced_buffer_id = nil
