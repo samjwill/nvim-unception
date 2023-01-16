@@ -29,7 +29,7 @@ vim.fn.rpcnotify(sock, "nvim_exec_lua", edit_files_call, {})
 if (not vim.g.unception_block_while_host_edits) then
     -- Our work here is done. Kill the nvim session that would have started otherwise.
     vim.fn.chanclose(sock)
-    vim.cmd("quit")
+    vim.cmd("qall!")
     return
 end
 
@@ -40,7 +40,7 @@ if (#args ~= 1) then
     local err = "Must have exactly 1 argument when g:unception_block_while_host_edits is enabled!"
     vim.fn.rpcrequest(sock, "nvim_exec_lua", "vim.api.nvim_err_writeln('"..err.."')", {})
     vim.fn.chanclose(sock)
-    vim.cmd("quit!")
+    vim.cmd("qall!")
     return
 end
 
