@@ -45,16 +45,8 @@ if (not vim.g.unception_block_while_host_edits) then
     return
 end
 
--- Start up a pipe so that client can listen for a response from the host session.
+-- Start up a pipe so that the client can listen for a response from the host session.
 local nested_pipe_path = vim.call("serverstart")
-
-if (#args ~= 1) then
-    local err = "Must have exactly 1 argument when g:unception_block_while_host_edits is enabled!"
-    vim.fn.rpcrequest(sock, "nvim_exec_lua", "vim.api.nvim_err_writeln('"..err.."')", {})
-    vim.fn.chanclose(sock)
-    vim.cmd("qall!")
-    return
-end
 
 -- Send the pipe path and edited filepath to the host so that it knows what file to look for and who to respond to.
 local notify_when_done_call = "unception_notify_when_done_editing("
