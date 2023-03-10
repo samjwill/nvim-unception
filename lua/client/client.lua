@@ -32,7 +32,8 @@ if (not vim.g.unception_block_while_host_edits) then
 
     if (not vim.g.unception_delete_replaced_buffer) then
         -- TODO: Try removing this conditional when Neovim core gets updated.
-        -- This should always call qall.
+        -- "qall!" should always be called here, regardless of whether
+        -- unception_delete_replaced_buffer is true.
         --
         -- See issue #60 in GitHub. Looks like there might be a bug in Neovim
         -- core that can ocassionally cause a segfault when deleting a terminal
