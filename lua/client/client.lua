@@ -29,7 +29,18 @@ vim.fn.rpcnotify(sock, "nvim_exec_lua", edit_files_call, {})
 if (not vim.g.unception_block_while_host_edits) then
     -- Our work here is done. Kill the nvim session that would have started otherwise.
     vim.fn.chanclose(sock)
-    vim.cmd("qall!")
+
+    if (not vim.g.unception_delete_replaced_buffer) then
+        -- TODO: Try removing this conditional when Neovim core gets updated.
+        -- This should always call qall.
+        --
+        -- See issue #60 in GitHub. Looks like there might be a bug in Neovim
+        -- core that can ocassionally cause a segfault when deleting a terminal
+        -- buffer? In any case, not exiting here appears to rectify the
+        -- behavior, but it is a band-aid.
+        vim.cmd("qall!")
+    end
+
     return
 end
 
