@@ -29,6 +29,17 @@ vim.fn.rpcnotify(sock, "nvim_exec_lua", edit_files_call, {})
 if (not vim.g.unception_block_while_host_edits) then
     -- Our work here is done. Kill the nvim session that would have started otherwise.
     vim.fn.chanclose(sock)
+
+    if (vim.g.unception_delete_replaced_buffer) then
+        -- See issue #60 in GitHub. Looks like there might be a bug in Neovim
+        -- core that can ocassionally cause a segfault when deleting a terminal
+        -- buffer? In any case, sleeping here appears to rectify the behavior,
+        -- but it is very much a band-aid.
+        --
+        -- TODO: Try removing this when Neovim core gets updated.
+        vim.cmd("sleep 1")
+    end
+
     vim.cmd("qall!")
     return
 end
