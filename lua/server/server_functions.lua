@@ -101,8 +101,8 @@ function _G.unception_edit_files(file_args, num_files_in_list, open_in_new_tab, 
 
     -- We don't want to delete the replaced buffer if there wasn't a replaced buffer.
     if (delete_replaced_buffer and last_replaced_buffer_id ~= nil) then
-        if (vim.fn.len(vim.fn.win_findbuf(tmp_buf_number)) == 0) then
-            pcall(vim.cmd, "bdelete! "..tmp_buf_number) -- Use pcall so it doesn't complain if it fails to delete the buffer.
+        if (vim.fn.len(vim.fn.win_findbuf(tmp_buf_number)) == 0 and string.sub(vim.api.nvim_buf_get_name(0), 1, 7) == "term://") then
+            vim.cmd("bdelete! "..tmp_buf_number)
         end
     end
 

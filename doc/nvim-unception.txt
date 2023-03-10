@@ -40,8 +40,8 @@ SETTINGS                                               *nvim-unception-settings*
         Note: The deleted buffer should always be the terminal buffer that was
     used to launch the new Neovim session, but there are no checks in place
     that mandate that this will always be the case. If the cursor was somehow
-    moved quickly enough to another buffer between the time the client sends
-    the command and the server receives it, this could technically cause
+    moved quickly enough to another terminal buffer between the time the client
+    sends the command and the server receives it, this could technically cause
     deletion of the wrong buffer.
 
 
