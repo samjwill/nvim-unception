@@ -43,8 +43,8 @@ Neovim 0.7 or later.
     return {
         "samjwill/nvim-unception",
         init = function()
-            -- Optional settings go here! e.g.)
-            -- vim.g.unception_open_buffer_in_new_tab = true
+            -- Optional settings go here!
+            -- e.g.) vim.g.unception_open_buffer_in_new_tab = true
         end
     }
 #### Using [packer.nvim](https://github.com/wbthomason/packer.nvim):
@@ -52,8 +52,8 @@ Neovim 0.7 or later.
     use {
         "samjwill/nvim-unception",
         setup = function()
-            -- Optional settings go here! e.g.)
-            -- vim.g.unception_open_buffer_in_new_tab = true
+            -- Optional settings go here!
+            -- e.g.) vim.g.unception_open_buffer_in_new_tab = true
         end
     }
 
