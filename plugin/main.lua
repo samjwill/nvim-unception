@@ -38,7 +38,8 @@ if (1 ~= vim.fn.has("nvim-0.7.0")) then
     vim.g.unception_disable = true
 end
 
-if (vim.g.unception_block_while_host_edits and #(vim.call("argv")) ~= 1) then
+-- It's invalid to try to block as a client if there is more than one argument.
+if (vim.g.unception_block_while_host_edits and (os.getenv("NVIM") ~= nil) and (#(vim.call("argv")) ~= 1)) then
     vim.api.nvim_err_writeln("Must have exactly 1 argument when g:unception_block_while_host_edits is enabled!")
     vim.g.unception_disable = true
 end
