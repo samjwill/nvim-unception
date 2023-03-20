@@ -17,7 +17,7 @@ end
 arg_str = unception_escape_special_chars(arg_str)
 
 -- Send messages to host on existing pipe.
-local sock = vim.fn.sockconnect("pipe", os.getenv("NVIM"), {rpc = true})
+local sock = vim.fn.sockconnect("pipe", os.getenv(unception_pipe_path_host_env_var), {rpc = true})
 local edit_files_call = "unception_edit_files("
                        .."\""..arg_str.."\", "
                        ..#args..", "
