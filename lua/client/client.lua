@@ -24,7 +24,7 @@ local edit_files_call = "unception_edit_files("
                        ..vim.inspect(vim.g.unception_open_buffer_in_new_tab)..", "
                        ..vim.inspect(vim.g.unception_delete_replaced_buffer)..", "
                        ..vim.inspect(vim.g.unception_enable_flavor_text)..")"
-vim.fn.rpcnotify(sock, "nvim_exec_lua", edit_files_call, {})
+vim.fn.rpcrequest(sock, "nvim_exec_lua", edit_files_call, {})
 
 if (not vim.g.unception_block_while_host_edits) then
     -- Our work here is done. Kill the nvim session that would have started otherwise.
