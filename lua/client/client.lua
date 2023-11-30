@@ -8,13 +8,11 @@ for index, iter in pairs(args) do
     local absolute_filepath = unception_get_absolute_filepath(iter)
 
     if (string.len(arg_str) == 0) then
-        arg_str = absolute_filepath
+        arg_str = unception_escape_special_chars(absolute_filepath)
     else
-        arg_str = arg_str.." "..absolute_filepath
+        arg_str = arg_str.." "..unception_escape_special_chars(absolute_filepath)
     end
 end
-
-arg_str = unception_escape_special_chars(arg_str)
 
 -- Send messages to host on existing pipe.
 local sock = vim.fn.sockconnect("pipe", os.getenv(unception_pipe_path_host_env_var), {rpc = true})
