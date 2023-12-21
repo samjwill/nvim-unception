@@ -122,8 +122,9 @@ EVENTS                                                 *nvim-unception-events*
 *UnceptionClientUnblocked*
 
         A |User| event that is triggered when a nested client session that
-    unception has been keeping open is closed. See
-    |g:unception_block_while_host_edits| for more info.
+    unception has been keeping open is closed. This event occurs directly
+    before the buffer is unloaded. See |g:unception_block_while_host_edits|
+    for more info.
 
 
 vim:ft=help:norl:
