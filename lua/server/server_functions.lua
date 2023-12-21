@@ -8,7 +8,7 @@ local blocked_terminal_buffer_id = nil
 local last_replaced_buffer_id = nil
 
 local function unblock_client_and_reset_state()
-    -- Remove the autocmds we made.
+    -- Remove the autocmds that we made.
     vim.api.nvim_del_autocmd(unception_quitpre_autocmd_id)
     vim.api.nvim_del_autocmd(unception_bufunload_autocmd_id)
 
@@ -23,6 +23,11 @@ local function unblock_client_and_reset_state()
     filepath_to_check = nil
     blocked_terminal_buffer_id = nil
     last_replaced_buffer_id = nil
+
+    -- Allow users to hook into this event if desired
+    -- TODO: May want to pass additional info with this event using
+    -- :h nvim_exec_autocmds()'s "data" parameter at some point.
+    vim.api.nvim_exec_autocmds("User", {pattern = "UnceptionClientUnblocked"})
 end
 
 function _G.unception_handle_bufunload(unloaded_buffer_filepath)
