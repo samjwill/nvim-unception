@@ -1,5 +1,8 @@
 require("common.common_functions")
 
+-- We don't want to overwrite :h shada
+vim.o.sdf = "NONE"
+
 -- We don't want to start. Send the args to the server instance instead.
 local args = vim.call("argv")
 
