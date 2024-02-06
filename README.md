@@ -37,7 +37,7 @@ Neovim 0.7 or later.
 
 ## Installation
 
-#### Using [lazy.nvim](https://github.com/folke/lazy.nvim) (as a submodule):
+#### Using [lazy.nvim](https://github.com/folke/lazy.nvim):
     return {
         "samjwill/nvim-unception",
         init = function()
