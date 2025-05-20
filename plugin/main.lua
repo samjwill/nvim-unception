@@ -9,6 +9,11 @@ if(vim.g.unception_open_buffer_in_new_tab == nil) then
     vim.g.unception_open_buffer_in_new_tab = false
 end
 
+-- This is the default opening method, that can be override by cmd line arguement split -o vsplit -O tab -p
+if(vim.g.unception_open_buffer_method_for_other == nil) then
+    vim.g.unception_open_buffer_method_for_other = "tabnew"
+end
+
 if (vim.g.unception_enable_flavor_text == nil) then
     vim.g.unception_enable_flavor_text = true
 end

@@ -7,7 +7,8 @@ local function detect_dash_parametes(str)
 end
 
 local dummy_parameters_list = {
-    ["-O"] = "vplit",
+    ["-o"] = "split",
+    ["-O"] = "vsplit",
     ["-p"] = "tab",
     ["--"] = "ignore"
 }
@@ -24,6 +25,8 @@ function extract_args(args, options)
     local files = {}
     local index = 1
     for i, arg in ipairs(args) do
+        -- this repeat block allow break to act as continue in the for loop
+        -- it may need some refactoring
         repeat
             if i == 1 then
                 break
@@ -50,7 +53,7 @@ function extract_args(args, options)
             if not files[index] then
                 files[index] = {}
             end
-            files[index].file = arg
+            files[index].path = arg
             index = index + 1
             break
         until false
