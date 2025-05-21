@@ -9,35 +9,50 @@ describe("unception nvim tests", function()
     describe("argument parser", function()
         local tests_list = {
             -- { -- NYI
-            --     intput = { "file", "\\+32" },
+            --     argv = { "file", "\\+32" },
             --     output = { { file = "open" }, { file = "+32" } }
             -- },
             {
-                intput = { "/usr/bin/nvim", "file", "+5" },
-                output = { { file = "file", line = "5" } }
+                argv = { "/usr/bin/nvim", "file", "+5", "-p" },
+                output = { { path = "file", line = "5" } },
+                option = { multi_file_open_method="tab" }
             },
             {
-                intput = { "/usr/bin/dontcare", "file", "file2", "+32" },
-                output = { { file = "file" }, { file = "file2", line = "32" } }
+                argv = { "/usr/bin/dontcare", "file", "file2", "+32" },
+                output = { { path = "file" }, { path = "file2", line = "32" } },
+                option = { }
             },
             {
-                intput = { "/usr/bin/dontcare", "--ignored-option-long", "-i", "file", "file2", "+32" },
-                output = { { file = "file" }, { file = "file2", line = "32" } }
+                argv = { "/usr/bin/dontcare", "--ignored-option-long", "-i", "file", "file2", "+32" },
+                output = { { path = "file" }, { path = "file2", line = "32" } },
+                option = { }
             },
             -- { -- NYI
-            --     intput = { "/usr/bin/dontcare", "\\- file starting with dash" },
+            --     argv = { "/usr/bin/dontcare", "\\- file starting with dash" },
             --     output = { { file = "- file starting with dash" } }
             -- },
             {
-                intput = { "/usr/bin/dontcare", "--", "- file starting with dash" },
-                output = { { file = "- file starting with dash" } }
-            }
+                argv = { "/usr/bin/dontcare", "--", "- file starting with dash" },
+                output = { { path = "- file starting with dash" } },
+                option = { }
+            },
+            {
+                argv = { "/usr/bin/nvim", "file", "+5", "-o" },
+                output = { { path = "file", line = "5" } },
+                option = { multi_file_open_method="split" }
+            },
+            {
+                argv = { "/usr/bin/nvim", "file", "+5", "-O" },
+                output = { { path = "file", line = "5" } },
+                option = { multi_file_open_method="vsplit" }
+            },
         }
         for i, test in ipairs(tests_list) do
             it("argument parser " .. tostring(i), function()
                 local options = {}
-                local ret = extract_args(test.intput, options)
+                local ret = unception_arg_parse(test.argv, options)
                 assert.are.same(test.output, ret)
+                assert.are.same(options, test.option)
             end)
         end
 

@@ -62,17 +62,16 @@ function _G.unception_notify_when_done_editing(pipe_to_respond_on, filepath)
         { command = "lua unception_handle_bufunload(vim.fn.expand('<afile>:p'))" })
 end
 
+local open_methods_table = {
+    split = "split",
+    vsplit = "vsplit",
+    tab = "tabnew",
+    bg = "argadd",
+}
+
 local function unception_detect_open_method(options)
-    local open_method = vim.g.unception_open_buffer_method_for_other
-    if options["split"] then
-        return "split"
-    end
-    if options["vsplit"] then
-        return "vsplit"
-    end
-    if options["tab"] then
-        return "tabnew"
-    end
+    local open_method = open_methods_table[options.multi_file_open_method]
+    -- todo check error
     return open_method
 end
 
@@ -84,7 +83,7 @@ local function unception_open_file(open_method, file)
     end
 end
 
-function _G.unception_edit_files(file_args, options, open_in_new_tab, delete_replaced_buffer, enable_flavor_text)
+function _G.unception_edit_files(file_args, options)
     vim.api.nvim_exec_autocmds("User", { pattern = "UnceptionEditRequestReceived" })
 
     -- log buffer number so that we can delete it later. We don't want a ton of
@@ -96,7 +95,7 @@ function _G.unception_edit_files(file_args, options, open_in_new_tab, delete_rep
     local open_method = unception_detect_open_method(options)
 
     if (#file_args > 0) then
-        if open_in_new_tab and open_method ~= "tabnew" then
+        if options.open_in_new_tab and open_method ~= "tabnew" then
             vim.cmd("tabnew")
             unception_open_file("edit", file_args[1])
             table.remove(file_args, 1)
@@ -105,7 +104,7 @@ function _G.unception_edit_files(file_args, options, open_in_new_tab, delete_rep
             unception_open_file(open_method, file)
         end
     else
-        if (open_in_new_tab) then
+        if (options.open_in_new_tab) then
             last_replaced_buffer_id = nil
             vim.cmd("tabnew")
         else
@@ -115,13 +114,13 @@ function _G.unception_edit_files(file_args, options, open_in_new_tab, delete_rep
     end
 
     -- We don't want to delete the replaced buffer if there wasn't a replaced buffer.
-    if (delete_replaced_buffer and last_replaced_buffer_id ~= nil) then
+    if (options.delete_replaced_buffer and last_replaced_buffer_id ~= nil) then
         if (vim.fn.len(vim.fn.win_findbuf(tmp_buf_number)) == 0 and string.sub(vim.api.nvim_buf_get_name(tmp_buf_number), 1, 7) == "term://") then
             vim.cmd("bdelete! " .. tmp_buf_number)
         end
     end
 
-    if (enable_flavor_text) then
+    if (options.enable_flavor_text) then
         print("Unception prevented inception!")
     end
 end
