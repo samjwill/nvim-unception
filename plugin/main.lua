@@ -15,8 +15,7 @@ if(vim.g.unception_multi_file_open_method == nil) then
     -- split
     -- vplit
     -- argadd
-    --vim.g.unception_multi_file_open_method = "argadd"
-    vim.g.unception_multi_file_open_method = "tab"
+    vim.g.unception_multi_file_open_method = "argadd"
 end
 
 if (vim.g.unception_enable_flavor_text == nil) then

@@ -66,12 +66,15 @@ local open_methods_table = {
     split = "split",
     vsplit = "vsplit",
     tab = "tabnew",
-    bg = "argadd",
+    argadd = "argadd",
 }
 
 local function unception_detect_open_method(options)
     local open_method = open_methods_table[options.multi_file_open_method]
-    -- todo check error
+    if open_method == nil then
+        print("unception can't find multi_file_open_method fall back to tab")
+        open_method = "tabnew"
+    end
     return open_method
 end
 
@@ -81,6 +84,44 @@ local function unception_open_file(open_method, file)
     else
         vim.cmd(("%s %s"):format(open_method, file.path))
     end
+end
+
+local function unception_open_file_other(file_args, options, open_method)
+    if options.open_in_new_tab and open_method ~= "tabnew" then
+        vim.cmd("tabnew")
+        unception_open_file("edit", file_args[1])
+        table.remove(file_args, 1)
+    end
+    for _, file in ipairs(file_args) do
+        unception_open_file(open_method, file)
+    end
+end
+
+local function unception_open_file_argadd(file_args, options)
+    local path = {}
+    for _, file in ipairs(file_args) do
+        table.insert(path, file.path)
+    end
+    path = table.concat(path, " ")
+    -- Had some issues when using argedit. Explicitly calling these
+    -- separately appears to work though.
+    vim.cmd("0argadd "..path)
+
+    if (options.open_in_new_tab) then
+        last_replaced_buffer_id = nil
+        vim.cmd("tab argument 1")
+    else
+        last_replaced_buffer_id = vim.fn.bufnr()
+        vim.cmd("argument 1")
+    end
+
+    -- This is kind of stupid, but basically, it appears that Neovim may
+    -- not always properly handle opening buffers using the method
+    -- above(?), notably if it's opening directly to a directory using
+    -- netrw. Calling "edit" here appears to give it another chance to
+    -- properly handle opening the buffer; otherwise it can occasionally
+    -- segfault.
+    vim.cmd("edit")
 end
 
 function _G.unception_edit_files(file_args, options)
@@ -95,13 +136,10 @@ function _G.unception_edit_files(file_args, options)
     local open_method = unception_detect_open_method(options)
 
     if (#file_args > 0) then
-        if options.open_in_new_tab and open_method ~= "tabnew" then
-            vim.cmd("tabnew")
-            unception_open_file("edit", file_args[1])
-            table.remove(file_args, 1)
-        end
-        for _, file in ipairs(file_args) do
-            unception_open_file(open_method, file)
+        if (open_method == "argadd") then
+            unception_open_file_argadd(file_args, options)
+        else
+            unception_open_file_other(file_args, options, open_method)
         end
     else
         if (options.open_in_new_tab) then
