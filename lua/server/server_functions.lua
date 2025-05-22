@@ -136,10 +136,12 @@ function _G.unception_edit_files(file_args, options)
     local open_method = unception_detect_open_method(options)
 
     if (#file_args > 0) then
-        if (open_method == "argadd") then
-            unception_open_file_argadd(file_args, options)
-        else
+        -- if argadd is selected but we have only one file
+        -- let's not use argadd so we can use line number specifier
+        if (open_method ~= "argadd" or #file_args == 1) then
             unception_open_file_other(file_args, options, open_method)
+        else
+            unception_open_file_argadd(file_args, options)
         end
     else
         if (options.open_in_new_tab) then
