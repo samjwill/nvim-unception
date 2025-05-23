@@ -8,43 +8,44 @@ require "common.arg_parse"
 describe("unception nvim tests", function()
     describe("argument parser", function()
         local tests_list = {
-            -- { -- NYI
-            --     argv = { "file", "\\+32" },
-            --     output = { { file = "open" }, { file = "+32" } }
-            -- },
             {
                 argv = { "/usr/bin/nvim", "file", "+5", "-p" },
-                output = { { path = "file", line = "5" } },
-                option = { multi_file_open_method="tab" }
+                output = { file = 5 },
+                option = { multi_file_open_method = "tab" }
             },
             {
                 argv = { "/usr/bin/dontcare", "file", "file2", "+32" },
-                output = { { path = "file" }, { path = "file2", line = "32" } },
-                option = { }
+                output = { file2 = 32 },
+                option = {}
             },
             {
-                argv = { "/usr/bin/dontcare", "--ignored-option-long", "-i", "file", "file2", "+32" },
-                output = { { path = "file" }, { path = "file2", line = "32" } },
-                option = { }
+                argv = { "/usr/bin/dontcare", "--ignored-option-long", "-i", "file2", "+32" },
+                output = { file2 = 32 },
+                option = {}
             },
             -- { -- NYI
             --     argv = { "/usr/bin/dontcare", "\\- file starting with dash" },
             --     output = { { file = "- file starting with dash" } }
             -- },
             {
-                argv = { "/usr/bin/dontcare", "--", "- file starting with dash" },
-                output = { { path = "- file starting with dash" } },
-                option = { }
+                argv = { "/usr/bin/dontcare", "+15", "--", "- file starting with dash" },
+                output = { ["- file starting with dash"] = 15 },
+                option = {}
             },
             {
                 argv = { "/usr/bin/nvim", "file", "+5", "-o" },
-                output = { { path = "file", line = "5" } },
-                option = { multi_file_open_method="split" }
+                output = { file = 5 },
+                option = { multi_file_open_method = "split" }
             },
             {
                 argv = { "/usr/bin/nvim", "file", "+5", "-O" },
-                output = { { path = "file", line = "5" } },
-                option = { multi_file_open_method="vsplit" }
+                output = { file = 5 },
+                option = { multi_file_open_method = "vsplit" }
+            },
+            {
+                argv = { "/usr/bin/nvim", "file", "file2", "+3", "-d" },
+                output = { file2 = 3 },
+                option = { multi_file_open_method = "diff" }
             },
         }
         for i, test in ipairs(tests_list) do
@@ -55,6 +56,5 @@ describe("unception nvim tests", function()
                 assert.are.same(options, test.option)
             end)
         end
-
     end)
 end)

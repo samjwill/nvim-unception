@@ -88,6 +88,7 @@ local open_methods_table = {
     vsplit = "vsplit",
     tab = "tabnew",
     argadd = "argadd",
+    diff = "diff",
 }
 
 local function unception_detect_open_method(options)
@@ -95,26 +96,33 @@ local function unception_detect_open_method(options)
     if open_method == nil then
         print("unception can't find multi_file_open_method fall back to tab")
         open_method = "tabnew"
+    elseif open_method == "diff" then
+        -- For now net's assume that the only way to view diff is via vsplit
+        open_method = "vsplit"
+        options.diff = true
     end
     return open_method
 end
 
-local function unception_open_file(open_method, file)
+local function unception_open_file(open_method, file, diff)
     if file.line then
         vim.cmd(("%s +%d %s"):format(open_method, file.line, file.path))
     else
         vim.cmd(("%s %s"):format(open_method, file.path))
+    end
+    if diff then
+        vim.cmd.diffthis()
     end
 end
 
 local function unception_open_file_other(file_args, options, open_method)
     if options.open_in_new_tab and open_method ~= "tabnew" then
         vim.cmd("tabnew")
-        unception_open_file("edit", file_args[1])
+        unception_open_file("edit", file_args[1], options.diff)
         table.remove(file_args, 1)
     end
     for _, file in ipairs(file_args) do
-        unception_open_file(open_method, file)
+        unception_open_file(open_method, file, options.diff)
     end
 end
 

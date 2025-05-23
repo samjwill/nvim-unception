@@ -10,6 +10,7 @@ local parameters_map = {
     ["-o"] = "split",
     ["-O"] = "vsplit",
     ["-p"] = "tab",
+    ["-d"] = "diff",
 }
 
 local function detect_parameters(str)
@@ -66,7 +67,7 @@ local function parse_line_number(arg, state)
         state.files[index] = {}
     end
 
-    state.files[index].line = line
+    state.files[index].line = tonumber(line)
 
     return true
 end
