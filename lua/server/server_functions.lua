@@ -3,9 +3,11 @@ require("common.common_functions")
 local response_sock = nil
 local unception_quitpre_autocmd_id = nil
 local unception_bufunload_autocmd_id = nil
+local unception_tabclosed_autocmd_id = nil
 local filepath_to_check = nil
 local blocked_terminal_buffer_id = nil
 local last_replaced_buffer_id = nil
+local last_tabpage = nil
 
 local function unblock_client_and_reset_state()
     -- Remove the autocmds we made.
@@ -23,6 +25,11 @@ local function unblock_client_and_reset_state()
     filepath_to_check = nil
     blocked_terminal_buffer_id = nil
     last_replaced_buffer_id = nil
+end
+
+local function unception_reset_last_tab()
+    vim.api.nvim_del_autocmd(unception_tabclosed_autocmd_id)
+    last_tabpage = nil
 end
 
 function _G.unception_handle_bufunload(unloaded_buffer_filepath)
@@ -50,6 +57,14 @@ function _G.unception_handle_quitpre(quitpre_buffer_filepath)
     end
 end
 
+function _G.unception_handle_tabclosed()
+    -- only switch tab when needed this will depend on the config
+    if last_tabpage ~= nil then
+        vim.api.nvim_set_current_tabpage(last_tabpage)
+    end
+    unception_reset_last_tab()
+end
+
 function _G.unception_notify_when_done_editing(pipe_to_respond_on, filepath)
     filepath_to_check = filepath
     blocked_terminal_buffer_id = last_replaced_buffer_id
@@ -60,6 +75,12 @@ function _G.unception_notify_when_done_editing(pipe_to_respond_on, filepath)
     -- Create an autocmd for BufUnload as a failsafe should QuitPre not get triggered on the target buffer (e.g. if a user runs :bdelete).
     unception_bufunload_autocmd_id = vim.api.nvim_create_autocmd("BufUnload",
         { command = "lua unception_handle_bufunload(vim.fn.expand('<afile>:p'))" })
+
+    -- When done editing in another tab we can't use QuitPre becuase if we switch
+    -- back to the previous tabpage within QuitPre it will prevent the tab to be closed
+    -- So here we use the TabClosed event
+    unception_tabclosed_autocmd_id = vim.api.nvim_create_autocmd("TabClosed",
+        { callback = unception_handle_tabclosed })
 end
 
 local open_methods_table = {
@@ -136,6 +157,9 @@ function _G.unception_edit_files(file_args, options)
     local open_method = unception_detect_open_method(options)
 
     if (#file_args > 0) then
+        if options.open_in_new_tab or open_method == "tabnew" then
+            last_tabpage = vim.api.nvim_get_current_tabpage()
+        end
         -- if argadd is selected but we have only one file
         -- let's not use argadd so we can use line number specifier
         if (open_method ~= "argadd" or #file_args == 1) then
