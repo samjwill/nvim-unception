@@ -1,19 +1,29 @@
+print("OMG 2")
 -------------------------------------------------------------------------------
 -- Initialize all expected variables
 -------------------------------------------------------------------------------
-if(vim.g.unception_delete_replaced_buffer == nil) then
+if(vim.g.unception_delete_replaced_buffer == nil or vim.g.unception_delete_replaced_buffer == 0) then
     vim.g.unception_delete_replaced_buffer = false
 end
 
-if(vim.g.unception_open_buffer_in_new_tab == nil) then
+if(vim.g.unception_open_buffer_in_new_tab == nil or vim.g.unception_open_buffer_in_new_tab == 0) then
     vim.g.unception_open_buffer_in_new_tab = false
 end
 
-if (vim.g.unception_enable_flavor_text == nil) then
+-- This is the default opening method, that can be override by cmd line arguement split -o vsplit -O tab -p
+if(vim.g.unception_multi_file_open_method == nil) then
+    -- tab
+    -- split
+    -- vplit
+    -- argadd
+    vim.g.unception_multi_file_open_method = "argadd"
+end
+
+if (vim.g.unception_enable_flavor_text == nil or vim.g.unception_enable_flavor_text == 0) then
     vim.g.unception_enable_flavor_text = true
 end
 
-if (vim.g.unception_block_while_host_edits == nil) then
+if (vim.g.unception_block_while_host_edits == nil or vim.g.unception_block_while_host_edits == 0) then
     vim.g.unception_block_while_host_edits = false
 end
 
@@ -22,7 +32,7 @@ if (vim.g.unception_block_while_host_edits) then
     vim.g.unception_delete_replaced_buffer = false
 end
 
-if (vim.g.unception_disable  == nil) then
+if (vim.g.unception_disable == nil or vim.g.unception_disable == 0) then
     vim.g.unception_disable = false
 end
 
