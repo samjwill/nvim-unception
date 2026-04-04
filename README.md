@@ -37,18 +37,33 @@ Neovim 0.7 or later.
 
 ## Installation
 
-#### Using [lazy.nvim](https://github.com/folke/lazy.nvim):
-    return {
-        "samjwill/nvim-unception",
-        init = function()
-            -- Optional settings go here!
-            -- e.g.) vim.g.unception_open_buffer_in_new_tab = true
-        end
-    }
+### Using Neovim 0.12+
 
-#### Using [vim-plug](https://github.com/junegunn/vim-plug):
+```lua
+-- Optional settings go here!
+-- e.g.) vim.g.unception_open_buffer_in_new_tab = true
+vim.pack.add({"https://github.com/samjwill/nvim-unception"})
+```
 
-    Plug 'samjwill/nvim-unception'
+### Using [lazy.nvim](https://github.com/folke/lazy.nvim):
+
+```lua
+return {
+    "samjwill/nvim-unception",
+    init = function()
+        -- Optional settings go here!
+        -- e.g.) vim.g.unception_open_buffer_in_new_tab = true
+    end
+}
+```
+
+### Using [vim-plug](https://github.com/junegunn/vim-plug):
+
+```vimscript
+" Optional settings go here!
+" e.g.) let g:unception_open_buffer_in_new_tab = 1
+Plug 'samjwill/nvim-unception'
+```
 
 ## Settings
 
