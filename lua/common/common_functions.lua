@@ -39,9 +39,9 @@ function _G.unception_escape_special_chars(str)
         -- filepaths. Lua needs \\ to define a \, so to escape special chars,
         -- there are twice as many backslashes as you would think that there
         -- should be.
-        str = string.gsub(str, "\\", "\\\\\\\\")
-        str = string.gsub(str, "\"", "\\\\\\\"")
-        str = string.gsub(str, " ", "\\\\ ")
+        str = string.gsub(str, "\\", "\\\\")
+        str = string.gsub(str, "\"", "\\\"")
+        str = string.gsub(str, " ", "\\ ")
         return str
     else
         return ""
